@@ -1,0 +1,8 @@
+all commands at:
+http://clippy.in/b/YJLM9W
+
+$ sudo tcptrack -i wlan0
+to track connection to specified interface card
+
+$ mtr google.com
+mtr, better than traceroute and ping combined 

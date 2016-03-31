@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Intellij
+Exec=sh /home/andrea/Documents/ideay/bin/idea.sh
+Terminal=false
+Icon=/home/andrea/Documents/ideay/bin/idea.png
+Categories=TextEditor;Development;
+StartupNotify=true

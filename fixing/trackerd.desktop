@@ -1,0 +1,7 @@
+# this desktop entry must be places in ~/.config/autostart in order to hidden
+# trackerd process and not use so much cpu time
+[Desktop Entry]
+Encoding=UTF-8
+Name=Tracker
+Hidden=true
+

@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo modprobe -r r852; sudo modprobe -r sdhci_pci; sudo modprobe r852; sudo modprobe sdhci_pci
+
+

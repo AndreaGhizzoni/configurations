@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ $UID -ne 0 ]]; then
+    echo "$0 must be run as root"
+    exit 1
+fi
+
+echo "=== INSTALL JAVA JDK 8..."
+add-apt-repository ppa:webupd8team/java
+echo "repository added!"
+apt-get update -y
+echo "update"
+apt-get install oracle-java8-installer
+echo "Java JDK 8 installed."
+echo "=== FINISH!"

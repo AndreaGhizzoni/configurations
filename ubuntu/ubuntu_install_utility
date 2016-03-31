@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ $UID -ne 0 ]]; then
+    echo "$0 must be run as root"
+    exit 1
+fi
+
+echo "=== INSTALLING UBUNTU UTILITY PACKAGES..."
+echo "=== utility program:"
+apt-get install vim htop wget vlc build-essential gparted keepassx tcptrack \
+    thunderbird iotop filezilla djmount scrot -y
+echo "=== funny stuff:"
+apt-get install figlet cowsay sl -y
+echo "=== FINISH!"

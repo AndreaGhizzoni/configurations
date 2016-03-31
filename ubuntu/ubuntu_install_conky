@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ $UID -ne 0 ]]; then
+    echo "$0 must be run as root"
+    exit 1
+fi
+
+echo "=== INSTALLING DEPENDENCIES ==="
+apt-get install lm-sensors curl hddtemp
+echo "setting up sensors..."
+sensors
+echo "installing..."
+apt-get install conky-all
+echo "coping rc file..."
+cp ../conky/.conkyrc ~
+echo "=== FINISH!"
+
+
+

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [[ $UID -ne 0 ]]; then
+    echo "$0 must be run as root"
+    exit 1
+fi
+
+echo "=== INSTALL ZSH..."
+apt-get install zsh curl git
+echo "changing shell for andrea..."
+chsh -s /bin/zsh andrea
+echo "shell changed!"
+su - andrea -c "curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh"
+echo "oh-my-zsh installed!"
+cp ../zsh/.zshrc ~
+echo ".zshrc copied into ~"
+echo "=== FINISH! (reboot needed)"
+
+# vim .zshrc and add the following line:
+# #ZSH_THEME="robbyrussell"
+# ZSH_THEME="gnzh"
+# unsetopt SHARE_HISTORY ( after source $ZSH/oh-my-zsh.sh )
+# setopt INC_APPEND_HISTORY
+
+# unsetopt correct_all ( after export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games )

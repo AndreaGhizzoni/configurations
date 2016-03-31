@@ -1,0 +1,23 @@
+#!/bin/sh
+
+install() {
+    export GOOS=$1
+    export GOARCH=$2
+    go install $dst
+}
+
+if [ $# -eq 0 ]; then 
+    printf "Usage: ./$0 <path_of_package>"
+    exit 1
+else
+    dst=$1
+    install windows 386
+    install windows amd64
+    install linux 386
+    install linux amd64
+    install linux arm
+fi
+
+
+
+

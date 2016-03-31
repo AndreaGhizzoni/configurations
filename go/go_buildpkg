@@ -1,0 +1,29 @@
+#!/bin/bash
+
+build() {
+    printf "Installing: $1 $2..."
+    export GOOS=$1 
+    if [ "$GOOS" = "windows" ]; then
+        export CGO_ENABLED=0
+    fi
+    export GOARCH=$2
+    go install -a std
+    printf "OK\n"
+    return 0
+}
+
+cd $GOROOT/src
+build windows 386
+build windows amd64
+build linux 386
+build linux amd64 
+build linux arm
+build freebsd 386
+build freebsd amd64
+build freebsd arm
+build openbsd 386
+build openbsd amd64
+build openbsd arm
+build netbsd 386
+build netbsd amd64
+build netbsd arm

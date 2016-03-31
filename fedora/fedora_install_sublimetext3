@@ -1,0 +1,32 @@
+#!/bin/sh
+
+if [[ $UID -ne 0 ]]; then
+    echo "$0 must be run as root"
+    exit 1
+fi
+
+if [ $# -eq 0 ]; then
+    echo "Sublime Text 3 tar ball is needed as first argument!"
+else
+    SCRIPT="#!/bin/sh
+    if [ \${1} == \"--help\" ]; then
+	    /opt/sublime_text/sublime_text --help
+    else
+	    /opt/sublime_text/sublime_text
+    fi"
+
+    SRC_DOTDESKTOP="sublime_text_3/sublime_text.desktop"
+    DST_DOTDESKTOP="/usr/share/applications/sublime_text.desktop"
+    TO_APPEND="s/Icon=sublime-text/Icon=\/opt\/sublime_text\/Icon\/128x128\/sublime-text.png/g"
+
+    echo "=== Install Sublime Text!"
+    
+    tar -xvjf "$1"
+    cp -fr "${SRC_DOTDESKTOP}" ${DST_DOTDESKTOP}     
+    sed -i "${TO_APPEND}" ${DST_DOTDESKTOP} 
+    mv "sublime_text_3" "/opt/sublime_text"
+    echo "${SCRIPT}" > "/usr/bin/sublime_text"
+    chmod +x "/usr/bin/sublime_text"
+ 
+    echo "=== Finish!"
+fi

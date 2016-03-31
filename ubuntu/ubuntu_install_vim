@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "=== NB: this script REQUIRE git installed and fully configured! ==="
+sudo apt-get install vim
+echo "=== Create home folder structure..."
+mkdir ~/.vim
+mkdir ~/.vim/swap
+mkdir ~/.vim/backup
+mkdir ~/.vim/undo
+mkdir ~/.vim/bundle
+cp -r ../vim/syntax ~/.vim
+cp -r ../vim/skeletons ~/.vim
+cp -r ../vim/colors ~/.vim
+cp ../vim/.vimrc ~
+echo "=== Home folder structure created and rc file copied!!"
+echo "=== Cloning Vundle plug-in manager..."
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+echo "=== Cloning OK!"
+echo "=== Installing dependencies for c-tags and YouCompleteMe plug-in..."
+sudo apt-get install exuberant-ctags build-essential cmake python-dev
+echo "=== VIM setup complete! ==="
+echo "=== Now open vim and run :VundleInstall to install all plugins"
+echo "=== Once finished run: cd ~/.vim/bundle/YouCompleteMe && ./install.py"
+echo "=== Once installed Go binary, open vim and run: :InstallBinaries"
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ $UID -ne 0 ]]; then
+    echo "$0 must be run as root"
+    exit 1
+fi
+
+echo "=== Installing fash player..."
+rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
+yum install flash-plugin nspluginwrapper alsa-plugins-pulseaudio libcurl -y
+echo "=== Finish!"
+

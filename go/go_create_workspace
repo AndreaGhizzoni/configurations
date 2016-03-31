@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "Usage: ./$0 <absolute_path_of_go_workspace>"
+    exit -1
+else
+    mkdir $1/bin
+    mkdir $1/pkg
+    mkdir $1/src
+    mkdir $1/src/github.com
+    mkdir $1/src/github.com/AndreaGhizzoni
+    echo "Workspace created based on $1 path"
+fi
+

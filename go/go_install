@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [[ $UID -ne 0 ]]; then
+    echo "$0 must be run as root"
+    exit 1
+fi
+
+if [ $# -eq 0 ]; then
+    echo "Usage: sudo ./$0 <path_to_go.targz>"
+else
+    echo "=== INSTALL/UPDATE $1"
+
+    dst="/usr/local"
+    godst="$dst/go"
+    usr="andrea"
+
+    if [ -d $godst ]; then
+        rm -rf $godst
+        echo "removing old Go binary...OK"
+    fi
+
+    tar -C $dst -xzf $1
+    echo "Go directory extracted correctly in $godst ...OK"
+
+    chown andrea:andrea -R $godst
+    echo "Changed permission from root:root to $usr:$usr of $godst"
+
+    echo "=== FINISH!"
+fi
+
+

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Telegram
+#Comment=
+Exec=/home/andrea/Documents/telegram/Telegram
+Terminal=flase
+Icon=/home/andrea/Documents/telegram/icon.png
+Categories=Messaging;
+StartupNotify=true
+
