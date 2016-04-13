@@ -27,7 +27,7 @@ alias cc="clear"
 alias lla="ls -lah --group-directories-first"
 alias extip='curl ifconfig.me'
 alias httpserver='ifconfig && python -m SimpleHTTPServer 8000'
-alias pg='ping -v google.com'
+alias pg='ping -v 8.8.8.8'
 alias ns='netstat -tlnp'
 alias ssdtop='sudo iotop --only'
 alias update='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y'
@@ -51,8 +51,8 @@ alias gs="git show --pretty --show-signature"
 # fedora
 #export JAVA_HOME=/usr/java/latest/
 # ubuntu
-#export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
-#export PATH=$PATH:$JAVA_HOME/bin
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+export PATH=$PATH:$JAVA_HOME/bin
 
 #========== Groovy
 #export GROOVY_HOME=/opt/groovy
@@ -63,20 +63,20 @@ alias gs="git show --pretty --show-signature"
 #export PATH=$PATH:$GRAILS_HOME/bin
 
 #========== Gradle
-#export GRADLE_HOME=/opt/gradle
-#export PATH=$PATH:$GRADLE_HOME/bin
+export GRADLE_HOME=/opt/gradle
+export PATH=$PATH:$GRADLE_HOME/bin
 
 #========== Go
-#export GOOS=linux
-#export GOARCH=amd64
-#export GOROOT=/usr/local/go
-#export PATH=$PATH:$GOROOT/bin
+export GOOS=linux
+export GOARCH=amd64
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
 
 #========== Workspaces
 #export CPPPATH=~/Documents/workspace/cpp/
 #export JAVAPATH=~/Documents/workspace/java/
-#export GOPATH=$HOME/Documents/workspace/go
-#export PATH=$PATH:$GOPATH/bin
+export GOPATH=$HOME/Documents/workspace/go
+export PATH=$PATH:$GOPATH/bin
 #export CPATH=~/Documents/workspace/c/
 
 #=========== workaround stuff
