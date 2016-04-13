@@ -1,0 +1,3 @@
+from: https://goo.gl/POkKdg
+
+put all packages into ~/texmf/tex/latex/custom/
