@@ -41,6 +41,10 @@ alias gp="git push"
 alias gc="git commit -m \$1"
 alias gs="git show --pretty --show-signature"
 
+#========== Functions
+# generate .gitignore
+function gi() { curl -L -s https://www.gitignore.io/api/$1 ;}
+
 #========== Android
 #export NDK=/home/andrea/Android/android-ndk-r10d/
 #export PATH=$PATH:$NDK
