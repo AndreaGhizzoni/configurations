@@ -10,3 +10,6 @@ i3exit.sh -> ~/.config/i3 | ~/.i3/
 
 ## Restoring multiple monitor configuration [desktop]
 .xprofile -> ~
+
+## Guide
+Complete guide [here](http://gist.github.com/AndreaGhizzoni/1e339ab4b7470438b875)
