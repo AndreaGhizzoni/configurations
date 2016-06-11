@@ -10,8 +10,13 @@ ZSH_THEME="my"
 # Which plugins would you like to load? 
 # (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git grails gradle sublime cp github gitignore)
+# git       : for aliases and functions
+# gradle    : add auto-complete for task
+# sublime   : "st" for open file in Sublime, "stt" for open current dir
+# cp        : cp with progress bar (rsync)
+# gitignore : gi() alias to fetch default .gitignore files from gitignore.io
+# history   : "h" for view the history, "hsi" for grep history
+plugins=(git gradle sublime cp gitignore history)
 
 source $ZSH/oh-my-zsh.sh
 unsetopt SHARE_HISTORY
@@ -41,10 +46,6 @@ alias gp="git push"
 alias gc="git commit -m \$1"
 alias gs="git show --pretty --show-signature"
 
-#========== Functions
-# generate .gitignore
-function gi() { curl -L -s https://www.gitignore.io/api/$1 ;}
-
 #========== Android
 #export NDK=/home/andrea/Android/android-ndk-r10d/
 #export PATH=$PATH:$NDK
@@ -55,8 +56,8 @@ function gi() { curl -L -s https://www.gitignore.io/api/$1 ;}
 # fedora
 #export JAVA_HOME=/usr/java/latest/
 # ubuntu
-#export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
-#export PATH=$PATH:$JAVA_HOME/bin
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+export PATH=$PATH:$JAVA_HOME/bin
 
 #========== Groovy
 #export GROOVY_HOME=/opt/groovy
@@ -67,20 +68,20 @@ function gi() { curl -L -s https://www.gitignore.io/api/$1 ;}
 #export PATH=$PATH:$GRAILS_HOME/bin
 
 #========== Gradle
-#export GRADLE_HOME=/opt/gradle
-#export PATH=$PATH:$GRADLE_HOME/bin
+export GRADLE_HOME=/opt/gradle
+export PATH=$PATH:$GRADLE_HOME/bin
 
 #========== Go
-#export GOOS=linux
-#export GOARCH=amd64
-#export GOROOT=/usr/local/go
-#export PATH=$PATH:$GOROOT/bin
+export GOOS=linux
+export GOARCH=amd64
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
 
 #========== Workspaces
 #export CPPPATH=~/Documents/workspace/cpp/
 #export JAVAPATH=~/Documents/workspace/java/
-#export GOPATH=$HOME/Documents/workspace/go
-#export PATH=$PATH:$GOPATH/bin
+export GOPATH=$HOME/Documents/workspace/go
+export PATH=$PATH:$GOPATH/bin
 #export CPATH=~/Documents/workspace/c/
 
 #=========== workaround stuff
