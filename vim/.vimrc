@@ -89,8 +89,12 @@ let g:tagbar_type_go = {
 " Press F4 to toggle highlighting on/off, and show current value.
 :noremap <F4> :set hlsearch! hlsearch?<CR>
 
+" ============= Spell Highlight
+" Press F5 to toggle highlighting on/off, and show current value.
+:noremap <F5> :set spell! spelllang?<CR>
+
 " ============= Airline
-set laststatus=2                               " airline always displaied
+set laststatus=2                               " airline always displayed 
 let g:airline#extensions#tabline#enabled = 1   " enable smart tab airline
 
 " ============= NERDTree
@@ -111,12 +115,13 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " ============= Template
-autocmd BufNewFile makefile 0r ~/.vim/skeletons/makefile
+autocmd BufNewFile makefile, Makefile 0r ~/.vim/skeletons/makefile
 autocmd BufNewFile *.html,*.php 0r ~/.vim/skeletons/template.html
 autocmd BufNewFile *.go 0r ~/.vim/skeletons/template.go
 autocmd BufNewFile *.c 0r ~/.vim/skeletons/template.c
 autocmd BufNewFile *.C,*.cpp,*.cc 0r ~/.vim/skeletons/template.cpp
 autocmd BufNewFile *.desktop 0r ~/.vim/skeletons/template.desktop
 autocmd BufNewFile *.sh 0r ~/.vim/skeletons/template.sh
+autocmd BufNewFile *.bash 0r ~/.vim/skeletons/template.bash
 autocmd BufNewFile *.l 0r ~/.vim/skeletons/template.l
 autocmd BufNewFile *.y 0r ~/.vim/skeletons/template.y
