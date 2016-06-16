@@ -115,7 +115,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " ============= Template
-autocmd BufNewFile makefile, Makefile 0r ~/.vim/skeletons/makefile
+autocmd BufNewFile makefile,Makefile 0r ~/.vim/skeletons/makefile
 autocmd BufNewFile *.html,*.php 0r ~/.vim/skeletons/template.html
 autocmd BufNewFile *.go 0r ~/.vim/skeletons/template.go
 autocmd BufNewFile *.c 0r ~/.vim/skeletons/template.c
