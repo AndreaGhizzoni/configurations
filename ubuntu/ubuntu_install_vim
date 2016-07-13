@@ -22,5 +22,6 @@ sudo apt-get install exuberant-ctags build-essential cmake python-dev
 echo "=== VIM setup complete! ==="
 echo "=== Now open vim and run :VundleInstall to install all plugins"
 echo "=== Once finished run: cd ~/.vim/bundle/YouCompleteMe && ./install.py"
-echo "=== Once installed Go binary, open vim and run: :InstallBinaries"
+echo "=== Once installed Go binary, open vim and run: :GoInstallBinaries and \\
+:GoUpdateBinaries"
 
