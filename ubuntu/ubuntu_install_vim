@@ -17,11 +17,11 @@ echo "=== Home folder structure created and rc file copied!!"
 echo "=== Cloning Vundle plug-in manager..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 echo "=== Cloning OK!"
-echo "=== Installing dependencies for c-tags and YouCompleteMe plug-in..."
+echo "=== Installing plug-in dependencies..."
 sudo apt-get install exuberant-ctags build-essential cmake python-dev
 echo "=== VIM setup complete! ==="
 echo "=== Now open vim and run :VundleInstall to install all plugins"
-echo "=== Once finished run: cd ~/.vim/bundle/YouCompleteMe && ./install.py"
+#echo "=== Once finished run: cd ~/.vim/bundle/YouCompleteMe && ./install.py"
 echo "=== Once installed Go binary, open vim and run: :GoInstallBinaries and \\
 :GoUpdateBinaries"
 

@@ -50,17 +50,16 @@ Plugin 'xolox/vim-easytags'           " dependency for tagbar
 Plugin 'xolox/vim-misc'               " dependency for tagbar
 Plugin 'majutsushi/tagbar'            " for outline of current file
 
-Plugin 'Valloric/YouCompleteMe'       " for auto complete functions
+" NB: this plugin is disable because break syntastic error check on save
+"Plugin 'Valloric/YouCompleteMe'       " for auto complete functions
 
 Plugin 'PotatoesMaster/i3-vim-syntax' " for i3 config file syntax highlighting
-
 
 call vundle#end()
 filetype plugin indent on
 
 " ============= Vim-Go
-" override the default location of go binaries from $GOPATH/bin to
-" ~/.vim/gobinaries
+" override the default path of go binaries from $GOPATH/bin to ~/.vim/gobinaries
 let g:go_bin_path = "/home/andrea/.vim/gobinaries"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -69,9 +68,8 @@ let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
-" these two line will fix the lagging of vim on opening files
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+" keybind to check for errors
+:noremap <F12> :GoErrCheck<CR>
 
 " ============= Tag Bar
 " Press F8 to open the Tag Window
