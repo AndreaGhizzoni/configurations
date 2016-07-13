@@ -59,6 +59,9 @@ call vundle#end()
 filetype plugin indent on
 
 " ============= Vim-Go
+" override the default location of go binaries from $GOPATH/bin to
+" ~/.vim/gobinaries
+let g:go_bin_path = "/home/andrea/.vim/gobinaries"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -117,7 +120,8 @@ let g:syntastic_check_on_wq = 0
 " ============= Template
 autocmd BufNewFile makefile,Makefile 0r ~/.vim/skeletons/makefile
 autocmd BufNewFile *.html,*.php 0r ~/.vim/skeletons/template.html
-autocmd BufNewFile *.go 0r ~/.vim/skeletons/template.go
+" go template is done by vim-go plugin
+"autocmd BufNewFile *.go 0r ~/.vim/skeletons/template.go
 autocmd BufNewFile *.c 0r ~/.vim/skeletons/template.c
 autocmd BufNewFile *.C,*.cpp,*.cc 0r ~/.vim/skeletons/template.cpp
 autocmd BufNewFile *.desktop 0r ~/.vim/skeletons/template.desktop

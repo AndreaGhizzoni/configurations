@@ -8,6 +8,7 @@ mkdir ~/.vim/swap
 mkdir ~/.vim/backup
 mkdir ~/.vim/undo
 mkdir ~/.vim/bundle
+mkdir ~/.vim/gobinaries
 cp -r ../vim/syntax ~/.vim
 cp -r ../vim/skeletons ~/.vim
 cp -r ../vim/colors ~/.vim
