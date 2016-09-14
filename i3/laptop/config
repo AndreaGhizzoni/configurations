@@ -39,7 +39,8 @@ focus_follows_mouse  no
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# hiding vertical borders hide_edge_borders none|vertical|horizontal|both
+# hiding vertical borders
+#hide_edge_borders none|vertical|horizontal|both
 hide_edge_borders none
 
 # Display popup during fullscreen mode
@@ -50,13 +51,9 @@ popup_during_fullscreen smart
 # workspace_auto_back_and_forth yes|no
 #workspace_auto_back_and_forth yes
 
-# Drawing marks on windows decoration
-# show_marks yes|no
-#show_marks yes
-
 # Border style for new Windows
 # new_window normal|none|pixel <px>
-new_window pixel 2
+new_window pixel 1
 
 # =============================================================================
 # = Special Keys
@@ -210,13 +207,13 @@ mode "resize" {
 # =============================================================================
 # = Status Bar
 # =============================================================================
-# Start i3bar to display a workspace bar 
+# Start i3bar to display a workspace bar in main monitor eDP1
 bar {
     colors {
         statusline  #00A5FF
         background  $black
 
-        # Colors            border      backgr.    text
+        # Colors            border      backgr     text
         focused_workspace   $white      $white     $black
         active_workspace    #073642     #073642    #696f89
         inactive_workspace  #073642     #073642    $white
@@ -224,7 +221,58 @@ bar {
     }
 
     # default is "status_command i3status" that use /etc/i3status.conf
-    status_command i3status -c ~/.i3/i3status.conf
+    status_command i3status -c ~/.i3/i3statusbar-main-monitor.conf
+    output eDP1
+    position bottom
+    # icon of various program place the his icon on the bar
+    tray_output primary     
+    font pango:DejaVu Sans Mono 9
+    separator_symbol ":|"
+    workspace_buttons yes
+    #strip_workspace_numbers yes
+}
+
+# configuration of status bar on HDMI1 output
+bar {
+    colors {
+        statusline  #00A5FF
+        background  $black
+
+        # Colors            border      backgr     text
+        focused_workspace   $white      $white     $black
+        active_workspace    #073642     #073642    #696f89
+        inactive_workspace  #073642     #073642    $white
+        urgent_workspace    $orange     $orange    $dark
+    }
+
+    # default is "status_command i3status" that use /etc/i3status.conf
+    status_command i3status -c ~/.i3/i3statusbar-secondary-monitor.conf
+    output HDMI1
+    position bottom
+    # icon of various program place the his icon on the bar
+    tray_output primary     
+    font pango:DejaVu Sans Mono 9
+    separator_symbol ":|"
+    workspace_buttons yes
+    #strip_workspace_numbers yes
+}
+
+# configuration of status bar on VGA1 output
+bar {
+    colors {
+        statusline  #00A5FF
+        background  $black
+
+        # Colors            border      backgr     text
+        focused_workspace   $white      $white     $black
+        active_workspace    #073642     #073642    #696f89
+        inactive_workspace  #073642     #073642    $white
+        urgent_workspace    $orange     $orange    $dark
+    }
+
+    # default is "status_command i3status" that use /etc/i3status.conf
+    status_command i3status -c ~/.i3/i3statusbar-secondary-monitor.conf
+    output VGA1
     position bottom
     # icon of various program place the his icon on the bar
     tray_output primary     
@@ -237,11 +285,13 @@ bar {
 # =============================================================================
 # = Window Applications Settings
 # =============================================================================
-# open certain windows in floating mode
+# open certain windows in specific configuration
 for_window [class="Firefox" title="(?i)DownThemAll"] floating enable
-for_window [class="Thunderbird" instance="Msgcompose"] floating enable
-for_window [class="telegram"] resize shrink width 30 px or 30 ppt
+for_window [class="Thunderbird" instance="Msgcompose"] resize shrink width 15 px or 15 ppt
+for_window [class="telegram"] resize shrink width 25 px or 25 ppt
 for_window [class="Keepassx"] floating enable
+
+workspace 10 output HDMI1
 
 # =============================================================================
 # = Auto start Applications
