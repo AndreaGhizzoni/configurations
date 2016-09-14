@@ -91,6 +91,9 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
+# statrt telegram program
+bindsym $mod+t exec telegram
+
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal -name term
 
