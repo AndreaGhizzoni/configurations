@@ -91,7 +91,7 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-# statrt telegram program
+# start telegram program
 bindsym $mod+t exec telegram
 
 # start a terminal
@@ -289,12 +289,24 @@ bar {
 # = Window Applications Settings
 # =============================================================================
 # open certain windows in specific configuration
+# by APPLICATION (WM_CLASS)
+# Note: class is typically useful for applying custom settings to
+#       to entire applications, including child windows. If this
+#       isn't want you want see the ROLE section, below.
+# Tip: To find out what these values might be run:
+#       xprop | grep -i 'class'
 for_window [class="Firefox" title="(?i)DownThemAll"] floating enable
-for_window [class="Thunderbird" instance="Msgcompose"] resize shrink width 15 px or 15 ppt
 for_window [class="telegram"] resize shrink width 25 px or 25 ppt
 for_window [class="Keepassx"] floating enable
+for_window [class="Pavucontrol"] floating enable, border normal
 
-workspace 10 output HDMI1
+# by ROLE (WM_WINDOW_ROLE)
+# Note: window_role is Typically useful for effecting child windows
+#       such as instant messaging converstations, email composition
+#       windows, etc.
+# Tip: To find out what these values might be run:
+#       xprop | grep -i 'role'
+for_window [window_role="Msgcompose"] floating enable, border normal, resize shrink width 15 px or 15 ppt, resize shrink height 25 px or 25 ppt
 
 # =============================================================================
 # = Auto start Applications
