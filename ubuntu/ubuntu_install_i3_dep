@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ $UID -ne 0 ]]; then
+    echo "$0 must be run as root"
+    exit 1
+fi
+
+GREEN='\033[0;32m'
+NC='\033[0m' # No color
+
+echo -e "${GREEN}=== INSTALLING i3wm DEPENDENCIES...${NC}"
+apt-get install alsa-utils xbacklight feh
+echo -e "${GREEN}=== FINISH!${NC}"
