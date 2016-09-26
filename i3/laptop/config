@@ -97,7 +97,7 @@ bindsym $mod+t exec telegram
 # start a terminal
 # i3-sensible-terminal is a script that runs the installed terminal
 #bindsym $mod+Return exec i3-sensible-terminal -name term
-bindsym $mod+Return exec xterm -fa 'Monospace' -fs 12
+bindsym $mod+Return exec xterm -fa 'Monospace' -fs 11
 
 
 # kill focused window
