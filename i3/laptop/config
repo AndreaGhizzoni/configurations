@@ -31,7 +31,7 @@ client.urgent           $orange $orange $dark   $white
 # = General Settings
 # =============================================================================
 # font 
-font pango:monospace 8
+font pango:monospace 10
 
 # Do not focus on mousover
 focus_follows_mouse  no
@@ -95,7 +95,10 @@ mode "$mode_system" {
 bindsym $mod+t exec telegram
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal -name term
+# i3-sensible-terminal is a script that runs the installed terminal
+#bindsym $mod+Return exec i3-sensible-terminal -name term
+bindsym $mod+Return exec xterm -fa 'Monospace' -fs 12
+
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -245,7 +248,7 @@ bar {
     position bottom
     # icon of various program place the his icon on the bar
     tray_output primary     
-    font pango:DejaVu Sans Mono 9
+    font pango:DejaVu Sans Mono 8
     separator_symbol ":|"
     workspace_buttons yes
     #strip_workspace_numbers yes
@@ -270,7 +273,7 @@ bar {
     position bottom
     # icon of various program place the his icon on the bar
     tray_output primary     
-    font pango:DejaVu Sans Mono 9
+    font pango:DejaVu Sans Mono 8
     separator_symbol ":|"
     workspace_buttons yes
     #strip_workspace_numbers yes
@@ -295,7 +298,7 @@ bar {
     position bottom
     # icon of various program place the his icon on the bar
     tray_output primary     
-    font pango:DejaVu Sans Mono 9
+    font pango:DejaVu Sans Mono 8
     separator_symbol ":|"
     workspace_buttons yes
     #strip_workspace_numbers yes
@@ -327,8 +330,10 @@ for_window [window_role="Msgcompose"] floating enable, border normal, resize shr
 # =============================================================================
 # = Auto start Applications
 # =============================================================================
+exec --no-startup-id feh --bg-fill /home/andrea/Pictures/wallpapers/i3wm_2.png
+
 #exec xautolock -time 9 -locker '~/.i3/i3exit.sh lock' &
-exec dropbox start
-exec xflux -l 46.0154 -g 11.6413
-exec wicd-client
+exec --no-startup-id dropbox start
+exec --no-startup-id xflux -l 46.0154 -g 11.6413
+exec --no-startup-id wicd-client
 
