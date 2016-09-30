@@ -106,7 +106,7 @@ au BufRead,BufNewFile *.go set filetype=go
 
 " ============= Syntastic 
 let g:syntastic_cpp_compiler = 'g++'                  " enable c++11
-let g:syntastic_cpp_compiler_options = ' -std=c++0x'  " for syntasitc
+let g:syntastic_cpp_compiler_options = ' -std=c++11'  " for syntasitc
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
