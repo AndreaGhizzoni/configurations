@@ -232,7 +232,8 @@ bindsym $mod+x mode "$mode_display"
 # Start i3bar to display a workspace bar in main monitor eDP1
 bar {
     colors {
-        statusline  #00A5FF
+        #statusline  #00A5FF #neon blue
+        statusline  #FFFFFF
         background  $black
 
         # Colors            border      backgr     text
