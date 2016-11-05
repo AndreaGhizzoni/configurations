@@ -59,6 +59,7 @@ call vundle#end()
 filetype plugin indent on
 
 " ============= Vim-Go
+au BufRead,BufNewFile *.go set filetype=go
 " override the default path of go binaries from $GOPATH/bin to ~/.vim/gobinaries
 let g:go_bin_path = "/home/andrea/.vim/gobinaries"
 let g:go_highlight_functions = 1
@@ -68,8 +69,12 @@ let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
-" keybind to check for errors
-:noremap <F12> :GoErrCheck<CR>
+
+" keybind ( <leader> = \ )
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
 
 " ============= Tag Bar
 " Press F8 to open the Tag Window
@@ -100,9 +105,6 @@ let g:airline#extensions#tabline#enabled = 1   " enable smart tab airline
 
 " ============= NERDTree
 map <F2> :NERDTreeToggle<CR>
-
-" ============= GO file type
-au BufRead,BufNewFile *.go set filetype=go
 
 " ============= Syntastic 
 let g:syntastic_cpp_compiler = 'g++'                  " enable c++11
