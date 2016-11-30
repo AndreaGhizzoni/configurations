@@ -36,6 +36,7 @@ alias pg='ping -v 8.8.8.8'
 alias ns='netstat -tlnp'
 alias ssdtop='sudo iotop --only'
 alias update='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y'
+alias prettyjson='python -m json.tool'
 #git
 alias gl='git log --pretty=format:"%Cgreen%h %Creset %s %Cblueby %an (%ar) %Cred %d" --graph'
 alias gd='git diff --stat --color'
@@ -56,8 +57,8 @@ alias gs="git show --pretty --show-signature"
 # fedora
 #export JAVA_HOME=/usr/java/latest/
 # ubuntu
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
-export PATH=$PATH:$JAVA_HOME/bin
+#export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+#export PATH=$PATH:$JAVA_HOME/bin
 
 #========== Groovy
 #export GROOVY_HOME=/opt/groovy
@@ -79,9 +80,9 @@ export PATH=$PATH:$GOROOT/bin
 
 #========== Workspaces
 #export CPPPATH=~/Documents/workspace/cpp/
-#export JAVAPATH=~/Documents/workspace/java/
+export JAVAPATH=~/Documents/workspace/java/
 export GOPATH=$HOME/Documents/workspace/go
-export PATH=$PATH:$GOPATH/bin
+#export PATH=$PATH:$GOPATH/bin
 #export CPATH=~/Documents/workspace/c/
 
 #=========== workaround stuff
