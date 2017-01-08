@@ -37,6 +37,7 @@ alias ns='netstat -tlnp'
 alias ssdtop='sudo iotop --only'
 alias update='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y'
 alias prettyjson='python -m json.tool'
+alias checkpass='chracklib-check'
 #git
 alias gl='git log --pretty=format:"%Cgreen%h %Creset %s %Cblueby %an (%ar) %Cred %d" --graph'
 alias gd='git diff --stat --color'
