@@ -8,7 +8,7 @@ fi
 echo "=== INSTALLING UBUNTU UTILITY PACKAGES..."
 echo "=== utility program:"
 apt-get install vim htop wget vlc build-essential gparted keepassx tcptrack \
-    thunderbird iotop filezilla djmount scrot wavemon libcrack2 nmap -y
+    thunderbird iotop filezilla djmount scrot wavemon libcrack2 nmap ffmpeg -y
 echo "=== funny stuff:"
 apt-get install figlet cowsay sl -y
 echo "=== FINISH!"
