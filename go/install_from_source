@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# instructions taken from: https://golang.org/doc/install/source
+
+# usage: ./go_install_from_source <version> <folder>
+if [ $# -eq 0 ]; then
+    echo "Usage: ./$0 goX /installation/path"
+    echo "Where X is the Go version to install/update from repository."
+    echo "The installation path must be absolute (default /usr/local)."
+fi
+
+# ==== REQUIREMENTS ====
+# check if git is installed ( & configured ? )
+
+# check if $GOROOT_BOOTSTRAP is set
+if [ -z "$GOROOT_BOOTSTRAP" ] then
+    wget https://storage.googleapis.com/golang/go1.4-bootstrap-20161024.tar.gz \
+        /tmp
+    cd /tmp
+    tar -xzf go1.4-bootstrap-20161024.tar.gz 
+    cd go/src
+    ./make.bash
+
+    GOROOT_BOOTSTRAP=/tmp/go
+    export GOROOT_BOOTSTRAP
+fi
+
+
+# TODO check this
+# check if $1 is set ( otherwise master is used )
+VERSION="master"
+
+# check if $2 is set (otherwise /usr/local is is used )
+DST="/usr/local"
+GO="go"
+GO_ROOT="$DST/$GO"
+
+# if $GO_ROOT exists then update the content
+if [ -d "$GO_ROOT" ]; then
+    cd $GO_ROOT/src
+    git fetch 
+    git checkout $VERSION
+else
+    cd $DST
+    sudo git clone https://go.googlesource.com/go $GO
+    sudo chown andrea:andrea -R $GO
+    cd $GO
+    git checkout $VERSION 
+    cd src
+fi
+
+./all.bash
+
+# echo a reminder to set:
+# $GOROOT
+# $GOPATH
+# $GOARCH
+# $GOOS
+
