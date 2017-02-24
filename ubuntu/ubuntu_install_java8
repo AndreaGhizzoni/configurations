@@ -1,15 +1,18 @@
 #!/bin/bash
 
-if [[ $UID -ne 0 ]]; then
-    echo "$0 must be run as root"
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No color
+
+if [ $UID -ne 0 ]; then
+    echo -e "${RED}$0 must be run as root${NC}"
     exit 1
 fi
 
-echo "=== INSTALL JAVA JDK 8..."
+echo -e "${GREEN}=== INSTALL JAVA JDK 8...${NC}"
 add-apt-repository ppa:webupd8team/java
-echo "repository added!"
+echo "=== Repository added!"
 apt-get update -y
-echo "update"
+echo "=== Update"
 apt-get install oracle-java8-installer
-echo "Java JDK 8 installed."
-echo "=== FINISH!"
+echo -e "${GREEN}=== FINISH! ===${NC}"

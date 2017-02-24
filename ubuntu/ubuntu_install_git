@@ -1,25 +1,28 @@
 #!/bin/bash
 
-if [[ $UID -ne 0 ]]; then
-    echo "$0 must be run as root"
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No color
+
+if [ $UID -eq 0 ]; then
+    echo -e "${RED}$0 it is not necessary to run this as root${NC}"
     exit 1
 fi
 
-if [[ $# < 3 || $# > 4 ]]; then
-    echo "Not enough arguments!"
-    echo "Use: $0 normal-user github-username github-email"
+if [ $# -eq 0 ]; then
+    echo "Usage:"
+    echo "$0 [github-username] [github-email]"
     exit 1
 fi
 
-user=$1
-NAME=$2
-EMAIL=$3
+NAME=$1
+EMAIL=$2
 
-echo "=== INSTALL AND CONFIGURE GIT..."
-apt-get install git -y
-git config --global user.name "${NAME}"
-echo "Git user.name as ${NAME}"
-git config --global user.email ${EMAIL}
-chown ${user}:${user} ~/.gitconfig
-echo "Git user.email as ${EMAIL}"
-echo "=== FINISH!"
+echo -e "${GREEN}=== INSTALLING GIT...${NC}"
+sudo apt-get install git -y
+echo -e "${GREEN}=== CONFIGURING...${NC}"
+git config --global user.name $NAME
+echo "=== Set git user.name as $NAME"
+git config --global user.email $EMAIL
+echo "=== Set git user.email as $EMAIL"
+echo -e "${GREEN}=== FINISH! ===${NC}"

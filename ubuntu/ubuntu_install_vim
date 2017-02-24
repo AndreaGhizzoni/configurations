@@ -1,6 +1,15 @@
 #!/bin/bash
 
-echo "=== NB: this script REQUIRE git installed and fully configured! ==="
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No color
+
+if [ $UID -eq 0 ] ; then
+    echo -e "${RED}$0 is not necessary to run this as root${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}=== REQUIREMENTS: git installed and fully configured! ===${NC}"
 sudo apt-get install vim
 echo "=== Create home folder structure..."
 mkdir ~/.vim
@@ -12,16 +21,15 @@ mkdir ~/.vim/gobinaries
 cp -r ../vim/syntax ~/.vim
 cp -r ../vim/skeletons ~/.vim
 cp -r ../vim/colors ~/.vim
+cp -r ../vim/spell ~/.vim
 cp ../vim/.vimrc ~
-echo "=== Home folder structure created and rc file copied!!"
+echo "=== vimrc file copied!!"
 echo "=== Cloning Vundle plug-in manager..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-echo "=== Cloning OK!"
-echo "=== Installing plug-in dependencies..."
+echo -e "${GREEN}=== INSTALLING PLUG-IN DEPENDENCIES...${NC}"
 sudo apt-get install exuberant-ctags build-essential cmake python-dev
-echo "=== VIM setup complete! ==="
+echo -e "${GREEN}=== VIM setup complete! ===${NC}"
 echo "=== Now open vim and run :VundleInstall to install all plugins"
-#echo "=== Once finished run: cd ~/.vim/bundle/YouCompleteMe && ./install.py"
-echo "=== Once installed Go binary, open vim and run: :GoInstallBinaries and \\
-:GoUpdateBinaries"
+echo "=== Once installed Go binary, run in vim: :GoInstallBinaries and :GoUpdateBinaries"
+echo -e "${GREEN}=== FINISH! ===${NC}"
 

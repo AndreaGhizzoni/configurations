@@ -1,19 +1,29 @@
 #!/bin/bash
 
-if [[ $UID -ne 0 ]]; then
-    echo "$0 must be run as root"
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No color
+
+usage() {
+    echo -e "${RED}$0 must be run as root${NC}"
     exit 1
+}
+
+if [ $UID -ne 0 ]; then
+    usage
 fi
 
-echo "=== INSTALLING DEPENDENCIES ==="
-apt-get install lm-sensors curl hddtemp
-echo "setting up sensors..."
+echo -e "${GREEN}=== INSTALLING DEPENDENCIES ===${NC}"
+apt-get install lm-sensors curl hddtemp -y
+echo "=== Setting up sensors..."
 sensors
-echo "installing..."
-apt-get install conky-all
-echo "coping rc file..."
+echo "=== Installing conky..."
+apt-get install conky-all -y
+echo "=== Coping rc file..."
 cp ../conky/.conkyrc ~
-echo "=== FINISH!"
+chown -R andrea:andrea ~/.conkyrc
+echo -e "${GREEN}=== FINISH! ===${NC}"
+
 
 
 

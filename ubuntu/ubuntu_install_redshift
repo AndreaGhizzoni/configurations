@@ -1,11 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 
-if [[ $UID -ne 0 ]]; then
-    echo "$0 must be run as root"
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No color
+
+if [ $UID -ne 0 ]; then
+    echo -e "${RED}$0 must be run as root${NC}"
     exit 1
 fi 
 
-echo "=== INSTALLING REDSHIFT ==="
-apt-get install redshift redshift-gtk
-echo "=== FINISH!"
+echo -e "${GREEN}=== INSTALLING REDSHIFT ===${NC}"
+apt-get install redshift redshift-gtk -y
+echo -e "${GREEN}=== FINISH!${NC}"
 
