@@ -1,0 +1,19 @@
+#!/bin/bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No color
+
+if [  $UID -eq 0 ]; then
+    echo -e "${RED}$0 it is not necessary to run this script as root${NC}"
+    exit 1
+fi
+
+LINK="https://www.dropbox.com/download?plat=lnx.x86_64"
+
+echo -e "${GREEN}=== INSTALLING DROPBOX...${NC}"
+cd /tmp && wget -O - "$LINK" | tar xzf -
+mv .dropbox-dist $HOME 
+cd $HOME/.dropbox-dist
+./dropboxd
+echo -e "${GREEN}=== FINISH! ===${NC}"
