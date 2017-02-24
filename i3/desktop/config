@@ -1,11 +1,6 @@
 set $mod Mod1
 
 # =============================================================================
-# = Set wallpaper - feh required
-# =============================================================================
-exec_always feh --bg-fill ~/Pictures/wall.png
-
-# =============================================================================
 # = Mouse speed and acceleration 
 # =============================================================================
 exec_always xset m 1 1
@@ -41,7 +36,7 @@ client.urgent           $orange $orange $dark   $white
 # = General Settings
 # =============================================================================
 # font 
-font pango:monospace 8
+font pango:monospace 10
 
 # Do not focus on mousover
 focus_follows_mouse  no
@@ -90,18 +85,20 @@ set $mode_system   [L]OCK   LOG[O]UT   [S]USPEND   [R]EBOOT   [P]OWEROFF
 bindsym $mod+Delete mode "$mode_system"
 bindsym Ctrl+$mod+BackSpace mode "$mode_system"
 mode "$mode_system" {
-    bindsym l exec $psst ~/.i3/i3exit.sh lock, mode "default"
-    bindsym o exec $psst ~/.i3/i3exit.sh logout, mode "default"
-    bindsym s exec $psst ~/.i3/i3exit.sh suspend, mode "default"
-    bindsym r exec $psst ~/.i3/i3exit.sh reboot, mode "default"
-    bindsym p exec $psst ~/.i3/i3exit.sh poweroff, mode "default"
+    bindsym l exec $psst ~/.config/i3/i3exit.sh lock, mode "default"
+    bindsym o exec $psst ~/.config/i3/i3exit.sh logout, mode "default"
+    bindsym s exec $psst ~/.config/i3/i3exit.sh suspend, mode "default"
+    bindsym r exec $psst ~/.config/i3/i3exit.sh reboot, mode "default"
+    bindsym p exec $psst ~/.config/i3/i3exit.sh poweroff, mode "default"
     #back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal -name term
+# i3-sensible-terminal is a script that runs the installed terminal
+#bindsym $mod+Return exec i3-sensible-terminal -name term
+bindsym $mod+Return exec xterm -fa 'Monospace' -fs 11
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -231,61 +228,9 @@ bar {
 
     # NB Use this settings if multi monitor is connected and nvidia driver is
     # already installed ( because may not match the name DP-0 with display port
-    output DP-0
+    #output DP-0
     # default is "status_command i3status" that use /etc/i3status.conf
-    status_command i3status -c ~/.i3/i3statusbar-primary-monitor.conf
-    position bottom
-    # icon of various program place the his icon on the bar
-    tray_output primary     
-    font pango:DejaVu Sans Mono 9
-    separator_symbol ":|"
-    workspace_buttons yes
-    #strip_workspace_numbers yes
-}
-
-bar {
-    colors {
-        statusline  #00A5FF
-        background  $black
-
-        # Colors            border      backgr.    text
-        focused_workspace   $white      $white     $black
-        active_workspace    #073642     #073642    #696f89
-        inactive_workspace  #073642     #073642    $white
-        urgent_workspace    $orange     $orange    $dark
-    }
-
-    # NB Use this settings if multi monitor is connected and nvidia driver is
-    # already installed ( because may not match the name 
-    output HDMI-0
-    # default is "status_command i3status" that use /etc/i3status.conf
-    status_command i3status -c ~/.i3/i3statusbar-secondary-monitor.conf
-    position bottom
-    # icon of various program place the his icon on the bar
-    tray_output primary     
-    font pango:DejaVu Sans Mono 9
-    separator_symbol ":|"
-    workspace_buttons yes
-    #strip_workspace_numbers yes
-}
-
-bar {
-    colors {
-        statusline  #00A5FF
-        background  $black
-
-        # Colors            border      backgr.    text
-        focused_workspace   $white      $white     $black
-        active_workspace    #073642     #073642    #696f89
-        inactive_workspace  #073642     #073642    $white
-        urgent_workspace    $orange     $orange    $dark
-    }
-
-    # NB Use this settings if multi monitor is connected and nvidia driver is
-    # already installed ( because may not match the name 
-    output DVI-I-0
-    # default is "status_command i3status" that use /etc/i3status.conf
-    status_command i3status -c ~/.i3/i3statusbar-secondary-monitor.conf
+    status_command i3status -c ~/.config/i3/i3statusbar-primary-monitor.conf
     position bottom
     # icon of various program place the his icon on the bar
     tray_output primary     
@@ -298,14 +243,30 @@ bar {
 # =============================================================================
 # = Window Applications Settings
 # =============================================================================
-# open certain windows in floating mode
+# open certain windows in specific configuration                                
+# by APPLICATION (WM_CLASS)                                                     
+# Note: class is typically useful for applying custom settings to               
+#       to entire applications, including child windows. If this                
+#       isn't want you want see the ROLE section, below.                        
+# Tip: To find out what these values might be run:                              
+#       xprop | grep -i 'class'  
 for_window [class="Firefox" title="(?i)DownThemAll"] floating enable
-for_window [class="Thunderbird" instance="Msgcompose"] floating enable
-#for_window [class="telegram"] floating enable
+for_window [class="Keepassx"] floating enable
+for_window [class="Pavucontrol"] floating enable, border normal
+
+# by ROLE (WM_WINDOW_ROLE)                                                      
+# Note: window_role is Typically useful for effecting child windows             
+#       such as instant messaging converstations, email composition             
+#       windows, etc.                                                           
+# Tip: To find out what these values might be run:                              
+#       xprop | grep -i 'role'
+for_window [window_role="Msgcompose"] floating enable, border normal, resize shrink width 15 px or 15 ppt, resize shrink height 25 px or 25 ppt
 
 # =============================================================================
 # = Auto start Applications
 # =============================================================================
+exec --no-startup-id feh --bg-fill /home/andrea/Pictures/wallpapers/i3wm_2.png
+
 #exec xautolock -time 9 -locker '~/.i3/i3exit.sh lock' &
-exec dropbox start
-exec xflux -l 46.0154 -g 11.6413
+exec --no-startup-id dropbox start
+exec --no-startup-id xflux -l 46.0154 -g 11.6413
