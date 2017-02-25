@@ -12,6 +12,12 @@ fi
 echo -e "${GREEN}=== INSTALLING UBUNTU UTILITY PACKAGES...${NC}"
 apt-get install vim htop wget vlc build-essential gparted keepassx tcptrack \
     thunderbird iotop filezilla djmount scrot wavemon libcrack2 nmap ffmpeg -y
+
+echo "=== Coping htoprc... "
+mkdir $HOME/.config/htop
+cp ../htop/htoprc $HOME/.config/htop
+echo "=== DONE!"
+
 echo -e "${GREEN}=== INSTALLING FUNNY STUFF...${NC}"
 apt-get install figlet cowsay sl -y
 echo -e "${GREEN}=== FINISH! ===${NC}"
