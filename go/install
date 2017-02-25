@@ -50,6 +50,7 @@ sudo wget -P ${DST} https://storage.googleapis.com/golang/${GOTAR}
 
 echo -e "${GREEN}=== Extracting go archive...${NC}" 
 sudo tar -C ${DST} -xzf ${DST}/${GOTAR}
+sudo chown -R andrea:andrea ${GOROOT}
 
 echo -e "${GREEN}=== Removing go archive...${NC}" 
 sudo rm ${DST}/${GOTAR}
