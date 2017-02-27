@@ -1,8 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=xflux
-#Comment=
-Exec=xflux -l 46.0154 -g 11.6413
-Terminal=false
-

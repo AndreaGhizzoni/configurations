@@ -1,0 +1,21 @@
+#!/bin/bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No color
+
+if [ $UID -eq 0 ]; then
+    echo -e "${RED}$0 is not necessary to run this as root${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}=== INSTALLING FLUX...${NC}"
+wget -c http://justgetflux.com/linux/xflux64.tgz
+tar -xvzf xflux64.tgz
+rm -rf xflux64.tgz
+chmod +x xflux
+echo -e "${GREEN}=== xflux get and extracted!${NC}"
+
+echo -e "${GREEN}=== Moving xflux to /usr/bin (sudo password required)...${NC}"
+sudo mv xflux /usr/bin
+echo -e "${GREEN}=== FINISH!${NC}"
