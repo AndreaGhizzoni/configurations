@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Here nmap will do a ping scan and populate your arp cache. Once the scan is
 # done, the arp command can be used to print the arp table and then you pull out

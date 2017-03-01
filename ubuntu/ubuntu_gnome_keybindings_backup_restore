@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 # how to use http://goo.gl/jRz3fg
 # this scripts is used to back up ubuntu keybindings in csv file format
