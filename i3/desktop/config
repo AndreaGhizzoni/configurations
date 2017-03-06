@@ -239,7 +239,7 @@ bar {
         #neon blue
         #statusline  #00A5FF
         statusline  #FFFFFF
-        background  $dark
+        background  $black
 
         # Colors            border      backgr.    text
         focused_workspace   $white      $white     $black
@@ -318,4 +318,4 @@ exec --no-startup-id feh --bg-fill /home/andrea/Pictures/wallpapers/i3wm_2.png
 
 #exec xautolock -time 9 -locker '~/.i3/i3exit.sh lock' &
 exec --no-startup-id dropbox start
-exec --no-startup-id xflux -l 46.0154 -g 11.6413
+exec --no-startup-id xflux -l 46.0154 -g 11.6413 -k 2700
