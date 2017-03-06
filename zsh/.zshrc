@@ -70,19 +70,20 @@ alias gs="git show --pretty --show-signature"
 #export PATH=$PATH:$GRAILS_HOME/bin
 
 #========== Gradle
-export GRADLE_HOME=/opt/gradle
-export PATH=$PATH:$GRADLE_HOME/bin
+#export GRADLE_HOME=/opt/gradle
+#export PATH=$PATH:$GRADLE_HOME/bin
 
 #========== Go
-export GOOS=linux
-export GOARCH=amd64
-export GOROOT=/usr/local/go
-export PATH=$PATH:$GOROOT/bin
+#export GOOS=linux
+#export GOARCH=amd64
+#export GOROOT=/usr/local/go
+#export PATH=$PATH:$GOROOT/bin
 
 #========== Workspaces
 #export CPPPATH=~/Documents/workspace/cpp/
-export JAVAPATH=~/Documents/workspace/java/
-export GOPATH=$HOME/Documents/workspace/go
+#export JAVAPATH=~/Documents/workspace/java/
+#export GOPATH=$HOME/Documents/workspace/go
+#export GOBIN=$GOPATH/bin
 #export PATH=$PATH:$GOPATH/bin
 #export CPATH=~/Documents/workspace/c/
 
