@@ -83,7 +83,6 @@ alias gs="git show --pretty --show-signature"
 #export CPPPATH=~/Documents/workspace/cpp/
 #export JAVAPATH=~/Documents/workspace/java/
 #export GOPATH=$HOME/Documents/workspace/go
-#export GOBIN=$GOPATH/bin
 #export PATH=$PATH:$GOPATH/bin
 #export CPATH=~/Documents/workspace/c/
 
