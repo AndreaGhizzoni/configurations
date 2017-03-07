@@ -23,7 +23,7 @@ echo -e "${GREEN}=== Coping custom latex library in ${TEX_CUSTOM}...${NC}"
 cp ../tex/bytefield/bytefield.sty $TEX_CUSTOM
 
 echo -e "${GREEN}=== Coping custom dictionaries in ${TEX_SPELL}...${NC}"
-cp ../tex/bytefield/it_IT.aff ../tex/bytefield/it_IT.dic $TEX_SPELL
+cp ../tex/it_IT.aff ../tex/it_IT.dic $TEX_SPELL
 
 echo -e "${GREEN}=== REMEMBER to set dictionary setting of texmaker to path:${NC}"
 echo -e "${GREEN}=== ${TEX_SPELL} ${NC}"
