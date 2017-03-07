@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No color
+
+if [ $UID -ne 0 ]; then
+    echo -e "${RED}$0 must be run as root${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}=== INSTALLING AVIDEMUX...${NC}"
+
+echo "=== Adding new source in /etc/apt/sources.list.d"
+echo "deb http://archive.getdeb.net/ubuntu xenial-getdeb apps" >> /etc/apt/sources.list.d/getdeb.list
+
+echo "=== Obtaining key..."
+wget -q -O- http://archive.getdeb.net/getdeb-archive.key | apt-key add -
+
+echo -e "${GREEN}=== Now installing...${NC}"
+apt-get update && apt-get install avidemux2.6-qt
+echo -e "${GREEN}=== FINISH!${NC}"
+
