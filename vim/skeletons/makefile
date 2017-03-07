@@ -1,20 +1,30 @@
+# ================ COMPILER
 #GCC=gcc
 #CPP=g++
-#SRCIN=
-#SRCOUT=
-#OUT=
-#IN=
-#ODIR=obj
-#SDIR=src
+
+# ================ COMPILER OPTIONS
 #CFLAGS=-Wall -ansi -pedantic-errors -faggressive-loop-optimizations -O2
 #CPPFLAGS= -DEVAL -O2 -std=c++0x
 
+# ================ FOLDERS
+#BIN=bin
+#SRC=src
+#INCLUDE=include
+#TEST=test
+
+# ================ RULES
 # default option to make 
-default : 
+default: 
 
-compileall :
+# get a description of makefile
+description:
 
-run :
+# generate bin files
+bin: clearbin
 
-clear :
-	$(RM)
+# runs the tests
+runtests: bin
+
+#TODO check if bin exists
+clearbin:
+	$(RM) 
