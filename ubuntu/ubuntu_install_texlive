@@ -12,8 +12,20 @@ fi
 echo -e "${GREEN}=== INSTALLING TEXLIVE PACKAGES...${NC}"
 apt-get install texlive-full texmaker
 
-echo "=== Coping custom tex library..."
-cp -r ../tex/texmf $HOME
-echo "=== DONE!"
+TEX_HOME=$HOME/texmf/tex/latex
+TEX_CUSTOM=$TEX_HOME/custom
+TEX_SPELL=$TEX_HOME/myspell
+mkdir -p $TEX_HOME
+mkdir -p $TEX_CUSTOM
+mkdir -p $TEX_SPELL
+
+echo -e "${GREEN}=== Coping custom latex library in ${TEX_CUSTOM}...${NC}"
+cp ../tex/bytefield/bytefield.sty $TEX_CUSTOM
+
+echo -e "${GREEN}=== Coping custom dictionaries in ${TEX_SPELL}...${NC}"
+cp ../tex/bytefield/it_IT.aff ../tex/bytefield/it_IT.dic $TEX_SPELL
+
+echo -e "${GREEN}=== REMEMBER to set dictionary setting of texmaker to path:${NC}"
+echo -e "${GREEN}=== ${TEX_SPELL} ${NC}"
 
 echo -e "${GREEN}=== FINISH! ===${NC}"
