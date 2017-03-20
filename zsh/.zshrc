@@ -47,7 +47,6 @@ alias gu="git pull"
 alias gp="git push"
 alias gc="git commit -m \$1"
 alias gs="git show --pretty --show-signature"
-alias fp="ga && gc \$1 && gp origin master"
 
 #========== Android
 #export NDK=/home/andrea/Android/android-ndk-r10d/
