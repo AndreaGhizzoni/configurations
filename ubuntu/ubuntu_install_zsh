@@ -11,12 +11,17 @@ fi
 
 echo -e "${GREEN}=== INSTALL ZSH...${NC}"
 apt-get install zsh curl git
+
 echo "=== Changing shell for andrea..."
 chsh -s /bin/zsh andrea
 echo "=== shell changed!"
+
 echo -e "${GREEN}=== INSTALLING oh-my-zsh...${NC}"
 su - andrea -c "curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh"
 echo "=== oh-my-zsh installed!"
 cp ../zsh/.zshrc ~
 echo "=== .zshrc copied into ~"
+cp ../zsh/my.zsh-theme ~/.oh-my-zsh/themes
+echo "=== my.zsh-theme copied into ~/.oh-my-zsh/themes"
+
 echo -e "${GREEN}=== FINISH! (reboot needed)${NC}"
