@@ -6,8 +6,6 @@ NC='\033[0m' # No color
 
 usage() {
     echo -e "${RED}$0 must be run as root ${NC}"
-    echo "Usage:"
-    echo "sudo $0 [laptop|desktop]"
     exit 1
 }
 
@@ -15,21 +13,8 @@ if [ $UID -ne 0 ]; then
     usage
 fi
 
-if [ $# -eq 0 ]; then
-    usage
-fi
+echo -e "${GREEN}=== INSTALLING i3 DEPS and UTILITIES... ${NC}"
 
-echo -e "${GREEN}=== INSTALLING i3 DEPENDENCIES... ${NC}"
-WHAT_TO_INSTALL=""
-if [ $1 = "laptop" ]; then 
-    WHAT_TO_INSTALL="$WHAT_TO_INSTALL xbacklight"
-else
-    if [ $1 = "desktop" ]; then
-        WHAT_TO_INSTALL="$WHAT_TO_INSTALL alsa-utils feh"
-    else
-        usage
-    fi
-fi
+apt-get install alsa-utils feh pavucontrol lxappearance wicd wicd-gtk
 
-apt-get install $WHAT_TO_INSTALL
 echo -e "${GREEN}=== FINISH! ===${NC}"
