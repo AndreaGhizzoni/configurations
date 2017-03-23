@@ -59,9 +59,9 @@ new_window pixel 1
 # = Special Keys
 # =============================================================================
 # increase screen brightness
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessUp exec ~/.config/i3/bright_control.bash -inc 100
 # decrease screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessDown exec ~/.config/i3/bright_control.bash -dec 100
 # increase sound volume
 bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
 # decrease sound volume
@@ -81,11 +81,11 @@ set $mode_system   [L]OCK   LOG[O]UT   [S]USPEND   [R]EBOOT   [P]OWEROFF
 bindsym $mod+Delete mode "$mode_system"
 bindsym Ctrl+$mod+BackSpace mode "$mode_system"
 mode "$mode_system" {
-    bindsym l exec $psst ~/.i3/i3exit.sh lock, mode "default"
-    bindsym o exec $psst ~/.i3/i3exit.sh logout, mode "default"
-    bindsym s exec $psst ~/.i3/i3exit.sh suspend, mode "default"
-    bindsym r exec $psst ~/.i3/i3exit.sh reboot, mode "default"
-    bindsym p exec $psst ~/.i3/i3exit.sh poweroff, mode "default"
+    bindsym l exec $psst ~/.config/i3/i3exit.sh lock, mode "default"
+    bindsym o exec $psst ~/.config/i3/i3exit.sh logout, mode "default"
+    bindsym s exec $psst ~/.config/i3/i3exit.sh suspend, mode "default"
+    bindsym r exec $psst ~/.config/i3/i3exit.sh reboot, mode "default"
+    bindsym p exec $psst ~/.config/i3/i3exit.sh poweroff, mode "default"
     #back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -244,8 +244,8 @@ bar {
     }
 
     # default is "status_command i3status" that use /etc/i3status.conf
-    status_command i3status -c ~/.i3/i3statusbar-main-monitor.conf
-    output eDP1
+    status_command i3status -c ~/.config/i3/i3statusbar-main-monitor.conf
+    #output eDP1
     position bottom
     # icon of various program place the his icon on the bar
     tray_output primary     
@@ -269,7 +269,7 @@ bar {
     }
 
     # default is "status_command i3status" that use /etc/i3status.conf
-    status_command i3status -c ~/.i3/i3statusbar-secondary-monitor.conf
+    status_command i3status -c ~/.config/i3/i3statusbar-secondary-monitor.conf
     output HDMI1
     position bottom
     # icon of various program place the his icon on the bar
@@ -294,7 +294,7 @@ bar {
     }
 
     # default is "status_command i3status" that use /etc/i3status.conf
-    status_command i3status -c ~/.i3/i3statusbar-secondary-monitor.conf
+    status_command i3status -c ~/.config/i3/i3statusbar-secondary-monitor.conf
     output VGA1
     position bottom
     # icon of various program place the his icon on the bar
