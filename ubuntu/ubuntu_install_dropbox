@@ -9,11 +9,18 @@ if [  $UID -eq 0 ]; then
     exit 1
 fi
 
-LINK="https://www.dropbox.com/download?plat=lnx.x86_64"
+LINK="https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb"
 
 echo -e "${GREEN}=== INSTALLING DROPBOX...${NC}"
-cd /tmp && wget -O - "$LINK" | tar xzf -
-mv .dropbox-dist $HOME 
-cd $HOME/.dropbox-dist
-./dropboxd
+
+cd $HOME/Downloads
+echo -e "${GREEN}=== DOWNLOADING DEB PACKAGE...${NC}"
+wget -O - "$LINK"
+
+echo -e "${GREEN}=== INSTALLING DEB (root password required)...${NC}"
+sudo dpkg -i dropbox_2015.10.28_amd64.deb
+
+echo -e "${GREEN}=== STARTING DROPBOX FOR THE FIRST TIME...${NC}"
+dropbox start -i
+
 echo -e "${GREEN}=== FINISH! ===${NC}"
