@@ -11,7 +11,8 @@ fi
 
 echo -e "${GREEN}=== INSTALLING UBUNTU UTILITY PACKAGES...${NC}"
 apt-get install vim htop wget vlc build-essential gparted keepassx tcptrack \
-    thunderbird iotop filezilla djmount scrot wavemon libcrack2 nmap ffmpeg -y
+    thunderbird iotop filezilla djmount scrot wavemon libcrack2 nmap ffmpeg \
+    gimp -y
 
 echo "=== Coping htoprc... "
 mkdir $HOME/.config/htop
