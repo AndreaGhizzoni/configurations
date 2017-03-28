@@ -17,6 +17,9 @@ apt-get install vim htop wget vlc build-essential gparted keepassx tcptrack \
 echo -e "${GREEN}=== INSTALLING ARCHIVE MANAGERS TOOLS...${NC}"
 apt-get install zip unzip tar rar xarchiver
 
+echo -e "${GREEN}=== INSTALLING AVAHI-DAEMON AND TOOLS...${NC}"
+apt-get install avahi-daemon avahi-discover avahi-utils libnss-mdns mdns-scan
+
 echo "=== Coping htoprc... "
 mkdir $HOME/.config/htop
 cp ../htop/htoprc $HOME/.config/htop
