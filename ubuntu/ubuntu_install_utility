@@ -14,6 +14,9 @@ apt-get install vim htop wget vlc build-essential gparted keepassx tcptrack \
     thunderbird iotop filezilla djmount scrot wavemon libcrack2 nmap ffmpeg \
     gimp -y
 
+echo -e "${GREEN}=== INSTALLING ARCHIVE MANAGERS TOOLS...${NC}"
+apt-get install zip unzip tar rar xarchiver
+
 echo "=== Coping htoprc... "
 mkdir $HOME/.config/htop
 cp ../htop/htoprc $HOME/.config/htop
