@@ -11,7 +11,7 @@ fi
 
 echo -e "${GREEN}=== REQUIREMENTS: git installed and fully configured! ===${NC}"
 sudo apt-get install vim
-echo "=== Create home folder structure..."
+echo -e "${GREEN}=== Create home folder structure...${NC}"
 mkdir ~/.vim
 mkdir ~/.vim/swap
 mkdir ~/.vim/backup
@@ -22,12 +22,30 @@ cp -r ../vim/syntax ~/.vim
 cp -r ../vim/skeletons ~/.vim
 cp -r ../vim/colors ~/.vim
 cp -r ../vim/spell ~/.vim
+echo -e "${GREEN}=== Done!${NC}"
+
+echo -e "${GREEN}=== COPING vimrc in $HOME...${NC}"
 cp ../vim/.vimrc ~
-echo "=== vimrc file copied!!"
+
 echo "=== Cloning Vundle plug-in manager..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
 echo -e "${GREEN}=== INSTALLING PLUG-IN DEPENDENCIES...${NC}"
 sudo apt-get install exuberant-ctags build-essential cmake python-dev
+
+echo -e "${GREEN}=== INSTALLING FONT DEPENDENCIES...${NC}"
+git clone https://github.com/powerline/fonts.git fonts
+cd fonts
+./install.sh
+cd ..
+rm -rf fonts
+
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git nerd-fonts
+cd nerd-fonts
+./install.sh
+cd ..
+rm -rf nerd-fonts
+
 echo -e "${GREEN}=== VIM setup complete! ===${NC}"
 echo "=== Now open vim and run :VundleInstall to install all plugins"
 echo "=== Once installed Go binary, run in vim: :GoInstallBinaries and :GoUpdateBinaries"

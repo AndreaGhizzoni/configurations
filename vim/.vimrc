@@ -102,6 +102,12 @@ let g:tagbar_type_go = {
 " ============= Airline
 set laststatus=2                               " airline always displayed 
 let g:airline#extensions#tabline#enabled = 1   " enable smart tab airline
+" to use this flag install: github.com/powerline/fonts
+let g:airline_powerline_fonts = 1
+" complete glyph sets github.com/ryanoasis/nerd-fonts
+let g:airline_left_sep = "\uE0B0"
+let g:airline_right_sep = "\uE0B3"
+
 
 " ============= NERDTree
 map <F2> :NERDTreeToggle<CR>
