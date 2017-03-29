@@ -98,7 +98,10 @@ mode "$mode_system" {
 # start a terminal
 # i3-sensible-terminal is a script that runs the installed terminal
 #bindsym $mod+Return exec i3-sensible-terminal -name term
-bindsym $mod+Return exec xterm -fa 'Monospace' -fs 10
+#bindsym $mod+Return exec xterm -fa 'Monospace' -fs 10
+#
+# using uxterm for unicode support and place .Xresources in $HOME for settings
+bindsym $mod+Return exec uxterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
