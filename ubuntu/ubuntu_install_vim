@@ -33,18 +33,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 echo -e "${GREEN}=== INSTALLING PLUG-IN DEPENDENCIES...${NC}"
 sudo apt-get install exuberant-ctags build-essential cmake python-dev
 
-echo -e "${GREEN}=== INSTALLING FONT DEPENDENCIES...${NC}"
-git clone https://github.com/powerline/fonts.git fonts
-cd fonts
-./install.sh
-cd ..
-rm -rf fonts
-
-git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git nerd-fonts
-cd nerd-fonts
-./install.sh
-cd ..
-rm -rf nerd-fonts
+./ubuntu_install_fonts
 
 echo -e "${GREEN}=== VIM setup complete! ===${NC}"
 echo "=== Now open vim and run :VundleInstall to install all plugins"
