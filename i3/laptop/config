@@ -98,8 +98,6 @@ bindsym $mod+t exec telegram
 # i3-sensible-terminal is a script that runs the installed terminal
 #bindsym $mod+Return exec i3-sensible-terminal -name term
 #bindsym $mod+Return exec xterm -fa 'Monospace' -fs 11
-#                                                                               
-# using uxterm for unicode support and place .Xresources in $HOME for settings
 bindsym $mod+Return exec uxterm
 
 # kill focused window
@@ -335,6 +333,7 @@ for_window [class="Pavucontrol"] floating enable, border normal
 #       xprop | grep -i 'role'
 for_window [window_role="Msgcompose"] floating enable, border normal, resize shrink width 15 px or 15 ppt, resize shrink height 25 px or 25 ppt
 
+for_window [window_role="EventDialog"] floating enable, border normal, resize shrink width 15 px or 15 ppt, resize shrink height 25 px or 25 ppt
 # =============================================================================
 # = Auto start Applications
 # =============================================================================
