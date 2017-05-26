@@ -21,6 +21,11 @@ mkdir -p $TEX_SPELL
 
 echo -e "${GREEN}=== Coping custom latex library in ${TEX_CUSTOM}...${NC}"
 cp ../tex/bytefield/bytefield.sty $TEX_CUSTOM
+cp ../tex/algorithm2e/tex/algorithm2e.sty $TEX_CUSTOM
+cp ../tex/graphviz/graphviz.sty $TEX_CUSTOM
+cp ../tex/mathtools/empheq.sty $TEX_CUSTOM
+cp ../tex/mathtools/mathtools.sty $TEX_CUSTOM
+cp ../tex/mathtools/mhsetup.sty $TEX_CUSTOM
 
 echo -e "${GREEN}=== Coping custom dictionaries in ${TEX_SPELL}...${NC}"
 cp ../tex/it_IT.aff ../tex/it_IT.dic $TEX_SPELL
