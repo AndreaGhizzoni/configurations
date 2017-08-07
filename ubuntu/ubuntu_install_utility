@@ -12,7 +12,7 @@ fi
 echo -e "${GREEN}=== INSTALLING UBUNTU UTILITY PACKAGES...${NC}"
 apt-get install vim htop wget vlc build-essential gparted keepassx tcptrack \
     thunderbird iotop filezilla djmount scrot wavemon libcrack2 nmap ffmpeg \
-    gimp gpicview iftop etherape -y
+    gimp gpicview iftop etherape qpdfview vprerex -y
 
 echo -e "${GREEN}=== INSTALLING ARCHIVE MANAGERS TOOLS...${NC}"
 apt-get install zip unzip tar rar xarchiver
