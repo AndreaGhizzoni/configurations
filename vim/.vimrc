@@ -57,6 +57,7 @@ Plugin 'PotatoesMaster/i3-vim-syntax' " for i3 config file syntax highlighting
 
 call vundle#end()
 filetype plugin indent on
+syntax on
 
 " ============= Vim-Go
 au BufRead,BufNewFile *.go set filetype=go
@@ -102,12 +103,12 @@ let g:tagbar_type_go = {
 " ============= Airline
 set laststatus=2                               " airline always displayed 
 let g:airline#extensions#tabline#enabled = 1   " enable smart tab airline
-" to use this flag install: github.com/powerline/fonts
 let g:airline_powerline_fonts = 1
-" complete glyph sets github.com/ryanoasis/nerd-fonts
-let g:airline_left_sep = "\uE0B0"
-let g:airline_right_sep = "\uE0B3"
-
+"let g:airline_symbols = get(g:, 'airline_symbols', {})
+"let g:airline_symbols.space = " " 
+"let g:airline_left_sep = '▶'
+"let g:airline_left_sep = "\uE0B0"
+"let g:airline_right_sep = "\uE0B3"
 
 " ============= NERDTree
 map <F2> :NERDTreeToggle<CR>
