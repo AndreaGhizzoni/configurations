@@ -13,12 +13,11 @@ LINK="https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd
 
 echo -e "${GREEN}=== INSTALLING DROPBOX...${NC}"
 
-cd $HOME/Downloads
 echo -e "${GREEN}=== DOWNLOADING DEB PACKAGE...${NC}"
-wget -O - "$LINK"
+wget -O dropbox.deb - "$LINK"
 
 echo -e "${GREEN}=== INSTALLING DEB (root password required)...${NC}"
-sudo dpkg -i dropbox_2015.10.28_amd64.deb
+sudo dpkg -i dropbox.deb
 
 echo -e "${GREEN}=== STARTING DROPBOX FOR THE FIRST TIME...${NC}"
 dropbox start -i
