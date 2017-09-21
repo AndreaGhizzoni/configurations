@@ -28,8 +28,8 @@ unsetopt correct_all
 
 #========== ALIAS  more alias and stuff here: https://goo.gl/C7lsbI
 #common
-alias cc="clear"
-alias lla="ls -lah --group-directories-first"
+alias c="clear"
+alias l="ls -lah --group-directories-first"
 alias extip='curl ifconfig.me'
 alias httpserver='ifconfig && python -m SimpleHTTPServer 8000'
 alias pg='ping -v 8.8.8.8'
@@ -70,20 +70,20 @@ alias gs="git show --pretty --show-signature"
 #export PATH=$PATH:$GRAILS_HOME/bin
 
 #========== Gradle
-#export GRADLE_HOME=/opt/gradle
-#export PATH=$PATH:$GRADLE_HOME/bin
+export GRADLE_HOME=/opt/gradle
+export PATH=$PATH:$GRADLE_HOME/bin
 
 #========== Go
-#export GOOS=linux
-#export GOARCH=amd64
-#export GOROOT=/usr/local/go
-#export PATH=$PATH:$GOROOT/bin
+export GOOS=linux
+export GOARCH=amd64
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
 
 #========== Workspaces
 #export CPPPATH=~/Documents/workspace/cpp/
-#export JAVAPATH=~/Documents/workspace/java/
-#export GOPATH=$HOME/Documents/workspace/go
-#export PATH=$PATH:$GOPATH/bin
+export JAVAPATH=~/Documents/workspace/java/
+export GOPATH=$HOME/Documents/workspace/go
+export PATH=$PATH:$GOPATH/bin
 #export CPATH=~/Documents/workspace/c/
 
 #=========== workaround stuff
