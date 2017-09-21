@@ -15,7 +15,7 @@ apt-get install vim htop wget vlc build-essential gparted keepassx tcptrack \
     gimp gpicview iftop etherape qpdfview vprerex -y
 
 echo -e "${GREEN}=== INSTALLING ARCHIVE MANAGERS TOOLS...${NC}"
-apt-get install zip unzip tar rar xarchiver
+apt-get install zip unzip tar rar p7zip-full file-roller
 
 echo -e "${GREEN}=== INSTALLING AVAHI-DAEMON AND TOOLS...${NC}"
 apt-get install avahi-daemon avahi-discover avahi-utils libnss-mdns mdns-scan
