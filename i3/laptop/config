@@ -4,8 +4,12 @@ set $mod Mod1
 # = Prevent black screen for inactivity - https://goo.gl/swWudG
 # =============================================================================
 exec_always xset -dpms s off s noblank s 0 0 s noexpose
+# disable bell sound 
 exec_always xset b off
+# swap CAPS-LOCK and ESC buttons
 exec_always xmodmap ~/.Xmodmap
+# enable click on tap -> depends on xserver-xorg-input-synaptics
+exec_always synclient tapbutton1=1
 
 # =============================================================================
 # = Colors 
@@ -342,7 +346,7 @@ for_window [window_role="EventDialog"] floating enable, border normal, resize sh
 exec --no-startup-id feh --bg-fill /home/andrea/Pictures/wallpapers/i3wm_2.png
 
 #exec xautolock -time 9 -locker '~/.i3/i3exit.sh lock' &
-#exec --no-startup-id dropbox start
+exec --no-startup-id dropbox start
 #exec --no-startup-id xflux -l 46.0154 -g 11.6413 -k 2700
 exec --no-startup-id wicd-client
 
