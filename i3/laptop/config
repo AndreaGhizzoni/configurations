@@ -8,8 +8,10 @@ exec_always xset -dpms s off s noblank s 0 0 s noexpose
 exec_always xset b off
 # swap CAPS-LOCK and ESC buttons
 exec_always xmodmap ~/.Xmodmap
-# enable click on tap -> depends on xserver-xorg-input-synaptics
+# enable left click on single finger tap -> depends on xserver-xorg-input-synaptics
 exec_always synclient tapbutton1=1
+# enable right click on two fingers tap -> depends on xserver-xorg-input-synaptics
+exec_always synclient tapbutton2=3
 
 # =============================================================================
 # = Colors 
