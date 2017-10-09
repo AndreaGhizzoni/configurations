@@ -14,7 +14,6 @@ if [ $UID -ne 0 ]; then
 fi
 
 echo -e "${GREEN}=== INSTALLING i3 DEPS and UTILITIES... ${NC}"
-
-apt-get install alsa-utils feh pavucontrol lxappearance wicd wicd-gtk
+apt-get install alsa-utils pavucontrol lxappearance wicd wicd-gtk feh scrot
 
 echo -e "${GREEN}=== FINISH! ===${NC}"
