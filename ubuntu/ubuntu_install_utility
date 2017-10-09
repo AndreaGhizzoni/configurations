@@ -9,22 +9,14 @@ if [ $UID -ne 0 ]; then
     exit 1
 fi
 
-echo -e "${GREEN}=== INSTALLING UBUNTU UTILITY PACKAGES...${NC}"
-apt-get install vim htop wget vlc build-essential gparted keepassx tcptrack \
-    thunderbird iotop filezilla djmount scrot wavemon libcrack2 nmap ffmpeg \
-    gimp gpicview iftop etherape qpdfview vprerex -y
-
-echo -e "${GREEN}=== INSTALLING ARCHIVE MANAGERS TOOLS...${NC}"
-apt-get install zip unzip tar rar p7zip-full file-roller
-
-echo -e "${GREEN}=== INSTALLING AVAHI-DAEMON AND TOOLS...${NC}"
-apt-get install avahi-daemon avahi-discover avahi-utils libnss-mdns mdns-scan
+echo -e "${GREEN}=== INSTALLING UTILITIES...${NC}"
+apt-get install build-essential htop iotop iftop etherape mtr tcptrack wget \
+    keepassx gparted vlc thunderbird gimp gpicview evince \
+    -y
 
 echo "=== Coping htoprc... "
 mkdir $HOME/.config/htop
 cp ../htop/htoprc $HOME/.config/htop
 echo "=== DONE!"
 
-echo -e "${GREEN}=== INSTALLING FUNNY STUFF...${NC}"
-apt-get install figlet cowsay sl -y
 echo -e "${GREEN}=== FINISH! ===${NC}"
