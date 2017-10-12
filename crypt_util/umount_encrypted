@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No color
+
+if [ $UID -ne 0 ]; then
+    echo -e "${RED}$0 must be run as root${NC}"
+    exit 1
+fi
+
+mount=$1
+
+echo -e "${GREEN}Mount point: ${mount} ${NC}"
+
+umount ${mount}
+cryptsetup luksClose crypt
+
+echo -e "${GREEN}Device unmounted ${NC}"
