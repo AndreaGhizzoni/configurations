@@ -1,6 +1,7 @@
 "" ============= Basic settings
 set t_Co=256 
-color molokai
+"color molokai
+color molokayo
 set tabstop=4                          " visualize tabulation as 4 spaces (still tab)
 set shiftwidth=4                       " spaces instead of tabs
 set softtabstop=4                      " http://goo.gl/qMsEu
