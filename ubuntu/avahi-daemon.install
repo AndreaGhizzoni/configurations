@@ -12,4 +12,5 @@ fi
 echo -e "${GREEN}=== INSTALLING AVAHI-DAEMON AND TOOLS...${NC}"
 apt-get install avahi-daemon avahi-discover avahi-utils libnss-mdns mdns-scan
 
+echo -e "${GREEN}=== See /etc/avahi-daemon/avahi-daemon.conf${NC}"
 echo -e "${GREEN}=== FINISH! ===${NC}"

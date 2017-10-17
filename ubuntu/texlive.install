@@ -9,10 +9,11 @@ if [ $UID -ne 0 ]; then
     exit 1
 fi
 
-echo -e "${GREEN}=== INSTALLING TEXLIVE PACKAGES...${NC}"
+echo -e "${GREEN}=== INSTALLING TEXLIVE${NC}"
 apt-get install texlive-full texmaker
 
-TEX_HOME=$HOME/texmf/tex/latex
+TEX=$HOME/texmf
+TEX_HOME=$TEX/tex/latex
 TEX_CUSTOM=$TEX_HOME/custom
 TEX_SPELL=$TEX_HOME/myspell
 mkdir -p $TEX_HOME
@@ -30,7 +31,9 @@ cp ../tex/mathtools/mhsetup.sty $TEX_CUSTOM
 echo -e "${GREEN}=== Coping custom dictionaries in ${TEX_SPELL}...${NC}"
 cp ../tex/it_IT.aff ../tex/it_IT.dic $TEX_SPELL
 
-echo -e "${GREEN}=== REMEMBER to set dictionary setting of texmaker to path:${NC}"
+chown -R andrea:andrea $TEX
+
+echo -e "${GREEN}=== REMEMBER to set the dictionary of texmaker to path:${NC}"
 echo -e "${GREEN}=== ${TEX_SPELL} ${NC}"
 
 echo -e "${GREEN}=== FINISH! ===${NC}"

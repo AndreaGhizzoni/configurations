@@ -9,13 +9,15 @@ if [ $UID -eq 0 ]; then
     exit 1
 fi
 
+LiNK=http://justgetflux.com/linux/xflux64.tgz
+
 echo -e "${GREEN}=== INSTALLING FLUX...${NC}"
-wget -c http://justgetflux.com/linux/xflux64.tgz
+echo -e "${GREEN}=== Get xflux...${NC}"
+wget -c $LINK
+echo -e "${GREEN}=== Extracting...${NC}"
 tar -xvzf xflux64.tgz
 rm -rf xflux64.tgz
 chmod +x xflux
-echo -e "${GREEN}=== xflux get and extracted!${NC}"
-
-echo -e "${GREEN}=== Moving xflux to /usr/bin (sudo password required)...${NC}"
-sudo mv xflux /usr/bin
+echo -e "${GREEN}=== Soft linking xflux to /usr/bin (sudo password required)..${NC}"
+sudo ln -s xflux /usr/bin/xflux
 echo -e "${GREEN}=== FINISH!${NC}"

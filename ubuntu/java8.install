@@ -1,18 +1,82 @@
 #!/usr/bin/env bash
 
+# color declaration.
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No color
 
-if [ $UID -ne 0 ]; then
-    echo -e "${RED}$0 must be run as root${NC}"
+# usage and exit function.
+usageAndExit(){
+    echo -e "Usage: $0"
+    #echo -e "Example: $0"
+    exit 1
+}
+
+# check if this script is running as root.
+# comment the following statement if not required
+if [ $UID -eq 0 ]; then
+    echo -e "${RED}$0 it is not necessary to run this as root${NC}"
+    usageAndExit
+fi
+
+# check if correct number of parameters are passed to this script.
+# change the following number: 1 == no parameters, 2 == 1 parameters ecc.
+#if [ "$#" -ne 1 ]; then
+#    echo -e "${RED}Parameters missing.${NC}"
+#    usageAndExit
+#fi
+
+# insert the required packages, space separated
+dep_req=( wget tar )
+# check if required packages are installed
+dep_not_found=( )
+i=0
+for dep in "${dep_req[@]}"
+do
+    q=$(dpkg-query -W -f='${Status}' ${dep} 2>/dev/null | grep -c "ok installed")
+    if [ ${q} -eq 0 ]; then
+        dep_not_found[$i]=${dep}
+        ((i++))
+    fi
+done
+if [ ${i} -ne 0 ]; then
+    echo -e "${RED}Abort: Dependency package/s not found: ${NC}"
+    printf '%s ' "${dep_not_found[@]}"
+    echo ""
     exit 1
 fi
 
-echo -e "${GREEN}=== INSTALL JAVA JDK 8...${NC}"
-add-apt-repository ppa:webupd8team/java
-echo "=== Repository added!"
-apt-get update -y
-echo "=== Update"
-apt-get install oracle-java8-installer
-echo -e "${GREEN}=== FINISH! ===${NC}"
+# script logic start here
+
+# docs https://goo.gl/5kiMnB
+HEADER="Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
+LINK="http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.tar.gz"
+TAR=jdk8.tar.gz
+
+DST=/opt/java8
+
+echo -e "${GREEN}=== INSTALLING JAVA 8${NC}"
+
+echo -e "${GREEN}=== Downloading binay tar...${NC}"
+wget -O $TAR --no-cookies --no-check-certificate --header "$HEADER" "$LINK" 
+
+echo -e "${GREEN}=== Extracting...${NC}"
+tar xf $TAR
+echo -e "${GREEN}=== Extracting complete!.${NC}"
+
+read -p "Moving extracted content into $DST? [Y/n]: " -n 1 -r
+echo # for spacing 
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo -e "${GREEN}=== Moving to ${DST} (sudo password required)...${NC}"
+    if [ -d "$DST" ]; then
+        echo -e "${RED}=== Folder $DST already exist. Aborting.${NC}"
+        exit 1
+    fi
+    sudo mkdir -p $DST
+    sudo mv jdk1.8.0_144/* $DST
+    sudo chown -R andrea:andrea $DST
+fi
+
+echo -e "${GREEN}=== FINISH!${NC}"
+

@@ -14,9 +14,8 @@ apt-get install build-essential htop iotop iftop etherape mtr tcptrack wget \
     keepassx gparted vlc thunderbird gimp gpicview evince \
     -y
 
-echo "=== Coping htoprc... "
-mkdir $HOME/.config/htop
+echo -e "${GREEN}=== Coping htoprc...${NC}"
+mkdir -p $HOME/.config/htop
 cp ../htop/htoprc $HOME/.config/htop
-echo "=== DONE!"
-
+chown andrea:andrea -R $HOME/.config/htop
 echo -e "${GREEN}=== FINISH! ===${NC}"
