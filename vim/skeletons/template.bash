@@ -20,13 +20,14 @@ if [ $UID -ne 0 ]; then
 fi
 
 # check if correct number of parameters are passed to this script.
-# change the following number
+# change the following number: 1 == no parameters, 2 == 1 parameters ecc.
 if [ "$#" -ne 1 ]; then
     echo -e "${RED}Parameters missing.${NC}"
     usageAndExit
 fi
 
-# insert the required packages, space separated
+# insert the required packages, space separated.
+# if no dependencies required for this script, just skip it without modify.
 dep_req=( )
 # check if required packages are installed
 dep_not_found=( )
