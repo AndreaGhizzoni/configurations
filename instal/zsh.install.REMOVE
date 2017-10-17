@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No color
+
+if [ $UID -ne 0 ]; then
+    echo -e "${RED}$0 must be run as root${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}=== INSTALL ZSH...${NC}"
+apt-get install zsh curl git
+
+echo "=== Changing shell for andrea..."
+chsh -s /bin/zsh andrea
+echo "=== shell changed!"
+
+echo -e "${GREEN}=== INSTALLING oh-my-zsh...${NC}"
+su - andrea -c "curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh"
+echo "=== oh-my-zsh installed!"
+cp ../zsh/.zshrc ~
+cp ../zsh/my.zsh-theme ~/.oh-my-zsh/themes
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git 
+mv zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/
+
+echo -e "${GREEN}=== FINISH! (reboot needed)${NC}"
