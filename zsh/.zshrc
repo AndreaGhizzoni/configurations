@@ -16,7 +16,7 @@ ZSH_THEME="my"
 # cp        : cp with progress bar (rsync)
 # gitignore : gi() alias to fetch default .gitignore files from gitignore.io
 # history   : "h" for view the history, "hsi" for grep history
-plugins=(git gradle sublime cp gitignore history)
+plugins=(git gradle sublime cp gitignore history zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 unsetopt SHARE_HISTORY
