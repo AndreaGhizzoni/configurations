@@ -5,8 +5,8 @@ RED='\033[0;31m'
 NC='\033[0m' # No color
 
 usageAndExit(){
-    echo -e "Usage: $0 [device] [mount-point]"
-    echo -e "Example: $0 /dev/sdd1 /mnt/device"
+    echo -e "Usage: $0 [mount-point]"
+    echo -e "Example: $0 /mnt/device"
     exit 1
 }
 
@@ -17,7 +17,7 @@ if [ $UID -ne 0 ]; then
 fi
 
 # check if correct number of parameters are passed to this script
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 1 ]; then
     echo -e "${RED}Parameters missing.${NC}"
     usageAndExit
 fi
