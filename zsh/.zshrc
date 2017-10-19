@@ -35,7 +35,7 @@ alias httpserver='ifconfig && python -m SimpleHTTPServer 8000'
 alias pg='mtr --curses 8.8.8.8'
 alias ns='netstat -tlnp'
 alias ssdtop='sudo iotop --only'
-alias update='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y'
+alias update='sudo apt-get update && sudo apt-get upgrade'
 alias prettyjson='python -m json.tool'
 alias checkpass='chracklib-check'
 
