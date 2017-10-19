@@ -1,7 +1,7 @@
 #! /bin/sh
 
-$USER=
-$MACHINE=
+u=
+m=
 
 # lancia Xephyr su display :1
 Xephyr :1 -ac -nolisten tcp -screen 1024x768 &

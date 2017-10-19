@@ -1,12 +1,15 @@
 #! /bin/sh
 
+u=andrea
+m=cassini.local
+
 # lancia Xephyr su display :1
-Xephyr :1 -ac -nolisten tcp -screen 1024x768 &
+Xephyr :1 -ac -nolisten tcp -screen 1440x900 &
 pid_xephyr=$!
 
 # lancia lxde via ssh su display :1
 exit_status=0
-DISPLAY=:1 ssh "andrea@cassini.local" -X -C -- startlxde ||
+DISPLAY=:1 ssh "$u@$m" -X -C -- startlxde ||
    exit_status=$?
 
 # termina Xephyr quando lxde termina
