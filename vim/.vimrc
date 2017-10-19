@@ -1,6 +1,6 @@
 "" ============= Basic settings
 set t_Co=256 
-color molokai
+color molokayo
 set tabstop=4                          " visualize tabulation as 4 spaces (still tab)
 set shiftwidth=4                       " spaces instead of tabs
 set softtabstop=4                      " http://goo.gl/qMsEu
@@ -43,6 +43,7 @@ Plugin 'tpope/vim-fugitive'           " for git integration
 Plugin 'scrooloose/syntastic'         " for syntax
 Plugin 'scrooloose/nerdtree'          " for tree directory
 Plugin 'bling/vim-airline'            " for bottom status bar
+Plugin 'vim-airline/vim-airline-themes' " set of themes for airline
 
 Plugin 'fatih/vim-go'                 " for working with go
 
@@ -59,6 +60,7 @@ Plugin 'PotatoesMaster/i3-vim-syntax' " for i3 config file syntax highlighting
 
 call vundle#end()
 filetype plugin indent on
+syntax on
 
 " ============= Vim-Go
 au BufRead,BufNewFile *.go set filetype=go
@@ -105,8 +107,9 @@ let g:tagbar_type_go = {
 set laststatus=2                               " airline always displayed 
 let g:airline#extensions#tabline#enabled = 1   " enable smart tab airline
 let g:airline_powerline_fonts = 1
-let g:airline_left_sep = "\uE0B0"
-let g:airline_right_sep = "\uE0B3"
+let g:airline_theme='simple'
+"let g:airline_left_sep = "\uE0B0"
+"let g:airline_right_sep = "\uE0B3"
 
 
 " ============= NERDTree
