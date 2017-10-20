@@ -14,8 +14,16 @@ apt-get install build-essential htop iotop iftop etherape mtr tcptrack wget \
     keepassx gparted vlc thunderbird gimp gpicview evince \
     -y
 
-echo -e "${GREEN}=== Coping htoprc...${NC}"
-mkdir -p $HOME/.config/htop
-cp ../htop/htoprc $HOME/.config/htop
-chown andrea:andrea -R $HOME/.config/htop
+read -p "Do you want to copy htoprc in $HOME/.config/htop ? [Y/n] " \
+    -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo -e "${GREEN}=== Coping htoprc...${NC}"
+    HTOP_F=$HOME/.config/htop
+    mkdir -p $HTOP_F
+    cp ../htop/htoprc $HTOP_F 
+    chown andrea:andrea -R $HTOP_F
+fi
+
 echo -e "${GREEN}=== FINISH! ===${NC}"

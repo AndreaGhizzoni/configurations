@@ -48,37 +48,37 @@ if [ ${i} -ne 0 ]; then
 fi
 
 # script logic start here
-echo -e "${GREEN}=== INSTALLING AND CONFIGURING VIM! ===${NC}"
+echo -e "${GREEN}=== INSTALLING VIM...${NC}"
 apt-get install vim
 
 if [ -d "~/.vim" ]; then
-    echo -e "${RED}~/.vim folder already exists. Aborging.${NC}"
-    exit 1
+    echo -e "${RED}~/.vim folder already exists. Skipping configurations.${NC}"
+else
+    echo -e "${GREEN}=== Create home folder structure...${NC}"
+    mkdir ~/.vim
+    mkdir ~/.vim/swap
+    mkdir ~/.vim/backup
+    mkdir ~/.vim/undo
+    mkdir ~/.vim/bundle
+    mkdir ~/.vim/gobinaries
+    cp -r ../vim/syntax ~/.vim
+    cp -r ../vim/skeletons ~/.vim
+    cp -r ../vim/colors ~/.vim
+    cp -r ../vim/spell ~/.vim
+    echo -e "${GREEN}=== Done!${NC}"
+
+    echo -e "${GREEN}=== COPING vimrc in $HOME...${NC}"
+    cp ../vim/.vimrc ~
+
+    echo -e "${GREEN}=== Cloning Vundle plug-in manager...${NC}"
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+    chown -R andrea:andrea ~/.vim
+    chown -R andrea:andrea ~/.vimrc
+
+    echo -e "${GREEN}=== Now open vim and run :VundleInstall to install all plugins${NC}"
+    echo -e "${GREEN}=== Once installed Go binary, run in vim: :GoInstallBinaries and :GoUpdateBinaries${NC}"
 fi
-echo -e "${GREEN}=== Create home folder structure...${NC}"
-mkdir ~/.vim
-mkdir ~/.vim/swap
-mkdir ~/.vim/backup
-mkdir ~/.vim/undo
-mkdir ~/.vim/bundle
-mkdir ~/.vim/gobinaries
-cp -r ../vim/syntax ~/.vim
-cp -r ../vim/skeletons ~/.vim
-cp -r ../vim/colors ~/.vim
-cp -r ../vim/spell ~/.vim
-echo -e "${GREEN}=== Done!${NC}"
 
-echo -e "${GREEN}=== COPING vimrc in $HOME...${NC}"
-cp ../vim/.vimrc ~
-
-echo -e "${GREEN}=== Cloning Vundle plug-in manager...${NC}"
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-chown -R andrea:andrea ~/.vim
-chown -R andrea:andrea ~/.vimrc
-
-echo -e "${GREEN}=== VIM setup complete! ===${NC}"
-echo -e "${GREEN}=== Now open vim and run :VundleInstall to install all plugins${NC}"
-echo -e "${GREEN}=== Once installed Go binary, run in vim: :GoInstallBinaries and :GoUpdateBinaries${NC}"
 echo -e "${GREEN}=== FINISH! ===${NC}"
 

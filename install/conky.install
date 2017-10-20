@@ -50,11 +50,16 @@ fi
 echo -e "${GREEN}=== Setting up sensors...${NC}"
 sensors
 echo -e "${GREEN}=== Installing conky...${NC}"
-apt-get install conky-all -y
+apt-get install conky-all
 
-echo -e "${GREEN}=== Coping rc file...${NC}"
-cp ../conky/.conkyrc ~
-chown -R andrea:andrea ~/.conkyrc
+read -p "Do you want to copy .conkyrc in $HOME ? [Y/n] " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo -e "${GREEN}=== Coping rc file...${NC}"
+    cp ../conky/.conkyrc $HOME
+    chown -R andrea:andrea $HOME/.conkyrc
+fi
 
 echo -e "${GREEN}=== FINISH! ===${NC}"
 

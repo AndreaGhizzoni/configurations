@@ -53,20 +53,28 @@ USER=andrea
 echo -e "${GREEN}=== INSTALL ZSH...${NC}"
 apt-get install zsh
 
-echo "=== Changing shell for user $USER..."
+echo -e "${GREEN}=== Changing shell for user $USER...${NC}"
 chsh -s /bin/zsh $USER
-echo "=== shell changed!"
+echo -e "${GREEN}=== shell changed!${NC}"
 
-echo -e "${GREEN}=== INSTALLING oh-my-zsh...${NC}"
-su - $USER -c "curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh"
-echo "=== oh-my-zsh installed!"
-cp ../zsh/.zshrc ~
-cp ../zsh/my.zsh-theme ~/.oh-my-zsh/themes
+if [ -d "$HOME/.oh-my-zsh" ]; then
+    echo -e "${RED}$HOME/.oh-my-zsh already exists. Skip download and configuration ${NC}"
+else
+    echo -e "${GREEN}=== INSTALLING oh-my-zsh...${NC}"
+    su - $USER -c "curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh"
+    cp ../zsh/my.zsh-theme $HOME/.oh-my-zsh/themes
 
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git 
-mv zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git 
+    mv zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/
+fi
 
-chown -R $USER:$USER ~/.zshrc
-chown -R $USER:$USER ~/.oh-my-zsh
+read -p "Do you want to copy zshrc in $HOME ? [Y/n] " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cp ../zsh/.zshrc $HOME
+    chown -R $USER:$USER $HOME/.zshrc
+fi
+
 echo -e "${GREEN}=== FINISH! (reboot needed)${NC}"
 
