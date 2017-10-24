@@ -10,6 +10,6 @@ if [ $UID -ne 0 ]; then
 fi
 
 echo -e "${GREEN}=== INSTALLING FUNNY STUFF...${NC}"
-apt-get install figlet cowsay sl -y
+apt-get install figlet cowsay sl neofetch -y
 
 echo -e "${GREEN}=== FINISH! ===${NC}"
