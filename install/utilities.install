@@ -10,8 +10,13 @@ if [ $UID -ne 0 ]; then
 fi
 
 echo -e "${GREEN}=== INSTALLING UTILITIES...${NC}"
-apt-get install build-essential htop iotop iftop etherape mtr tcptrack wget \
-    keepassx gparted vlc thunderbird gimp gpicview evince \
+# silversearch-ag => ag program: better than grep
+apt-get install build-essential \
+    silversearch-ag \
+    htop iotop iftop \
+    etherape mtr tcptrack wget \
+    keepassx gparted vlc thunderbird \
+    gimp gpicview evince \
     -y
 
 read -p "Do you want to copy htoprc in $HOME/.config/htop ? [Y/n] " \
