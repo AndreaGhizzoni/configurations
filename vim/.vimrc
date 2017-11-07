@@ -52,6 +52,7 @@ Plugin 'xolox/vim-misc'               " dependency for tagbar
 Plugin 'majutsushi/tagbar'            " for outline of current file
 Plugin 'airblade/vim-gitgutter'       " shows a git diff in the sign column
 Plugin 'sheerun/vim-polyglot'         " syntax package
+Plugin 'neomake/neomake'              " lint for bash script https://goo.gl/qbAJFT
 
 " NB: this plugin is disable because break syntastic error check on save
 "Plugin 'Valloric/YouCompleteMe'       " for auto complete functions
