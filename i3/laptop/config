@@ -3,16 +3,16 @@ set $mod Mod1
 # =============================================================================
 # = General Tweak
 # =============================================================================
-#  Prevent black screen for inactivity - https://goo.gl/swWudG
-exec_always xset -dpms s off s noblank s 0 0 s noexpose
+# prevent black screen for inactivity - https://goo.gl/swWudG
+exec_always --no-startup-id xset -dpms s off s noblank s 0 0 s noexpose
 # disable bell sound 
-exec_always xset b off
+exec_always --no-startup-id xset b off
 # swap CAPS-LOCK and ESC buttons via script
-exec_always ./home/andrea/.config/i3/swap-caps-esc.bash 
+exec_always --no-startup-id ./home/andrea/.config/i3/swap-caps-esc.bash 
 # enable left click on single finger tap -> depends on xserver-xorg-input-synaptics
-exec_always synclient tapbutton1=1
+exec_always --no-startup-id synclient tapbutton1=1
 # enable right click on two fingers tap -> depends on xserver-xorg-input-synaptics
-exec_always synclient tapbutton2=3
+exec_always --no-startup-id synclient tapbutton2=3
 
 # =============================================================================
 # = Colors 
@@ -66,24 +66,6 @@ popup_during_fullscreen smart
 # Border style for new Windows
 # new_window normal|none|pixel <px>
 new_window pixel 1
-
-# =============================================================================
-# = Special Keys
-# =============================================================================
-# increase screen brightness
-bindsym XF86MonBrightnessUp exec ~/.config/i3/bright_control.bash -inc 100
-# decrease screen brightness
-bindsym XF86MonBrightnessDown exec ~/.config/i3/bright_control.bash -dec 100
-# increase sound volume
-bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
-# decrease sound volume
-bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
-# mute sound
-bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
-# scrot & gimp - root
-bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
-# scrot & gimp - select window or rectangle
-bindsym Mod1+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
 
 # =============================================================================
 # = General Keybinding 
@@ -160,22 +142,40 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# =============================================================================
+# = Special Keys
+# =============================================================================
+# increase screen brightness
+bindsym XF86MonBrightnessUp exec ~/.config/i3/bright_control.bash -inc 100
+# decrease screen brightness
+bindsym XF86MonBrightnessDown exec ~/.config/i3/bright_control.bash -dec 100
+# increase sound volume
+bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
+# decrease sound volume
+bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
+# mute sound
+bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
+# scrot & gimp - root
+bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+# scrot & gimp - select window or rectangle
+bindsym Mod1+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
+
 #==============================================================================
 #= Workspaces
 #==============================================================================
-# Define workspaces name with icons
-set $work_1_firefox_icon     "1.  "
-set $work_2_thunderbird_icon "2.  "
-set $work_3_franz_icon       "3.  "
-set $work_4_gp_icon          "4.  "
-set $work_5_gp_icon          "5.  "
-set $work_6_gp_icon          "6.  "
-set $work_7_gp_icon          "7.  "
-set $work_8_gp_icon          "8.  "
-set $work_9_gp_icon          "9.  "
-set $work_10_music_icon      "10.  "
+# Define workspaces with icons
+set $work_1_firefox_icon     "1.   "
+set $work_2_thunderbird_icon "2.   "
+set $work_3_franz_icon       "3.   "
+set $work_4_gp_icon          "4.   "
+set $work_5_gp_icon          "5.   "
+set $work_6_gp_icon          "6.   "
+set $work_7_gp_icon          "7.   "
+set $work_8_gp_icon          "8.   "
+set $work_9_gp_icon          "9.   "
+set $work_10_music_icon      "10.   "
 
-# Define workspaces name
+# Define workspaces with names
 set $work_1_firefox     "1. Firefox "
 set $work_2_thunderbird "2. Thunderbird "
 set $work_3_franz       "3. Franz "
@@ -210,6 +210,12 @@ bindsym $mod+Shift+7 move container to workspace $work_7_gp_icon
 bindsym $mod+Shift+8 move container to workspace $work_8_gp_icon
 bindsym $mod+Shift+9 move container to workspace $work_9_gp_icon
 bindsym $mod+Shift+0 move container to workspace $work_10_music_icon
+
+# workspace assignments
+assign [class="Firefox"] $work_1_firefox_icon
+assign [class="Thunderbird"] $work_2_thunderbird_icon
+assign [class="Franz"] $work_3_franz_icon
+assign [class="Clementine"] $work_10_music_icon
 
 #==============================================================================
 #= i3 modes
@@ -259,6 +265,7 @@ mode "$mode_system" {
     bindsym s exec $psst ~/.config/i3/i3exit.sh suspend, mode "default"
     bindsym r exec $psst ~/.config/i3/i3exit.sh reboot, mode "default"
     bindsym p exec $psst ~/.config/i3/i3exit.sh poweroff, mode "default"
+
     #back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -276,8 +283,8 @@ bindsym $mod+Delete mode "$mode_system"
 # Start i3bar to display a workspace bar in main monitor eDP1
 bar {
     colors {
-        #statusline  #00A5FF #neon blue
-        statusline  #FFFFFF
+        statusline  #00A5FF #neon blue
+        #statusline  #FFFFFF
         background  $black
 
         # Colors            border      backgr     text
@@ -296,59 +303,10 @@ bar {
     #font pango:DejaVu Sans Mono 8
     font pango:DejaVu Sans Mono, FontAwesome 9
     separator_symbol ":|"
+    # make workspace indicator a button
     workspace_buttons yes
     #strip_workspace_numbers yes
 }
-
-# configuration of status bar on HDMI1 output
-#bar {
-#    colors {
-#        statusline  #00A5FF
-#        background  $black
-
-        # Colors            border      backgr     text
-#        focused_workspace   $white      $white     $black
-#        active_workspace    #073642     #073642    #696f89
-#        inactive_workspace  #073642     #073642    $white
-#        urgent_workspace    $orange     $orange    $dark
-#    }
-
-    # default is "status_command i3status" that use /etc/i3status.conf
-#    status_command i3status -c ~/.config/i3/i3statusbar-secondary-monitor.conf
-#    output HDMI1
-#    position bottom
-    # icon of various program place the his icon on the bar
-#    tray_output primary     
-#    font pango:DejaVu Sans Mono 8
-#    separator_symbol ":|"
-#    workspace_buttons yes
-    #strip_workspace_numbers yes
-#}
-
-# configuration of status bar on VGA1 output
-#bar {
-#    colors {
-#        statusline  #00A5FF
-#        background  $black
-
-        # Colors            border      backgr     text
-#        focused_workspace   $white      $white     $black
-#        active_workspace    #073642     #073642    #696f89
-#        inactive_workspace  #073642     #073642    $white
-#        urgent_workspace    $orange     $orange    $dark
-#    }
-
-    # default is "status_command i3status" that use /etc/i3status.conf
-#    status_command i3status -c ~/.config/i3/i3statusbar-secondary-monitor.conf
-#    output VGA1
-#    position bottom
-    # icon of various program place the his icon on the bar
-#    tray_output primary     
-#    font pango:DejaVu Sans Mono 8
-#    separator_symbol ":|"
-#    workspace_buttons yes
-    #strip_workspace_numbers yes
-#}
 
 # =============================================================================
 # = Window Applications Settings
@@ -371,16 +329,14 @@ for_window [class="Pavucontrol"] floating enable, border normal
 # Tip: To find out what these values might be run:
 #       xprop | grep -i 'role'
 for_window [window_role="Msgcompose"] floating enable, border normal, resize shrink width 15 px or 15 ppt, resize shrink height 25 px or 25 ppt
-
 for_window [window_role="EventDialog"] floating enable, border normal, resize shrink width 15 px or 15 ppt, resize shrink height 25 px or 25 ppt
 
 # =============================================================================
 # = Auto start Applications
 # =============================================================================
 exec --no-startup-id feh --bg-fill /home/andrea/Pictures/wallpapers/i3wm_2.png
-
-#exec xautolock -time 9 -locker '~/.i3/i3exit.sh lock' &
 exec --no-startup-id dropbox start
+exec --no-startup-id wicd-client -t
+#exec xautolock -time 9 -locker '~/.i3/i3exit.sh lock' &
 #exec --no-startup-id xflux -l 46.0154 -g 11.6413 -k 2700
-exec --no-startup-id wicd-client
 
