@@ -6,7 +6,7 @@ set $mod Mod1
 # Prevent black screen for inactivity - https://goo.gl/swWudG
 exec_always --no-startup-id xset -dpms s off s noblank s 0 0 s noexpose
 # Mouse speed and acceleration 
-exec_always xset m 1 1
+exec_always --no-startup-id xset m 1 1
 # swap CAPS-LOCK and ESC buttons via script
 exec_always --no-startup-id ./home/andrea/.config/i3/swap-caps-esc.bash 
 
