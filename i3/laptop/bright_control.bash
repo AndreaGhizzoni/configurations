@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
+if [ ! -f "/tmp/brightness_enabled" ]; then
+    gksudo chmod a+rw /sys/class/backlight/intel_backlight/brightness
+    touch /tmp/brightness_enabled
+fi
+
 # from here: https://goo.gl/40kUGU
 file="/sys/class/backlight/intel_backlight/brightness"
 current=$(cat "$file")
