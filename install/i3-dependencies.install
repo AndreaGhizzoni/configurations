@@ -48,6 +48,9 @@ fi
 
 # script logic start here
 echo -e "${GREEN}=== INSTALLING i3 DEPENDENCIES... ${NC}"
-apt-get install alsa-utils pavucontrol lxappearance wicd wicd-gtk feh scrot
+apt-get install alsa-utils pavucontrol lxappearance wicd wicd-gtk feh scrot \
+    fonts-font-awesome arandr
+echo -e "${GREEN}=== Updating fonts... ${NC}"
+fc-cache -f
 echo -e "${GREEN}=== FINISH! ===${NC}"
 
