@@ -1,14 +1,14 @@
 set $mod Mod1
 
 # =============================================================================
-# = Mouse speed and acceleration 
+# = General Tweak
 # =============================================================================
+# Prevent black screen for inactivity - https://goo.gl/swWudG
+exec_always --no-startup-id xset -dpms s off s noblank s 0 0 s noexpose
+# Mouse speed and acceleration 
 exec_always xset m 1 1
-
-# =============================================================================
-# = Prevent black screen for inactivity - https://goo.gl/swWudG
-# =============================================================================
-exec_always xset -dpms s off s noblank s 0 0 s noexpose
+# swap CAPS-LOCK and ESC buttons via script
+exec_always --no-startup-id ./home/andrea/.config/i3/swap-caps-esc.bash 
 
 # =============================================================================
 # = Colors 
@@ -26,25 +26,29 @@ set $orange   #E59847
 set $cyan     #2AA198
 set $dark     #00252E
 
+# Tip: indicator is the color of the bar that indicates the location of the next
+# tilled windows that will be open
 # Window colors         border  backgr. text    indicator
-client.focused          $white  $white  $dark   $dark
+client.focused          $white  $white  $dark   $white
 client.unfocused        $dark   $dark   $white  $white
-client.focused_inactive $dark   $dark   $white  $dark
+client.focused_inactive $dark   $dark   $white  $white
 client.urgent           $orange $orange $dark   $white
 
 # =============================================================================
 # = General Settings
 # =============================================================================
 # font 
-font pango:monospace 10
+#font pango:monospace 10
+font xft:Droid Sans Mono, FontAwesome 8
 
 # Do not focus on mousover
-focus_follows_mouse  no
+focus_follows_mouse no
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# hiding vertical borders hide_edge_borders none|vertical|horizontal|both
+# hiding vertical borders 
+#hide_edge_borders none|vertical|horizontal|both
 hide_edge_borders none
 
 # Display popup during fullscreen mode
@@ -64,43 +68,12 @@ popup_during_fullscreen smart
 new_window pixel 2
 
 # =============================================================================
-# = Special Keys
+# = General Keybinding
 # =============================================================================
-# increase sound volume
-bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
-# decrease sound volume
-bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
-# mute sound
-bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
-# scrot & gimp - root
-bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
-# scrot & gimp - select window or rectangle
-bindsym Mod1+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
-
-# =============================================================================
-# = General Binding 
-# =============================================================================
-# settings fro lock, logout, reboot or shutdown
-set $mode_system   [L]OCK   LOG[O]UT   [S]USPEND   [R]EBOOT   [P]OWEROFF
-bindsym $mod+Delete mode "$mode_system"
-bindsym Ctrl+$mod+BackSpace mode "$mode_system"
-mode "$mode_system" {
-    bindsym l exec $psst ~/.config/i3/i3exit.sh lock, mode "default"
-    bindsym o exec $psst ~/.config/i3/i3exit.sh logout, mode "default"
-    bindsym s exec $psst ~/.config/i3/i3exit.sh suspend, mode "default"
-    bindsym r exec $psst ~/.config/i3/i3exit.sh reboot, mode "default"
-    bindsym p exec $psst ~/.config/i3/i3exit.sh poweroff, mode "default"
-    #back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
 # start a terminal
 # i3-sensible-terminal is a script that runs the installed terminal
 #bindsym $mod+Return exec i3-sensible-terminal -name term
 #bindsym $mod+Return exec xterm -fa 'Monospace' -fs 10
-#
-# using uxterm for unicode support and place .Xresources in $HOME for settings
 bindsym $mod+Return exec uxterm
 
 # kill focused window
@@ -159,30 +132,9 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# switch to workspace
-bindsym $mod+1 workspace 1 
-bindsym $mod+2 workspace 2 
-bindsym $mod+3 workspace 3 
-bindsym $mod+4 workspace 4 
-bindsym $mod+5 workspace 5 
-bindsym $mod+6 workspace 6 
-bindsym $mod+7 workspace 7 
-bindsym $mod+8 workspace 8 
-bindsym $mod+9 workspace 9 
-bindsym $mod+0 workspace 10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1 
-bindsym $mod+Shift+2 move container to workspace 2 
-bindsym $mod+Shift+3 move container to workspace 3 
-bindsym $mod+Shift+4 move container to workspace 4 
-bindsym $mod+Shift+5 move container to workspace 5 
-bindsym $mod+Shift+6 move container to workspace 6 
-bindsym $mod+Shift+7 move container to workspace 7 
-bindsym $mod+Shift+8 move container to workspace 8 
-bindsym $mod+Shift+9 move container to workspace 9 
-bindsym $mod+Shift+0 move container to workspace 10
-
+#==============================================================================
+#= i3 managment
+#==============================================================================
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -190,6 +142,80 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# =============================================================================
+# = Special Keys
+# =============================================================================
+# increase sound volume
+bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
+# decrease sound volume
+bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
+# mute sound
+bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
+# scrot & gimp - root
+bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+# scrot & gimp - select window or rectangle
+bindsym Mod1+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
+
+#==============================================================================
+#= Workspaces
+#==============================================================================
+# Define workspaces with icons
+set $work_1_firefox_icon     "1.   "
+set $work_2_thunderbird_icon "2.   "
+set $work_3_franz_icon       "3.   "
+set $work_4_gp_icon          "4.   "
+set $work_5_gp_icon          "5.   "
+set $work_6_gp_icon          "6.   "
+set $work_7_gp_icon          "7.   "
+set $work_8_gp_icon          "8.   "
+set $work_9_gp_icon          "9.   "
+set $work_10_music_icon      "10.   "
+
+# Define workspaces with names
+set $work_1_firefox     "1. Firefox "
+set $work_2_thunderbird "2. Thunderbird "
+set $work_3_franz       "3. Franz "
+set $work_4_gp          "4. "
+set $work_5_gp          "5. "
+set $work_6_gp          "6. "
+set $work_7_gp          "7. "
+set $work_8_gp          "8. "
+set $work_9_gp          "9. "
+set $work_10_music      "10. Clementine "
+
+# switch to workspace
+bindsym $mod+1 workspace $work_1_firefox_icon
+bindsym $mod+2 workspace $work_2_thunderbird_icon
+bindsym $mod+3 workspace $work_3_franz_icon
+bindsym $mod+4 workspace $work_4_gp_icon
+bindsym $mod+5 workspace $work_5_gp_icon
+bindsym $mod+6 workspace $work_6_gp_icon
+bindsym $mod+7 workspace $work_7_gp_icon
+bindsym $mod+8 workspace $work_8_gp_icon
+bindsym $mod+9 workspace $work_9_gp_icon
+bindsym $mod+0 workspace $work_10_music_icon
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $work_1_firefox_icon
+bindsym $mod+Shift+2 move container to workspace $work_2_thunderbird_icon
+bindsym $mod+Shift+3 move container to workspace $work_3_franz_icon
+bindsym $mod+Shift+4 move container to workspace $work_4_gp_icon
+bindsym $mod+Shift+5 move container to workspace $work_5_gp_icon
+bindsym $mod+Shift+6 move container to workspace $work_6_gp_icon
+bindsym $mod+Shift+7 move container to workspace $work_7_gp_icon
+bindsym $mod+Shift+8 move container to workspace $work_8_gp_icon
+bindsym $mod+Shift+9 move container to workspace $work_9_gp_icon
+bindsym $mod+Shift+0 move container to workspace $work_10_music_icon
+
+# workspace assignments
+assign [class="Firefox"] $work_1_firefox_icon
+assign [class="Thunderbird"] $work_2_thunderbird_icon
+assign [class="Franz"] $work_3_franz_icon
+assign [class="Clementine"] $work_10_music_icon
+
+#==============================================================================
+#= i3 modes
+#==============================================================================
 # These bindings trigger as soon as you enter the resize mode
 # resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
@@ -233,6 +259,22 @@ bindsym $mod+x mode "$mode_display"
 # Move current workspace to output
 bindsym $mod+m move workspace to output DVI-0
 
+# settings fro lock, logout, reboot or shutdown
+set $mode_system   [L]OCK   LOG[O]UT   [S]USPEND   [R]EBOOT   [P]OWEROFF
+bindsym $mod+Delete mode "$mode_system"
+bindsym Ctrl+$mod+BackSpace mode "$mode_system"
+mode "$mode_system" {
+    bindsym l exec $psst ~/.config/i3/i3exit.sh lock, mode "default"
+    bindsym o exec $psst ~/.config/i3/i3exit.sh logout, mode "default"
+    bindsym s exec $psst ~/.config/i3/i3exit.sh suspend, mode "default"
+    bindsym r exec $psst ~/.config/i3/i3exit.sh reboot, mode "default"
+    bindsym p exec $psst ~/.config/i3/i3exit.sh poweroff, mode "default"
+
+    #back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 # =============================================================================
 # = Status Bar
 # =============================================================================
@@ -259,7 +301,8 @@ bar {
     position bottom
     # icon of various program place the his icon on the bar
     tray_output primary     
-    font pango:DejaVu Sans Mono 9
+    #font pango:DejaVu Sans Mono 9
+    font pango:DejaVu Sans Mono, FontAwesome 9
     separator_symbol ":|"
     workspace_buttons yes
     #strip_workspace_numbers yes
@@ -268,7 +311,9 @@ bar {
 # Start i3bar to display a workspace bar for secondary monitor
 bar {
     colors {
-        statusline  #00A5FF
+        #neon blue
+        #statusline  #00A5FF
+        statusline  #FFFFFF
         background  $black
 
         # Colors            border      backgr.    text
@@ -286,7 +331,8 @@ bar {
     position bottom
     # icon of various program place the his icon on the bar
     tray_output primary     
-    font pango:DejaVu Sans Mono 9
+    #font pango:DejaVu Sans Mono 9
+    font pango:DejaVu Sans Mono, FontAwesome 9
     separator_symbol ":|"
     workspace_buttons yes
     #strip_workspace_numbers yes
@@ -318,7 +364,6 @@ for_window [window_role="Msgcompose"] floating enable, border normal, resize shr
 # = Auto start Applications
 # =============================================================================
 exec --no-startup-id feh --bg-fill /home/andrea/Pictures/wallpapers/i3wm_2.png
-
-#exec xautolock -time 9 -locker '~/.i3/i3exit.sh lock' &
 exec --no-startup-id dropbox start
 exec --no-startup-id xflux -l 46.0154 -g 11.6413 -k 2700
+#exec xautolock -time 9 -locker '~/.i3/i3exit.sh lock' &
