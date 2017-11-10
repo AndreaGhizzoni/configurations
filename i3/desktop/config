@@ -1,6 +1,13 @@
 set $mod Mod1
 
 # =============================================================================
+# = Multidisplay
+# =============================================================================
+exec --no-startup-id "xrandr --output DisplayPort-0 --off \
+                 --output DVI-0 --off --output HDMI-0 --off \
+                 --output DVI-1 --mode 1920x1080 --pos 1920x0 --rotate normal"
+
+# =============================================================================
 # = General Tweak
 # =============================================================================
 # Prevent black screen for inactivity - https://goo.gl/swWudG
@@ -369,4 +376,9 @@ for_window [window_role="Msgcompose"] floating enable, border normal, resize shr
 exec --no-startup-id feh --bg-fill /home/andrea/Pictures/wallpapers/i3wm_2.png
 exec --no-startup-id dropbox start
 exec --no-startup-id xflux -l 46.0154 -g 11.6413 -k 2700
+
+exec --no-startup-id firefox
+exec --no-startup-id thunderbird
+exec --no-startup-id franz
+exec --no-startup-id clementine
 #exec xautolock -time 9 -locker '~/.i3/i3exit.sh lock' &
