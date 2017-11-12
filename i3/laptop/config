@@ -163,6 +163,7 @@ bindsym Mod1+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
 #==============================================================================
 #= Workspaces
 #==============================================================================
+# Icons from fontawesome.io
 # Define workspaces with icons
 set $work_1_firefox_icon     "1.   "
 set $work_2_thunderbird_icon "2.   "
@@ -172,7 +173,7 @@ set $work_5_gp_icon          "5.   "
 set $work_6_gp_icon          "6.   "
 set $work_7_gp_icon          "7.   "
 set $work_8_gp_icon          "8.   "
-set $work_9_gp_icon          "9.   "
+set $work_9_gimp_icon        "9.   "
 set $work_10_music_icon      "10.   "
 
 # Define workspaces with names
@@ -184,7 +185,7 @@ set $work_5_gp          "5. "
 set $work_6_gp          "6. "
 set $work_7_gp          "7. "
 set $work_8_gp          "8. "
-set $work_9_gp          "9. "
+set $work_9_gimp        "9. Gimp"
 set $work_10_music      "10. Clementine "
 
 # switch to workspace
@@ -196,7 +197,7 @@ bindsym $mod+5 workspace $work_5_gp_icon
 bindsym $mod+6 workspace $work_6_gp_icon
 bindsym $mod+7 workspace $work_7_gp_icon
 bindsym $mod+8 workspace $work_8_gp_icon
-bindsym $mod+9 workspace $work_9_gp_icon
+bindsym $mod+9 workspace $work_9_gimp_icon
 bindsym $mod+0 workspace $work_10_music_icon
 
 # move focused container to workspace
@@ -208,13 +209,14 @@ bindsym $mod+Shift+5 move container to workspace $work_5_gp_icon
 bindsym $mod+Shift+6 move container to workspace $work_6_gp_icon
 bindsym $mod+Shift+7 move container to workspace $work_7_gp_icon
 bindsym $mod+Shift+8 move container to workspace $work_8_gp_icon
-bindsym $mod+Shift+9 move container to workspace $work_9_gp_icon
+bindsym $mod+Shift+9 move container to workspace $work_9_gimp_icon
 bindsym $mod+Shift+0 move container to workspace $work_10_music_icon
 
 # workspace assignments
 assign [class="Firefox"] $work_1_firefox_icon
 assign [class="Thunderbird"] $work_2_thunderbird_icon
 assign [class="Franz"] $work_3_franz_icon
+assign [class="Gimp"] $work_9_gimp_icon
 assign [class="Clementine"] $work_10_music_icon
 
 #==============================================================================
