@@ -21,7 +21,8 @@ set linebreak                          " to re-flow long line of text instantly
 set textwidth=80                       " max with of the text
 set formatoptions-=l                   " http://goo.gl/RnL9DI
 
-set spell spelllang=en,it              " docs here https://goo.gl/17dMm
+" disable spell check on starup
+"set spell spelllang=en,it              " docs here https://goo.gl/17dMm
 
 " ============== Backup/Swap/Undo directory
 "set backup
