@@ -24,7 +24,7 @@ function usageAndExit () {
 
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
-if [ "$EUID" -ne 0 ]; then
+if [ "$EUID" -eq 0 ]; then
     logError "$0 is not necessary to run this as root."
     usageAndExit
 fi
@@ -58,14 +58,18 @@ if [ ${i} -ne 0 ]; then
 fi
 
 # script logic start here
-log "=== INSTALLING FONT DEPENDENCIES..."
+log "=== INSTALLING POWERLINE FONTS..."
 git clone https://github.com/powerline/fonts.git fonts
 ./fonts/install.sh
 rm -rf fonts
 
+log "=== INSTALLING NERD FONTS..."
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git nerd-fonts
 ./nerd-fonts/install.sh
 rm -rf nerd-fonts
+
+log "=== Update fonts cache..."
+fc-cache -f
 
 log "=== Using: fc-list  to list all installed fonts ==="
 log "=== FINISH! ==="
