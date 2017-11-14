@@ -61,6 +61,20 @@ fi
 log "=== INSTALLING i3 DEPENDENCIES..."
 apt-get install alsa-utils pavucontrol lxappearance wicd wicd-gtk feh scrot \
     fonts-font-awesome arandr qalc libnotify-bin
+
+# from: https://askubuntu.com/questions/15832/how-do-i-get-the-cpu-temperature
+read -p "Install and configure lm-sensors ? (required for i3 on laptop) [y/n] " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    log "=== Installing lm-sensors..."
+    apt-get install lm-sensors
+    
+    log "=== Configuring..."
+    sensors-detect
+    service kmod start
+    systemctl enable kmod
+fi
+
 log "=== Updating fonts..."
 fc-cache -f
 log "=== To resolve some font problem just run: fonts.install"
