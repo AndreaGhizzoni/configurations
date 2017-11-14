@@ -90,5 +90,6 @@ else
     log "=== Once installed Go binary, run in vim: :GoInstallBinaries and :GoUpdateBinaries"
 fi
 
+log "=== To resolve some font problem just run: fonts.install"
 log "=== FINISH! ==="
 

@@ -63,5 +63,6 @@ apt-get install alsa-utils pavucontrol lxappearance wicd wicd-gtk feh scrot \
     fonts-font-awesome arandr qalc libnotify-bin
 log "=== Updating fonts..."
 fc-cache -f
+log "=== To resolve some font problem just run: fonts.install"
 log "=== FINISH! ==="
 
