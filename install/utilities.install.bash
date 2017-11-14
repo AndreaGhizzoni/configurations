@@ -65,7 +65,8 @@ apt-get install build-essential \
     htop iotop iftop \
     etherape mtr tcptrack wget \
     keepassx gparted vlc thunderbird \
-    gimp gpicview evince
+    gimp gpicview evince \
+    youtube-dl
 
 read -p "Do you want to copy htoprc in $HOME/.config/htop ? [Y/n] " \
     -n 1 -r
