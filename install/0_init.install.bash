@@ -60,7 +60,7 @@ fi
 function installIt () {
     echo -e -n "${GREEN}=== Installing "
     echo -n "$1"
-    echo -e -n "${NC}"
+    echo -e "${NC}"
     apt-get install "$1"
     dpkg --configure -a
 }
