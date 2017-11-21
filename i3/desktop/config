@@ -369,6 +369,7 @@ for_window [class="Pavucontrol"] floating enable, border normal
 # Tip: To find out what these values might be run:                              
 #       xprop | grep -i 'role'
 for_window [window_role="Msgcompose"] floating enable, border normal, resize shrink width 15 px or 15 ppt, resize shrink height 25 px or 25 ppt
+for_window [window_role="EventDialog"] floating enable, border normal, resize shrink width 15 px or 15 ppt, resize shrink height 25 px or 25 ppt
 
 # =============================================================================
 # = Auto start Applications
