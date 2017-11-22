@@ -1,9 +1,0 @@
-! ====== reload .Xresources
-! xrdb -remove && xrdb -merge .Xresource
-!
-! ====== check current settings
-! xrdb -q
-!
-! ====== for this font install: github.com/ryanoasis/nerd-fonts
-UXTerm*faceName: DejaVuSans Mono Nerd Font:size=10
-*customization: -color
