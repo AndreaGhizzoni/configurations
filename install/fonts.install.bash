@@ -39,7 +39,7 @@ fi
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( git )
+dep_req=( git python-fontforge )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -63,14 +63,21 @@ git clone https://github.com/powerline/fonts.git fonts
 ./fonts/install.sh
 rm -rf fonts
 
-log "=== INSTALLING NERD FONTS..."
+log "=== Update fonts cache..."
+fc-cache -f
+
+log "=== GETTING NERD FONTS..."
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git nerd-fonts
-./nerd-fonts/install.sh
-rm -rf nerd-fonts
+cd nerd-fonts
+log "=== Patching DejaVu Sans Mono font..."
+myfont=DejaVu\ Sans\ Mono\ for\ Powerline.ttf
+myfontpatched=DejaVu\ Sans\ Mono\ Nerd\ Font\ Complete\ Mono.ttf
+cp $HOME/.local/share/fonts/$myfont .
+./font-patcher --complete --use-single-width-glyphs $myfont
+cp $myfontpatched $HOME/.local/share/fonts/
 
 log "=== Update fonts cache..."
 fc-cache -f
 
-log "=== Using: fc-list  to list all installed fonts ==="
+log "=== using uxterm/.Xresources to apply generated font to terminal emulator."
 log "=== FINISH! ==="
-
