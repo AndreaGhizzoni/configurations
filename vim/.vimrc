@@ -1,6 +1,7 @@
 "" ============= Basic settings
-set t_Co=256 
 color molokayo
+set t_Co=256 
+set encoding=utf8
 set tabstop=4                          " visualize tabulation as 4 spaces (still tab)
 set shiftwidth=4                       " spaces instead of tabs
 set softtabstop=4                      " http://goo.gl/qMsEu
@@ -39,11 +40,11 @@ call vundle#begin()
 
 " Plug-in for vundle-plugin-manager 
 Plugin 'gmarik/Vundle.vim'
-" My plug-in. These are all git hub pages, for doc check there.
+" My plug-in. These are all github pages, for doc check there.
 Plugin 'tpope/vim-fugitive'           " for git integration
 Plugin 'scrooloose/syntastic'         " for syntax
 Plugin 'scrooloose/nerdtree'          " for tree directory
-Plugin 'bling/vim-airline'            " for bottom status bar
+Plugin 'vim-airline/vim-airline'      " for bottom status bar
 Plugin 'vim-airline/vim-airline-themes' " set of themes for airline
 
 Plugin 'fatih/vim-go'                 " for working with go
@@ -54,6 +55,7 @@ Plugin 'majutsushi/tagbar'            " for outline of current file
 Plugin 'airblade/vim-gitgutter'       " shows a git diff in the sign column
 Plugin 'sheerun/vim-polyglot'         " syntax package
 Plugin 'neomake/neomake'              " lint for bash script https://goo.gl/qbAJFT
+Plugin 'ryanoasis/vim-devicons'
 
 " NB: this plugin is disable because break syntastic error check on save
 "Plugin 'Valloric/YouCompleteMe'       " for auto complete functions
