@@ -18,11 +18,10 @@ set showmatch                      " highlight the matching parenthesis
 set incsearch                      " move the cursor while searching pattern
 set hlsearch                       " set highlight for searched text
 
-" Replaced with Vim-Pencil plugin
-"set wrap                           " wrap long line of text
-"set linebreak                      " to re-flow long line of text instantly
-"set textwidth=80                   " max with of the text
-"set formatoptions-=l               " http://goo.gl/RnL9DI
+set wrap                           " wrap long line of text
+set linebreak                      " to re-flow long line of text instantly
+set textwidth=80                   " max with of the text
+set formatoptions-=l               " http://goo.gl/RnL9DI
 
 " disable spell check on starup
 "set spell spelllang=en,it         " docs here https://goo.gl/17dMm
@@ -62,20 +61,9 @@ Plugin 'sheerun/vim-polyglot'           " collection of language syntax/indent
 
 Plugin 'PotatoesMaster/i3-vim-syntax'   " i3 config file syntax highlighting
 
-Plugin 'reedes/vim-pencil'
-
 call vundle#end()
 filetype plugin indent on
 syntax on
-
-" ============= Vim-Pencil
-augroup pencil
-    autocmd!
-    autocmd FileType markdown,mkd call pencil#init()
-    autocmd FileType text         call pencil#init()
-augroup END
-let g:pencil#textwidth = 80
-let g:pencil#wrapModeDefault = 'hard'   " soft|hard - default is hard
 
 " ============= Vim-Go
 au BufRead,BufNewFile *.go set filetype=go
