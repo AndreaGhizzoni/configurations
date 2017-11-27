@@ -41,25 +41,25 @@ call vundle#begin()
 
 " Plug-in for vundle-plugin-manager 
 Plugin 'gmarik/Vundle.vim'
-" My plug-in. These are all github pages, for doc check there.
-Plugin 'tpope/vim-fugitive'           " for git integration
-Plugin 'scrooloose/syntastic'         " for syntax
-Plugin 'scrooloose/nerdtree'          " for tree directory
-Plugin 'vim-airline/vim-airline'      " for bottom status bar
+" My plugin. These are all github pages, for doc check there.
+Plugin 'vim-airline/vim-airline'        " for bottom status bar
 Plugin 'vim-airline/vim-airline-themes' " set of themes for airline
 
-Plugin 'fatih/vim-go'                 " for working with go
+Plugin 'tpope/vim-fugitive'             " for git integration
+Plugin 'airblade/vim-gitgutter'         " shows a git diff in the sign column
 
-Plugin 'xolox/vim-easytags'           " dependency for tagbar
-Plugin 'xolox/vim-misc'               " dependency for tagbar
-Plugin 'majutsushi/tagbar'            " for outline of current file
-Plugin 'airblade/vim-gitgutter'       " shows a git diff in the sign column
-Plugin 'sheerun/vim-polyglot'         " syntax package
+Plugin 'scrooloose/syntastic'           " for syntax
+Plugin 'scrooloose/nerdtree'            " for tree directory
 
-" NB: this plugin is disable because break syntastic error check on save
-"Plugin 'Valloric/YouCompleteMe'       " for auto complete functions
+Plugin 'fatih/vim-go'                   " for working with go
 
-Plugin 'PotatoesMaster/i3-vim-syntax' " for i3 config file syntax highlighting
+Plugin 'xolox/vim-easytags'             " dependency for tagbar
+Plugin 'xolox/vim-misc'                 " dependency for tagbar
+Plugin 'majutsushi/tagbar'              " for outline of current file
+
+Plugin 'sheerun/vim-polyglot'           " collection of language syntax/indent 
+
+Plugin 'PotatoesMaster/i3-vim-syntax'   " i3 config file syntax highlighting
 
 call vundle#end()
 filetype plugin indent on
