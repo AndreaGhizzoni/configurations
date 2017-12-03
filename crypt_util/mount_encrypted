@@ -21,6 +21,11 @@ function usageAndExit () {
     exit 1
 }
 
+if [ "$1" = "-h" ] || [ "$1" = "--help"  ]; then
+    echo "Utiliy script to mount encrypted device"
+    usageAndExit
+fi
+
 # check if this script is running as root
 if [ $UID -ne 0 ]; then
     logError "$0 must be run as root."
