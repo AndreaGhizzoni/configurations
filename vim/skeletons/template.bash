@@ -22,6 +22,11 @@ function usageAndExit () {
     exit 1
 }
 
+if [ "$1" = "-h" ] || [ "$1" = "--help"  ]; then
+    echo "TODO"
+    usageAndExit
+fi
+
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
 if [ "$EUID" -ne 0 ]; then
