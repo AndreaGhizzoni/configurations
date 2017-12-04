@@ -57,27 +57,31 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-# script logic start here
-log "=== INSTALLING POWERLINE FONTS..."
-git clone https://github.com/powerline/fonts.git fonts
-./fonts/install.sh
-rm -rf fonts
-
-log "=== Update fonts cache..."
-fc-cache -f
-
 log "=== GETTING NERD FONTS..."
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git nerd-fonts
-cd nerd-fonts
-log "=== Patching DejaVu Sans Mono font..."
-myfont=DejaVu\ Sans\ Mono\ for\ Powerline.ttf
-myfontpatched=DejaVu\ Sans\ Mono\ Nerd\ Font\ Complete\ Mono.ttf
-cp $HOME/.local/share/fonts/$myfont .
-./font-patcher --complete --use-single-width-glyphs $myfont
-cp $myfontpatched $HOME/.local/share/fonts/
+cd nerd-fonts || exit
 
-log "=== Update fonts cache..."
-fc-cache -f
+log "=== INSTALLING BASE FONTS (sudo password required)..."
+sudo apt-get install fonts-font-awesome \
+                     fonts-freefont-otf \
+                     fonts-freefont-ttf
+# all installed fonts should be under /usr/share/fonts
+FONT_BASE_NAME=FreeMono.ttf
+cp /usr/share/fonts/truetype/freefont/$FONT_BASE_NAME .
 
+log "=== PATCHING $FONT_BASE_NAME ..."
+cp ../../glyphs/my-glyphs.ttf src/glyphs
+./font-patcher --complete --use-single-width-glyphs --careful \
+    --custom my-glyphs.ttf \
+    $FONT_BASE_NAME
+
+FONT_PATCHED_NAME="FreeMono Nerd Font Complete Mono.ttf"
+mkdir -p "$HOME"/.local/share/fonts/
+cp "$FONT_PATCHED_NAME" "$HOME"/.local/share/fonts/
+
+log "=== UPDATE FONTS CACHE..."
+fc-cache -fr --really-force
+
+log "=== to list the installed font use: fc-list | grep FreeMono | grep .local"
 log "=== using uxterm/.Xresources to apply generated font to terminal emulator."
 log "=== FINISH! ==="
