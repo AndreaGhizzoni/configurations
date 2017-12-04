@@ -70,11 +70,13 @@ FONT_BASE_NAME=FreeMono.ttf
 cp /usr/share/fonts/truetype/freefont/$FONT_BASE_NAME .
 
 log "=== PATCHING $FONT_BASE_NAME ..."
+cp ../../glyphs/my-glyphs.ttf src/glyphs
 ./font-patcher --complete --use-single-width-glyphs --careful \
-    --custom ../glyphs/my-glyphs \
+    --custom my-glyphs.ttf \
     $FONT_BASE_NAME
 
-FONT_PATCHED_NAME=FreeMono Nerd Font Complete Mono.ttf
+FONT_PATCHED_NAME="FreeMono Nerd Font Complete Mono.ttf"
+mkdir -p "$HOME"/.local/share/fonts/
 cp "$FONT_PATCHED_NAME" "$HOME"/.local/share/fonts/
 
 log "=== UPDATE FONTS CACHE..."
