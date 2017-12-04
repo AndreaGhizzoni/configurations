@@ -41,9 +41,8 @@ client.urgent           $orange $orange $dark   $white
 # =============================================================================
 # = General Settings
 # =============================================================================
-# font 
-#font pango:monospace 10
-font xft:Droid Sans Mono, FontAwesome 8
+# font used to render window titles
+font pango:monospace 9
 
 # Do not focus on mousover
 focus_follows_mouse  no
@@ -303,7 +302,8 @@ bar {
     # icon of various program place the his icon on the bar
     tray_output primary     
     #font pango:DejaVu Sans Mono 8
-    font pango:DejaVu Sans Mono, FontAwesome 9
+    #font pango:DejaVu Sans Mono, FontAwesome 9
+    font pango:FontAwesome 9
     separator_symbol ":|"
     # make workspace indicator a button
     workspace_buttons yes
