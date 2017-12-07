@@ -39,7 +39,7 @@ fi
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( )
+dep_req=( git )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -58,10 +58,33 @@ if [ ${i} -ne 0 ]; then
 fi
 
 # script logic start here
-log "=== INSTALLING i3 DEPENDENCIES..."
+log "=== INSTALLING i3 POST INSTALL PROGRAMS..."
 apt-get install alsa-utils pavucontrol lxappearance wicd wicd-gtk feh scrot \
     fonts-font-awesome arandr qalc libnotify-bin
 
+fc-cache -fr --really-force
+
+log "=== INSTALLING NEW i3lock..."
+read -p "Replace i3lock with PandorasFox/i3lock-color? (required for i3exit.sh) [y/n] " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    apt-get install pkg-config libxcb1 libpam-dev libcairo-dev \
+        libxcb-composite0 libxcb-composite0-dev libxcb-xinerama0-dev \
+        libev-dev libx11-dev libx11-xcb-dev libxkbcommon0 libxkbcommon-x11-0 \
+        libxcb-dpms0-dev libxcb-image0-dev libxcb-util0-dev libxcb-xkb-dev \
+        libxkbcommon-x11-dev libxkbcommon-dev libxcb-randr0-dev autoconf
+
+    log "=== CLONING PandorasFox/i3lock-color..."
+    git clone git@github.com:PandorasFox/i3lock-color.git || exit
+    log "=== CONFIGURING..."
+    autoreconf -i || exit 
+    ./configure || exit
+    log "=== MAKE & MAKE INSTALL..."
+    cd x86_64-pc-linux-gnu || exit
+    make && make install
+fi
+
+log "=== INSTALLING LMSENSORS..."
 # from: https://askubuntu.com/questions/15832/how-do-i-get-the-cpu-temperature
 read -p "Install and configure lm-sensors ? (required for i3 on laptop) [y/n] " -n 1 -r
 echo    # (optional) move to a new line
@@ -75,8 +98,6 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     systemctl enable kmod
 fi
 
-log "=== Updating fonts..."
-fc-cache -f
 log "=== To resolve some font problem just run: fonts.install"
 log "=== FINISH! ==="
 
