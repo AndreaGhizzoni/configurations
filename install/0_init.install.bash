@@ -71,6 +71,7 @@ apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y
 
 installIt software-properties-common
 installIt linux-headers-"$(uname -r)"
+installIt autoconf
 installIt xorg
 
 log "=== Installing Nvidia Driver and bumblebee NOW (if necessary)"
