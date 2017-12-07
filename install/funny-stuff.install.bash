@@ -59,6 +59,6 @@ fi
 
 # script logic start here
 log "=== INSTALLING FUNNY STUFF..."
-apt-get install figlet cowsay sl neofetch forune
+apt-get install figlet cowsay sl neofetch fortune
 log "=== FINISH! ==="
 
