@@ -43,7 +43,7 @@ fi
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( wget unzip )
+dep_req=( wget unzip tar )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -102,6 +102,17 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     sensors-detect
     service kmod start
     systemctl enable kmod
+fi
+
+log "=== EXTRACTING WALLPAPERS..."
+PICS="$HOME"/Pictures
+mkdir -p $PICS
+WALLPAPERS="$PICS"/wallpapers
+if [ -d "$WALLPAPERS" ]; then
+    tar xf ../wallpapers.tar -C "$PICS"
+    log "=== WALLPAPERS EXTRACTED"
+else
+    log "=== WALLPAPERS FOLDER ALREADY EXISTS."
 fi
 
 log "=== To resolve some font problem just run: fonts.install"
