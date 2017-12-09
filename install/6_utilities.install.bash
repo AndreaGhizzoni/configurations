@@ -17,15 +17,19 @@ function logError () {
 
 # usage and exit function.
 function usageAndExit () {
-    #echo -e "Usage: $0"
+    echo -e "Usage: sudo $0"
     #echo -e "Example: $0"
     exit 1
 }
 
+if [ "$1" = "-h" ] || [ "$1" = "--help"  ]; then
+    usageAndExit
+fi
+
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
-if [ "$EUID" -eq 0 ]; then
-    logError "$0 is not necessary to run this as root."
+if [ "$EUID" -ne 0 ]; then
+    logError "$0 must be run as root."
     usageAndExit
 fi
 
@@ -39,7 +43,7 @@ fi
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( git python-fontforge )
+dep_req=( )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -57,31 +61,27 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-log "=== GETTING NERD FONTS..."
-git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git nerd-fonts
-cd nerd-fonts || exit
+# script logic start here
+log "=== INSTALLING UTILITIES..."
+# silversearch-ag => ag program: better than grep
+apt-get install build-essential \
+    silversearch-ag \
+    htop iotop iftop \
+    etherape mtr tcptrack wget \
+    keepassx gparted vlc thunderbird \
+    gimp gpicview evince \
+    youtube-dl
 
-log "=== INSTALLING BASE FONTS (sudo password required)..."
-sudo apt-get install fonts-font-awesome \
-                     fonts-freefont-otf \
-                     fonts-freefont-ttf
-# all installed fonts should be under /usr/share/fonts
-FONT_BASE_NAME=FreeMono.ttf
-cp /usr/share/fonts/truetype/freefont/$FONT_BASE_NAME .
+read -p "Do you want to copy htoprc in $HOME/.config/htop ? [Y/n] " \
+    -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    log "=== Coping htoprc..."
+    HTOP_F=$HOME/.config/htop
+    mkdir -p "$HTOP_F"
+    cp ../htop/htoprc "$HTOP_F"
+    chown andrea:andrea -R "$HTOP_F"
+fi
 
-log "=== PATCHING $FONT_BASE_NAME ..."
-cp ../../glyphs/my-glyphs.ttf src/glyphs
-./font-patcher --complete --use-single-width-glyphs --careful \
-    --custom my-glyphs.ttf \
-    $FONT_BASE_NAME
-
-FONT_PATCHED_NAME="FreeMono Nerd Font Complete Mono.ttf"
-mkdir -p "$HOME"/.local/share/fonts/
-cp "$FONT_PATCHED_NAME" "$HOME"/.local/share/fonts/
-
-log "=== UPDATE FONTS CACHE..."
-fc-cache -fr --really-force
-
-log "=== to list the installed font use: fc-list | grep FreeMono | grep .local"
-log "=== using uxterm/.Xresources to apply generated font to terminal emulator."
 log "=== FINISH! ==="
+

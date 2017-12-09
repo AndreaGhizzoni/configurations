@@ -17,10 +17,14 @@ function logError () {
 
 # usage and exit function.
 function usageAndExit () {
-    #echo -e "Usage: $0"
+    echo -e "Usage: sudo $0"
     #echo -e "Example: $0"
     exit 1
 }
+
+if [ "$1" = "-h" ] || [ "$1" = "--help"  ]; then
+    usageAndExit
+fi
 
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
@@ -39,7 +43,7 @@ fi
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( git )
+dep_req=( wget unzip )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -74,8 +78,10 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         libxcb-dpms0-dev libxcb-image0-dev libxcb-util0-dev libxcb-xkb-dev \
         libxkbcommon-x11-dev libxkbcommon-dev libxcb-randr0-dev autoconf
 
-    log "=== CLONING PandorasFox/i3lock-color..."
-    git clone git@github.com:PandorasFox/i3lock-color.git || exit
+    log "=== GETTING PandorasFox/i3lock-color..."
+    wget https://github.com/PandorasFox/i3lock-color/archive/master.zip
+    unzip master.zip
+    cd i3lock-color-master || exit
     log "=== CONFIGURING..."
     autoreconf -i || exit 
     ./configure || exit

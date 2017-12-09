@@ -17,10 +17,14 @@ function logError () {
 
 # usage and exit function.
 function usageAndExit () {
-    #echo -e "Usage: $0"
+    echo -e "Usage: sudo $0"
     #echo -e "Example: $0"
     exit 1
 }
+
+if [ "$1" = "-h" ] || [ "$1" = "--help"  ]; then
+    usageAndExit
+fi
 
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
@@ -39,7 +43,7 @@ fi
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( )
+dep_req=( git curl )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -58,26 +62,31 @@ if [ ${i} -ne 0 ]; then
 fi
 
 # script logic start here
-log "=== INSTALLING UTILITIES..."
-# silversearch-ag => ag program: better than grep
-apt-get install build-essential \
-    silversearch-ag \
-    htop iotop iftop \
-    etherape mtr tcptrack wget \
-    keepassx gparted vlc thunderbird \
-    gimp gpicview evince \
-    youtube-dl
+USER=andrea
 
-read -p "Do you want to copy htoprc in $HOME/.config/htop ? [Y/n] " \
-    -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    log "=== Coping htoprc..."
-    HTOP_F=$HOME/.config/htop
-    mkdir -p "$HTOP_F"
-    cp ../htop/htoprc "$HTOP_F"
-    chown andrea:andrea -R "$HTOP_F"
+log "=== INSTALL ZSH..."
+apt-get install zsh
+
+log "=== Changing shell for user $USER..."
+chsh -s /bin/zsh $USER
+log "=== shell changed!"
+
+if [ -d "$HOME/.oh-my-zsh" ]; then
+    logError "$HOME/.oh-my-zsh already exists. Skip download and configuration"
+else
+    log "=== INSTALLING oh-my-zsh..."
+    su - $USER -c "curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh"
+    cp ../zsh/my.zsh-theme "$HOME"/.oh-my-zsh/themes
+
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git 
+    mv zsh-syntax-highlighting "$HOME"/.oh-my-zsh/custom/plugins/
 fi
 
-log "=== FINISH! ==="
+read -p "Do you want to copy zshrc in $HOME ? [Y/n] " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    cp ../zsh/.zshrc "$HOME"
+    chown -R "$USER":"$USER" "$HOME"/.zshrc
+fi
 
+log "=== FINISH! (reboot needed)"

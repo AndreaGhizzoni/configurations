@@ -17,10 +17,14 @@ function logError () {
 
 # usage and exit function.
 function usageAndExit () {
-    #echo -e "Usage: $0"
+    echo -e "Usage: $0"
     #echo -e "Example: $0"
     exit 1
 }
+
+if [ "$1" = "-h" ] || [ "$1" = "--help"  ]; then
+    usageAndExit
+fi
 
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required

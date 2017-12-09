@@ -17,7 +17,7 @@ function logError () {
 
 # usage and exit function.
 function usageAndExit () {
-    echo -e "Usage: sudo $0"
+    echo -e "Usage: $0"
     #echo -e "Example: $0"
     exit 1
 }
@@ -28,8 +28,8 @@ fi
 
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
-if [ "$EUID" -ne 0 ]; then
-    logError "$0 must be run as root."
+if [ "$EUID" -eq 0 ]; then
+    logError "$0 is not necessary to run this as root."
     usageAndExit
 fi
 
@@ -43,7 +43,7 @@ fi
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( )
+dep_req=( git )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -61,20 +61,34 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-# from: https://ubuntuforums.org/showthread.php?t=1123635
-# 
-# ONCE INSTALLED:
-# 1) hp-check
-# 2) hp-setup -i
-#
-log "=== INSTALLING HP PRINTER DRIVER..."
-apt-get install hplip libcups2 libdbus-1-dev libtool libtool-bin \
-libcups2-dev cups-bsd cups-client libcupsimage2-dev python3-dev python3-pyqt4 \
-gtk2-engines-pixbuf libsnmp-dev snmp-mibs-downloader libusb-1.0.0-dev \
-libsane-dev openssl libjpeg-dev gtk2-engines-pixbuf xsane python3-notify2 \
-python3-dbus.mainloop.qt libssl-dev
-log "=== Now plug the printer usb and run the following commands:"
-log "sudo hp-check$"
-log "sudo hp-setup -i"
-log "=== FINISH!"
+log "=== INSTALLING DEPENDENCIES..."
+sudo apt-get install python-fontforge -y
 
+log "=== GETTING NERD FONTS..."
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git nerd-fonts
+cd nerd-fonts || exit
+
+log "=== INSTALLING BASE FONTS (sudo password required)..."
+sudo apt-get install fonts-font-awesome \
+                     fonts-freefont-otf \
+                     fonts-freefont-ttf
+# all installed fonts should be under /usr/share/fonts
+FONT_BASE_NAME=FreeMono.ttf
+cp /usr/share/fonts/truetype/freefont/$FONT_BASE_NAME .
+
+log "=== PATCHING $FONT_BASE_NAME ..."
+cp ../../glyphs/my-glyphs.ttf src/glyphs
+./font-patcher --complete --use-single-width-glyphs --careful \
+    --custom my-glyphs.ttf \
+    $FONT_BASE_NAME
+
+FONT_PATCHED_NAME="FreeMono Nerd Font Complete Mono.ttf"
+mkdir -p "$HOME"/.local/share/fonts/
+cp "$FONT_PATCHED_NAME" "$HOME"/.local/share/fonts/
+
+log "=== UPDATE FONTS CACHE..."
+fc-cache -fr --really-force
+
+log "=== to list the installed font use: fc-list | grep FreeMono | grep .local"
+log "=== using uxterm/.Xresources to apply generated font to terminal emulator."
+log "=== FINISH! ==="

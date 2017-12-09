@@ -17,21 +17,25 @@ function logError () {
 
 # usage and exit function.
 function usageAndExit () {
-    #echo -e "Usage: $0"
-    #echo -e "Example: $0"
+    echo -e "Usage: $0 [github-username] [gihub-email]"
+    echo -e "Example: $0 pippo pippo@pluto.com"
     exit 1
 }
+
+if [ "$1" = "-h" ] || [ "$1" = "--help"  ]; then
+    usageAndExit
+fi
 
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
 if [ "$EUID" -ne 0 ]; then
-    logError "$0 must be run as root."
+    logError "$0 it is not necessary to run this as root"
     usageAndExit
 fi
 
 # check if correct number of arguments are passed to this script.
 # 0 == no parameters, 1 == 1 argument, 2 == 2 arguments [...]
-if [ "$#" -ne 0 ]; then
+if [ "$#" -ne 2 ]; then
     logError "Script arguments are missing!"
     usageAndExit
 fi
@@ -39,7 +43,7 @@ fi
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( git exuberant-ctags build-essential cmake python-dev )
+dep_req=( )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -58,38 +62,14 @@ if [ ${i} -ne 0 ]; then
 fi
 
 # script logic start here
-log "=== INSTALLING VIM..."
-apt-get install vim
+NAME=$1
+EMAIL=$2
 
-if [ -d "$HOME/.vim" ]; then
-    logError "$HOME/.vim folder already exists. Skipping configurations."
-else
-    log "=== Create home folder structure..."
-    mkdir ~/.vim
-    mkdir ~/.vim/swap
-    mkdir ~/.vim/backup
-    mkdir ~/.vim/undo
-    mkdir ~/.vim/bundle
-    mkdir ~/.vim/gobinaries
-    cp -r ../vim/syntax ~/.vim
-    cp -r ../vim/skeletons ~/.vim
-    cp -r ../vim/colors ~/.vim
-    cp -r ../vim/spell ~/.vim
-    log "=== Done!"
-
-    log "=== COPING vimrc in $HOME..."
-    cp ../vim/.vimrc ~
-
-    log "=== Cloning Vundle plug-in manager..."
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-    chown -R andrea:andrea ~/.vim
-    chown -R andrea:andrea ~/.vimrc
-
-    log "=== Now open vim and run :VundleInstall to install all plugins"
-    log "=== Once installed Go binary, run in vim: :GoInstallBinaries and :GoUpdateBinaries"
-fi
-
-log "=== To resolve some font problem just run: fonts.install"
+log "=== INSTALLING GIT..."
+sudo apt-get install git
+log "=== Set git user.name as $NAME"
+git config --global user.name "$NAME"
+log "=== Set git user.email as $EMAIL"
+git config --global user.email "$EMAIL"
 log "=== FINISH! ==="
 
