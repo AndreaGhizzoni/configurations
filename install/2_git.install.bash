@@ -28,7 +28,7 @@ fi
 
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
-if [ "$EUID" -ne 0 ]; then
+if [ "$EUID" -eq 0 ]; then
     logError "$0 it is not necessary to run this as root"
     usageAndExit
 fi

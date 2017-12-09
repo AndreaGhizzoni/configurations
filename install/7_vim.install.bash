@@ -43,7 +43,7 @@ fi
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( git exuberant-ctags build-essential cmake python-dev )
+dep_req=( git )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -62,6 +62,9 @@ if [ ${i} -ne 0 ]; then
 fi
 
 # script logic start here
+log "=== INSTALLING VIM PLUGIN DEPENDENCIES..."
+apt-get install exuberant-ctags build-essential cmake python-dev
+
 log "=== INSTALLING VIM..."
 apt-get install vim
 

@@ -76,7 +76,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         libxcb-composite0 libxcb-composite0-dev libxcb-xinerama0-dev \
         libev-dev libx11-dev libx11-xcb-dev libxkbcommon0 libxkbcommon-x11-0 \
         libxcb-dpms0-dev libxcb-image0-dev libxcb-util0-dev libxcb-xkb-dev \
-        libxkbcommon-x11-dev libxkbcommon-dev libxcb-randr0-dev autoconf
+        libxkbcommon-x11-dev libxkbcommon-dev libxcb-randr0-dev autoconf \
+        libjpeg-dev
 
     log "=== GETTING PandorasFox/i3lock-color..."
     wget https://github.com/PandorasFox/i3lock-color/archive/master.zip

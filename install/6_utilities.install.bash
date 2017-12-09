@@ -65,10 +65,9 @@ fi
 log "=== INSTALLING UTILITIES..."
 # silversearch-ag => ag program: better than grep
 apt-get install build-essential \
-    silversearch-ag \
     htop iotop iftop \
     etherape mtr tcptrack wget \
-    keepassx gparted vlc thunderbird \
+    keepassx gparted vlc thunderbird firefox \
     gimp gpicview evince \
     youtube-dl
 
