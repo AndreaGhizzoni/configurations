@@ -43,7 +43,7 @@ fi
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( )
+dep_req=( python-pip stress )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -64,5 +64,17 @@ fi
 # script logic start here
 log "=== INSTALLING FUNNY STUFF..."
 apt-get install figlet cowsay sl neofetch fortune
+
+read -p "Copy neofetch config file? [y/n] " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    CFG="$HOME"/.config/neofetch
+    mkdir -p "$CFG"
+    cp ../neofetch/* "$CFG"
+fi
+
+log "=== INSTALLING s-tui - goo.gl/YJsBJ8"
+apt pip install s-tui
+
 log "=== FINISH! ==="
 
