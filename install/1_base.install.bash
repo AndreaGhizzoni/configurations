@@ -63,10 +63,10 @@ fi
 
 # script logic start here
 log "=== Installing basic applications..."
-apt-get install curl
+apt-get install curl python-pip stress
 
 log "=== login manager..."
-apt-get install lightdm lightdm-gtk-greeter oxygen-icon-theme
+apt-get install lightdm lightdm-gtk-greeter
 
 log "=== file manager..."
 apt-get install dkms gvfs gvfs-backends policykit-1 udisks2 synaptic \
