@@ -18,14 +18,14 @@ function logError () {
 # usage and exit function.
 function usageAndExit () {
     echo -e "Usage: $0"
-    echo -e "Example: $0"
+    #echo -e "Example: $0"
     exit 1
 }
 
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
-if [ "$EUID" -ne 0 ]; then
-    logError "$0 must be run as root."
+if [ "$EUID" -eq 0 ]; then
+    logError "It's not necessary to run this script as root."
     usageAndExit
 fi
 
@@ -57,8 +57,27 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-# script logic start here
-log "Script Starting!"
+ROOT_WORKSPACE_CONTAINER="$HOME"/Documents
+ROOT_WORKSPACE="$ROOT_WORKSPACE_CONTAINER"/workspace2 # TODO change it
 
-log "Done!"
+WORKSPACES=( java )
 
+log "Building \`workspace\` folder under: $ROOT_WORKSPACE_CONTAINER"
+if [ -d "$ROOT_WORKSPACE" ]; then
+    logError "$ROOT_WORKSPACE already exists. Nothing to do."
+else
+    # for each workspace in $WORKSPACES:
+    # - cd into that folder
+    # - ./build-workspace.bash $ROOT_WORKSPACE
+    # - ./install.bash
+    # - ./get-projects.bash $ROOT_WORKSPACE
+    for w in "${WORKSPACES[@]}"
+    do
+        log "$w workspace found:"
+        cd $w || exit
+        ./build-workspace.bash $ROOT_WORKSPACE || exit
+        ./install.bash || exit
+        ./get-projects.bash $ROOT_WORKSPACE || exit
+        cd ..
+    done
+fi

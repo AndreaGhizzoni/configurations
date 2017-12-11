@@ -5,27 +5,34 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No color
 
+TAG="> [JAVA]"
+
 # print $1 in green
 function log () {
-    echo -e -n "${GREEN}"; echo -n "$1"; echo -e "${NC}"
+    echo -e -n "${GREEN}"; echo -n "$TAG $1"; echo -e "${NC}"
 }
 
 # print $1 in red
 function logError () {
-    echo -e -n "${RED}"; echo -n "$1"; echo -e "${NC}"
+    echo -e -n "${RED}"; echo -n "$TAG $1"; echo -e "${NC}"
 }
 
 # usage and exit function.
 function usageAndExit () {
     echo -e "Usage: $0"
-    echo -e "Example: $0"
+    #echo -e "Example: $0"
     exit 1
 }
 
+if [ "$1" = "-h" ] || [ "$1" = "--help"  ]; then                                
+    echo "Script used to install java sdk."
+    usageAndExit
+fi 
+
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
-if [ "$EUID" -ne 0 ]; then
-    logError "$0 must be run as root."
+if [ "$EUID" -eq 0 ]; then
+    logError "It's not necessary to run this script as root."
     usageAndExit
 fi
 
@@ -57,8 +64,18 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-# script logic start here
-log "Script Starting!"
+log "installing sdk.."
 
-log "Done!"
+SPACING="   |"
+echo -n -e "${GREEN}$SPACING adding repository..."
+sudo add-apt-repository ppa:webupd8team/java --yes &>/dev/null
+echo -e "done${NC}"
+
+echo -n -e "${GREEN}$SPACING updating sources..."
+sudo apt-get update &>/dev/null
+echo -e "done${NC}"
+
+echo -n -e "${GREEN}$SPACING installing sdk from repo..."
+sudo apt-get install oracle-java8-installer --yes &>/dev/null
+echo -e "done${NC}"
 
