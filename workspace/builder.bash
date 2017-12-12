@@ -17,13 +17,16 @@ function logError () {
 
 # usage and exit function.
 function usageAndExit () {
-    echo -e "Usage: $0 [-s|--spacing]"
-    echo -e "Example: $0 -s \"   -->\""
+    echo -e "Usage: $0 [-a|--all] [-c|--create-workspace] [-i|--install] \
+[-p|--getprojects]"
+    echo -e "The following two example are equivalent:"
+    echo -e "Example: $0 --all"
+    echo -e "Example: $0 --create-workspace --install --get-projects"
     exit 1
 }
 
 function printHelp () {
-    echo "Sript used to install java sdk from repository."
+    echo "Builder script for my workspace"
     usageAndExit
 }
 
@@ -47,8 +50,8 @@ if [[ $? -ne 4 ]]; then
     exit 1
 fi
 
-OPTIONS=hs:
-LONGOPTIONS=help,spacing:
+OPTIONS=hcipa
+LONGOPTIONS=help,create-workspace,install,get-projects,all
 PARSED=$(getopt --options=$OPTIONS \
                 --longoptions=$LONGOPTIONS \
                 --name "$0" -- "$@")
@@ -60,9 +63,23 @@ while true; do
         -h|--help)
             printHelp
             ;;
-        -s|--spacing)
-            spacing="$2"
-            shift 2
+        -c|--create-workspace)
+            create=1
+            shift
+            ;;
+        -i|--install)
+            install=1
+            shift
+            ;;
+        -p|--get-projects)
+            projects=1
+            shift
+            ;;
+        -a|--all)
+            create=1
+            install=1
+            projects=1
+            shift
             ;;
         # this case is required to handle --arg
         --)
@@ -98,16 +115,34 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-log "$spacing installing sdk.."
-echo -n -e "${GREEN}    $spacing adding repository..."
-sudo add-apt-repository ppa:webupd8team/java --yes &>/dev/null
-echo -e "done${NC}"
+ROOT_WORKSPACE_CONTAINER="$HOME"/Documents
+ROOT_WORKSPACE="$ROOT_WORKSPACE_CONTAINER"/workspace2 # TODO change it
 
-echo -n -e "${GREEN}    $spacing updating sources..."
-sudo apt-get update &>/dev/null
-echo -e "done${NC}"
+WORKSPACES=( java ) # TODO add workspaces
 
-echo -n -e "${GREEN}    $spacing installing from repo..."
-sudo apt-get install oracle-java8-installer --yes &>/dev/null
-echo -e "done${NC}"
-
+log "create \`workspace\` folder under: $ROOT_WORKSPACE_CONTAINER"
+if [ -d "$ROOT_WORKSPACE" ]; then
+    logError "$ROOT_WORKSPACE already exists. Nothing to do."
+else
+    # for each workspace in $WORKSPACES:
+    # - cd into that folder
+    # - ./build-workspace.bash "" $ROOT_WORKSPACE
+    # - ./install.bash
+    # - ./get-projects.bash $ROOT_WORKSPACE
+    LOG_SPACING="    -"
+    for w in "${WORKSPACES[@]}"
+    do
+        log "-> $w"
+        cd "$w" || exit
+        if [ ! -z "$create" ]; then
+            ./build-workspace.bash -s "$LOG_SPACING" -d "$ROOT_WORKSPACE" || exit
+        fi
+        if [ ! -z "$install" ]; then
+            ./install.bash -s "$LOG_SPACING" || exit
+        fi
+        if [ ! -z "$projects" ]; then
+            ./get-projects.bash -s "$LOG_SPACING" -d "$ROOT_WORKSPACE" || exit
+        fi
+        cd ..
+    done
+fi
