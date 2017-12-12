@@ -71,5 +71,6 @@ log "=== Set git user.name as $NAME"
 git config --global user.name "$NAME"
 log "=== Set git user.email as $EMAIL"
 git config --global user.email "$EMAIL"
+log "=== In order to clone/push repo is recommend to copy your RSA keys."
 log "=== FINISH! ==="
 
