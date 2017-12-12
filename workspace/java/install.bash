@@ -5,23 +5,26 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No color
 
-# print $1 in green
+## print $1 in green.                                                           
+# $1: something to print in GREEN on stdout
 function log () {
     echo -e -n "${GREEN}"; echo -n "$1"; echo -e "${NC}"
 }
 
-# print $1 in red
+## print $1 in green.                                                           
+# $1: something to print in RED on stdout
 function logError () {
     echo -e -n "${RED}"; echo -n "$1"; echo -e "${NC}"
 }
 
-# usage and exit function.
+## print usage and exit.
 function usageAndExit () {
     echo -e "Usage: $0 [-s|--spacing]"
     echo -e "Example: $0 -s \"   -->\""
     exit 1
 }
 
+## print some help string and call usageAndExit
 function printHelp () {
     echo "Sript used to install java sdk from repository."
     usageAndExit
