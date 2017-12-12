@@ -85,7 +85,7 @@ bindsym $mod+d exec dmenu_run
 # installed. 
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# run calculator
+# cli calculator
 bindsym $mod+c exec uxterm qalc
 
 # change focus
