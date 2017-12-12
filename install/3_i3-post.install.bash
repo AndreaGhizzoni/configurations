@@ -107,7 +107,7 @@ fi
 
 log "=== EXTRACTING WALLPAPERS..."
 PICS="$HOME"/Pictures
-mkdir -p $PICS
+mkdir -p "$PICS"
 WALLPAPERS="$PICS"/wallpapers
 if [ -d "$WALLPAPERS" ]; then
     tar xf ../wallpapers.tar -C "$PICS"
