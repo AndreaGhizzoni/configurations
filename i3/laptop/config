@@ -300,7 +300,35 @@ bar {
 
     # default is "status_command i3status" that use /etc/i3status.conf
     status_command i3status -c ~/.config/i3/i3statusbar-main-monitor.conf
-    #output eDP1
+    output eDP-1
+    position bottom
+    # icon of various program place the his icon on the bar
+    tray_output primary     
+    #font pango:DejaVu Sans Mono 8
+    #font pango:DejaVu Sans Mono, FontAwesome 9
+    font pango:FontAwesome 9
+    separator_symbol ":|"
+    # make workspace indicator a button
+    workspace_buttons yes
+    #strip_workspace_numbers yes
+}
+
+bar {
+    colors {
+        statusline  #00A5FF #neon blue
+        #statusline  #FFFFFF
+        background  $black
+
+        # Colors            border      backgr     text
+        focused_workspace   $white      $white     $black
+        active_workspace    #073642     #073642    #696f89
+        inactive_workspace  #073642     #073642    $white
+        urgent_workspace    $orange     $orange    $dark
+    }
+
+    # default is "status_command i3status" that use /etc/i3status.conf
+    status_command i3status -c ~/.config/i3/i3statusbar-secondary-monitor.conf
+    output HDMI-1
     position bottom
     # icon of various program place the his icon on the bar
     tray_output primary     
