@@ -5,13 +5,13 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No color
 
-## print $1 in green.
+## print $1 in green.                                                           
 # $1: something to print in GREEN on stdout
 function log () {
     echo -e -n "${GREEN}"; echo -n "$1"; echo -e "${NC}"
 }
 
-## print $1 in red.
+## print $1 in red.                                                             
 # $1: something to print in RED on stdout
 function logError () {
     echo -e -n "${RED}"; echo -n "$1"; echo -e "${NC}"
@@ -19,14 +19,17 @@ function logError () {
 
 ## print usage and exit.
 function usageAndExit () {
-    echo -e "Usage: $0"
-    #echo -e "Example: $0"
+    echo -e "Usage: $0 [-a|--all] [-c|--create-workspace] [-i|--install] \
+[-p|--getprojects]"
+    echo -e "The following two example are equivalent:"
+    echo -e "Example: $0 --all"
+    echo -e "Example: $0 --create-workspace --install --get-projects"
     exit 1
 }
 
 ## print some help string and call usageAndExit
 function printHelp () {
-    echo "dropbox installation script."
+    echo "Builder script for my workspace"
     usageAndExit
 }
 
@@ -40,10 +43,9 @@ fi
 
 # check if correct number of arguments are passed to this script.
 # 0 == no parameters, 1 == 1 argument, 2 == 2 arguments [...]
-#if [ "$#" -ne 0 ]; then
-#    logError "Script arguments are missing!"
-#    usageAndExit
-#fi
+if [ "$#" -eq 0 ]; then
+    printHelp
+fi
 
 getopt --test > /dev/null
 if [[ $? -ne 4 ]]; then
@@ -51,8 +53,8 @@ if [[ $? -ne 4 ]]; then
     exit 1
 fi
 
-OPTIONS=h
-LONGOPTIONS=help
+OPTIONS=hcipa
+LONGOPTIONS=help,create-workspace,install,get-projects,all
 PARSED=$(getopt --options=$OPTIONS \
                 --longoptions=$LONGOPTIONS \
                 --name "$0" -- "$@")
@@ -63,6 +65,24 @@ while true; do
     case "$1" in
         -h|--help)
             printHelp
+            ;;
+        -c|--create-workspace)
+            create=1
+            shift
+            ;;
+        -i|--install)
+            install=1
+            shift
+            ;;
+        -p|--get-projects)
+            projects=1
+            shift
+            ;;
+        -a|--all)
+            create=1
+            install=1
+            projects=1
+            shift
             ;;
         # this case is required to handle --arg
         --)
@@ -76,10 +96,11 @@ while true; do
     esac
 done
 
+
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( wget )
+dep_req=( )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -97,18 +118,34 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-# script logic start here
-LINK="https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb"
+ROOT_WORKSPACE_CONTAINER="$HOME"/Documents
+ROOT_WORKSPACE="$ROOT_WORKSPACE_CONTAINER"/workspace2 # TODO change it
 
-log "=== INSTALLING DROPBOX..."
-log "=== DOWNLOADING DEB PACKAGE..."
-wget -O dropbox.deb - "$LINK"
+WORKSPACES=( java ) # TODO add workspaces
 
-log "=== INSTALLING DEB (root password required)..."
-sudo dpkg -i dropbox.deb
-
-log "=== STARTING DROPBOX FOR THE FIRST TIME..."
-dropbox start -i
-
-log "=== FINISH! ==="
-
+log "create \`workspace\` folder under: $ROOT_WORKSPACE_CONTAINER"
+if [ -d "$ROOT_WORKSPACE" ]; then
+    logError "$ROOT_WORKSPACE already exists. Nothing to do."
+else
+    # for each workspace in $WORKSPACES:
+    # - cd into that folder
+    # - ./build-workspace.bash "" $ROOT_WORKSPACE
+    # - ./install.bash
+    # - ./get-projects.bash $ROOT_WORKSPACE
+    LOG_SPACING="    -"
+    for w in "${WORKSPACES[@]}"
+    do
+        log "-> $w"
+        cd "$w" || exit
+        if [ ! -z "$create" ]; then
+            ./build-workspace.bash -s "$LOG_SPACING" -d "$ROOT_WORKSPACE" || exit
+        fi
+        if [ ! -z "$install" ]; then
+            ./install.bash -s "$LOG_SPACING" || exit
+        fi
+        if [ ! -z "$projects" ]; then
+            ./get-projects.bash -s "$LOG_SPACING" -d "$ROOT_WORKSPACE" || exit
+        fi
+        cd ..
+    done
+fi

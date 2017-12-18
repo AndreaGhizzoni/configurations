@@ -5,31 +5,36 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No color
 
-# print $1 in green
+## print $1 in green.
+# $1: something to print in GREEN on stdout
 function log () {
     echo -e -n "${GREEN}"; echo -n "$1"; echo -e "${NC}"
 }
 
-# print $1 in red
+## print $1 in red.
+# $1: something to print in RED on stdout
 function logError () {
     echo -e -n "${RED}"; echo -n "$1"; echo -e "${NC}"
 }
 
-# usage and exit function.
+## print usage and exit.
 function usageAndExit () {
     echo -e "Usage: $0 [github-username] [gihub-email]"
     echo -e "Example: $0 pippo pippo@pluto.com"
     exit 1
 }
 
-if [ "$1" = "-h" ] || [ "$1" = "--help"  ]; then
+## print some help string and call usageAndExit
+function printHelp () {
+    echo "Script to install and configure git."
     usageAndExit
-fi
+}
 
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
 if [ "$EUID" -eq 0 ]; then
-    logError "$0 it is not necessary to run this as root"
+    #logError "$0 must be run as root."
+    logError "$0 must be executed a non-root user."
     usageAndExit
 fi
 
@@ -39,6 +44,37 @@ if [ "$#" -ne 2 ]; then
     logError "Script arguments are missing!"
     usageAndExit
 fi
+
+getopt --test > /dev/null
+if [[ $? -ne 4 ]]; then
+    echo "I’m sorry, $(getopt --test) failed in this environment."
+    exit 1
+fi
+
+OPTIONS=h
+LONGOPTIONS=help
+PARSED=$(getopt --options=$OPTIONS \
+                --longoptions=$LONGOPTIONS \
+                --name "$0" -- "$@")
+eval set -- "$PARSED"
+
+# now enjoy the options in order and nicely split until we see --
+while true; do
+    case "$1" in
+        -h|--help)
+            printHelp
+            ;;
+        # this case is required to handle --arg
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "Programming error"
+            exit 3
+            ;;
+    esac
+done
 
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
@@ -71,5 +107,6 @@ log "=== Set git user.name as $NAME"
 git config --global user.name "$NAME"
 log "=== Set git user.email as $EMAIL"
 git config --global user.email "$EMAIL"
+log "=== In order to clone/push repo is recommend to copy your RSA keys."
 log "=== FINISH! ==="
 
