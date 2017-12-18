@@ -67,5 +67,4 @@ log "Mount point: ${mount}"
 cryptsetup luksOpen "${device}" crypt
 mount -t auto /dev/mapper/crypt "${mount}"
 
-echo -e "${GREEN}Device mounted on ${mount}${NC}"
 log "Device mounted on ${mount}"
