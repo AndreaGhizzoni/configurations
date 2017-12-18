@@ -146,10 +146,10 @@ PICS="$HOME"/Pictures
 mkdir -p "$PICS"
 WALLPAPERS="$PICS"/wallpapers
 if [ -d "$WALLPAPERS" ]; then
+    log "=== WALLPAPERS FOLDER ALREADY EXISTS."
+else
     tar xf ../wallpapers.tar -C "$PICS"
     log "=== WALLPAPERS EXTRACTED"
-else
-    log "=== WALLPAPERS FOLDER ALREADY EXISTS."
 fi
 
 log "=== To resolve some font problem just run: fonts.install"

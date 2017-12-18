@@ -110,7 +110,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 log "=== INSTALLING s-tui - goo.gl/YJsBJ8"
-apt pip install s-tui
+pip install s-tui
 
 log "=== FINISH! ==="
 

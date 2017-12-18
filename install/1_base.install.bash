@@ -26,13 +26,13 @@ function usageAndExit () {
 
 ## print some help string and call usageAndExit
 function printHelp () {
-    echo "Basic program Installation script."
+    echo "Basic programs installation script."
     usageAndExit
 }
 
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
-if [ "$EUID" -eq 0 ]; then
+if [ "$EUID" -ne 0 ]; then
     logError "$0 must be run as root."
     #logError "$0 must be executed a non-root user."
     usageAndExit
@@ -99,7 +99,7 @@ fi
 
 # script logic start here
 log "=== Installing basic applications..."
-apt-get install curl python-pip stress
+apt-get install curl python-pip stress ssh
 
 log "=== login manager..."
 apt-get install lightdm lightdm-gtk-greeter
