@@ -119,10 +119,19 @@ function pull () {
     git -C "$1" pull origin master
 }
 
-# TODO add more java projects
 repos_name_github=( 
     JDrive
     it.unitn.disi.firstplugin
+    it.unitn.disi.gef
+    ASDPlayGround
+    Application-Util
+    AUTO
+    Network-Util
+    Simple-Logger
+    Monitoring
+    IOUtil
+    JXSwingPlus
+    mtg
 )
 
 log "$spacing getting/pulling repositories..."
