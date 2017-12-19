@@ -101,16 +101,29 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
+# 1.8, 1.7...
+VERSION=1.9.2
+# linux, windows ..
+OS=linux
+# amd64, i386
+ARCH=amd64
+GOTAR="go${VERSION}.${OS}-${ARCH}.tar.gz"
+
+# default location
+DST="/usr/local"
+
 log "$spacing installing go compiler..."
-#echo -n -e "${GREEN}    $spacing adding repository..."
-#sudo add-apt-repository ppa:webupd8team/java --yes &>/dev/null
-#echo -e "done${NC}"
+echo -n -e "${GREEN}    $spacing downloading tar..."
+# use --quiet to suppress wget output
+wget https://storage.googleapis.com/golang/${GOTAR} || exit
+echo -e "done${NC}"
 
-#echo -n -e "${GREEN}    $spacing updating sources..."
-#sudo apt-get update &>/dev/null
-#echo -e "done${NC}"
+echo -n -e "${GREEN}    $spacing coping into $DST (sudo pass required)..."
+# TODO check if $DST/go exists
+sudo tar -C "$DST" -xf "$GOTAR"
+echo -e "done${NC}"
 
-#echo -n -e "${GREEN}    $spacing installing from repo..."
-#sudo apt-get install oracle-java8-installer --yes &>/dev/null
+echo -n -e "${GREEN}    $spacing cleaning up archive..."
+rm -rf "$GOTAR" || exit
 echo -e "done${NC}"
 
