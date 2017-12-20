@@ -98,9 +98,9 @@ if [ ${i} -ne 0 ]; then
 fi
 
 # script logic start here
-GPG_K=https://download.sublimetext.com/sublimehq-pub.gpg
+GPG_K="https://download.sublimetext.com/sublimehq-pub.gpg"
 
-SOURCE_DEB=deb https://download.sublimetext.com/ apt/stable/
+SOURCE_DEB="deb https://download.sublimetext.com/ apt/stable/"
 SOURCE=/etc/apt/sources.list.d/sublime-text.list
 
 log "=== INSTALLING SUBLIME-TEXT 3"

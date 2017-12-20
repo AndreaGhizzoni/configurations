@@ -128,7 +128,7 @@ fc-cache -fr --really-force
 
 log "=== CLEANING UP..."
 cd .. || exit
-rm -rf nerd-font
+rm -rf nerd-fonts
 
 log "=== to list the installed font use: fc-list | grep FreeMono | grep .local"
 log "=== using uxterm/.Xresources to apply generated font to terminal emulator."
