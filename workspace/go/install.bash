@@ -107,23 +107,27 @@ VERSION=1.9.2
 OS=linux
 # amd64, i386
 ARCH=amd64
-GOTAR="go${VERSION}.${OS}-${ARCH}.tar.gz"
+
+log "$spacing installing go compiler..."
 
 # default location
 DST="/usr/local"
+if [ -d "$DST"/go ]; then
+    echo -e "${GREEN}    $spacing $DST/go already exists...nothing  todo${NC}"
+else
+    echo -n -e "${GREEN}    $spacing downloading tar..."
+    GOTAR="go${VERSION}.${OS}-${ARCH}.tar.gz"
+    # use --quiet to suppress wget output
+    wget https://storage.googleapis.com/golang/${GOTAR} || exit
+    echo -e "done${NC}"
 
-log "$spacing installing go compiler..."
-echo -n -e "${GREEN}    $spacing downloading tar..."
-# use --quiet to suppress wget output
-wget https://storage.googleapis.com/golang/${GOTAR} || exit
-echo -e "done${NC}"
+    echo -n -e "${GREEN}    $spacing coping into $DST (sudo pass required)..."
+    sudo tar -C "$DST" -xf "$GOTAR"
+    echo -e "done${NC}"
 
-echo -n -e "${GREEN}    $spacing coping into $DST (sudo pass required)..."
-# TODO check if $DST/go exists
-sudo tar -C "$DST" -xf "$GOTAR"
-echo -e "done${NC}"
+    echo -n -e "${GREEN}    $spacing cleaning up archive..."
+    rm -rf "$GOTAR" || exit
+    echo -e "done${NC}"
+fi
 
-echo -n -e "${GREEN}    $spacing cleaning up archive..."
-rm -rf "$GOTAR" || exit
-echo -e "done${NC}"
 

@@ -119,22 +119,41 @@ function pull () {
     git -C "$1" pull origin master
 }
 
-# TODO add more repository
+## get go project in the right way
+# $1 : github repository path like github.com/<USER>/<REPO>
+function goget () {
+    log "$spacing     [getting] $1"
+    ./usr/local/go/bin/go get "$1"
+}
+
 repos_name_github=( 
     factorial
+    zenium
+    independent-set
+    coins-change
+    film-scan
+    LCS
+    gin-app
+    go-docker
+    gos
+    go-introduction
 )
 
 log "$spacing getting/pulling repositories..."
 log "    $spacing unlocking keys..."
 ssh-add -t 90 2>/dev/null || exit
 
+origin=$(pwd)
+cd "$destination"/go/src || exit
 for repo_name in "${repos_name_github[@]}"
 do
-    #REPO_DST="$destination"/java/"$repo_name"
-    #if [ -d "$REPO_DST" ]; then
-    #    pull "$REPO_DST"
-    #else
-    #    clone git@github.com:AndreaGhizzoni/"$repo_name".git "$REPO_DST"
-    #fi
+    REPO_DST=github.com/AndreaGhizzoni/"$repo_name"
+    if [ -d "$REPO_DST" ]; then
+        pull "$REPO_DST"
+    else
+        #clone git@github.com:AndreaGhizzoni/"$repo_name".git "$REPO_DST"
+        goget github.com/AndreaGhizzoni/"$repo_name"
+    fi
 done
+cd "$origin" || exit
 
