@@ -115,16 +115,21 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         libxkbcommon-x11-dev libxkbcommon-dev libxcb-randr0-dev autoconf \
         libjpeg-dev
 
-    log "=== GETTING PandorasFox/i3lock-color..."
+    log "=== getting PandorasFox/i3lock-color..."
     wget https://github.com/PandorasFox/i3lock-color/archive/master.zip
     unzip master.zip
     cd i3lock-color-master || exit
-    log "=== CONFIGURING..."
+    log "=== configuring..."
     autoreconf -i || exit 
     ./configure || exit
-    log "=== MAKE & MAKE INSTALL..."
+    log "=== make && make install..."
     cd x86_64-pc-linux-gnu || exit
     make && make install
+
+    log "=== cleaning up..."
+    cd ../.. || exit
+    rm master.zip
+    rm -rf i3lock-color-master
 fi
 
 log "=== INSTALLING LMSENSORS..."
@@ -132,10 +137,10 @@ log "=== INSTALLING LMSENSORS..."
 read -p "Install and configure lm-sensors ? (required for i3 on laptop) [y/n] " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    log "=== Installing lm-sensors..."
+    log "=== installing lm-sensors..."
     apt-get install lm-sensors
     
-    log "=== Configuring..."
+    log "=== configuring..."
     sensors-detect
     service kmod start
     systemctl enable kmod
@@ -143,15 +148,15 @@ fi
 
 log "=== EXTRACTING WALLPAPERS..."
 PICS="$HOME"/Pictures
-mkdir -p "$PICS"
 WALLPAPERS="$PICS"/wallpapers
 if [ -d "$WALLPAPERS" ]; then
-    log "=== WALLPAPERS FOLDER ALREADY EXISTS."
+    log "=== $WALLPAPERS already exists: nothing todo."
 else
+    mkdir -p "$PICS"
     tar xf ../wallpapers.tar -C "$PICS"
-    log "=== WALLPAPERS EXTRACTED"
+    chown -R andrea:andrea "$PICS"/*
+    log "=== wallpapers extracted in $WALLPAPERS."
 fi
 
-log "=== To resolve some font problem just run: fonts.install"
 log "=== FINISH! ==="
 

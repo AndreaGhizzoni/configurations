@@ -100,14 +100,15 @@ fi
 log "=== INSTALLING DEPENDENCIES..."
 sudo apt-get install python-fontforge -y
 
-log "=== GETTING NERD FONTS..."
-git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git nerd-fonts
-cd nerd-fonts || exit
-
 log "=== INSTALLING BASE FONTS (sudo password required)..."
 sudo apt-get install fonts-font-awesome \
                      fonts-freefont-otf \
                      fonts-freefont-ttf
+
+log "=== GETTING NERD FONTS..."
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git nerd-fonts
+cd nerd-fonts || exit
+
 # all installed fonts should be under /usr/share/fonts
 FONT_BASE_NAME=FreeMono.ttf
 cp /usr/share/fonts/truetype/freefont/$FONT_BASE_NAME .
@@ -124,6 +125,10 @@ cp "$FONT_PATCHED_NAME" "$HOME"/.local/share/fonts/
 
 log "=== UPDATE FONTS CACHE..."
 fc-cache -fr --really-force
+
+log "=== CLEANING UP..."
+cd .. || exit
+rm -rf nerd-font
 
 log "=== to list the installed font use: fc-list | grep FreeMono | grep .local"
 log "=== using uxterm/.Xresources to apply generated font to terminal emulator."
