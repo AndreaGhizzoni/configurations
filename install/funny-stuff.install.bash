@@ -99,7 +99,7 @@ fi
 
 # script logic start here
 log "=== INSTALLING FUNNY STUFF..."
-apt-get install figlet cowsay sl neofetch fortune baset lolcat
+apt-get install figlet cowsay sl neofetch fortune bastet lolcat
 
 read -p "Copy neofetch config file? [y/n] " -n 1 -r
 echo    # (optional) move to a new line
