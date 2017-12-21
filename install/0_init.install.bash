@@ -30,21 +30,6 @@ function printHelp () {
     usageAndExit
 }
 
-# check if this script is running with EUID==0 (root)
-# comment the following statement if not required
-if [ "$EUID" -ne 0 ]; then
-    logError "$0 must be run as root."
-    #logError "$0 must be executed a non-root user."
-    usageAndExit
-fi
-
-# check if correct number of arguments are passed to this script.
-# 0 == no parameters, 1 == 1 argument, 2 == 2 arguments [...]
-#if [ "$#" -ne 0 ]; then
-#    logError "Script arguments are missing!"
-#    usageAndExit
-#fi
-
 getopt --test > /dev/null
 if [[ $? -ne 4 ]]; then
     echo "I’m sorry, $(getopt --test) failed in this environment."
@@ -75,6 +60,21 @@ while true; do
             ;;
     esac
 done
+
+# check if correct number of arguments are passed to this script.
+# 0 == no parameters, 1 == 1 argument, 2 == 2 arguments [...]
+#if [ "$#" -ne 0 ]; then
+#    logError "Script arguments are missing!"
+#    usageAndExit
+#fi
+
+# check if this script is running with EUID==0 (root)
+# comment the following statement if not required
+if [ "$EUID" -ne 0 ]; then
+    logError "$0 must be run as root."
+    #logError "$0 must be executed a non-root user."
+    usageAndExit
+fi
 
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
