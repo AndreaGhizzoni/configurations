@@ -30,6 +30,7 @@ unsetopt correct_all
 #common
 alias c="clear"
 alias l="ls -lah --group-directories-first"
+alias search="sudo apt-cache search"
 alias extip='curl ifconfig.me'
 alias httpserver='ifconfig && python -m SimpleHTTPServer 8000'
 alias pg='mtr --curses 8.8.8.8'
