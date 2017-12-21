@@ -158,5 +158,14 @@ else
     log "=== wallpapers extracted in $WALLPAPERS."
 fi
 
+log "=== CONFIGURING LIGHTDM..."
+read -p "Copy lightdm-gtk-greeter.conf in /etc/lightdm ? [y/n] " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    log "=== coping lightdm-gtk-greeter.conf into /etc/lightdm/"
+    mv /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.default
+    cp ../lightdm/lightdm-gtk-greeter.conf /etc/lightdm
+fi
+
 log "=== FINISH! ==="
 

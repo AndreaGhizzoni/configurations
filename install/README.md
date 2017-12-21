@@ -9,5 +9,4 @@
 - copy `uxterm/[desktop|laptop]/.Xresources` in `~`
 - copy `i3/[desktop|laptop]/*` `i3/common/*` in `~/.config/i3/`
 - `6_utilities.install.bash`
-- copy `lightdm/lightdm-gtk-greeter.conf` in `/etc/lightdm/`
 - `7_vim.install.bash`
