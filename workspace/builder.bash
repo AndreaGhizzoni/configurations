@@ -121,7 +121,7 @@ fi
 ROOT_WORKSPACE_CONTAINER="$HOME"/Documents
 ROOT_WORKSPACE="$ROOT_WORKSPACE_CONTAINER"/workspace2 # TODO change it
 
-WORKSPACES=( java ) # TODO add workspaces
+WORKSPACES=( java go ) # TODO add workspaces
 
 log "create \`workspace\` folder under: $ROOT_WORKSPACE_CONTAINER"
 if [ -d "$ROOT_WORKSPACE" ]; then
