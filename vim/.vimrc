@@ -1,29 +1,31 @@
-"" ============= Basic settings
+" ============= Basic settings
 color molokayo
 set t_Co=256 
 set encoding=utf8
-set tabstop=4                          " visualize tabulation as 4 spaces (still tab)
-set shiftwidth=4                       " spaces instead of tabs
-set softtabstop=4                      " http://goo.gl/qMsEu
-set expandtab                          " these three setting are used to use 
 
-set autoindent                         " copy the indentation of previous line
-set smartindent                        " insert one indentation in C-like files
+set tabstop=4                      " visualize tabulation as 4 spaces (still tab)
+set shiftwidth=4                   " spaces instead of tabs
+set softtabstop=4                  " http://goo.gl/qMsEu
+set expandtab                      " enter a real tab with ctrl-v <TAB>
 
-set number                             " show line numbers
-set colorcolumn=80                     " draw a column at 80 character
+set autoindent                     " copy the indentation of previous line
+set smartindent                    " insert one indentation in C-like files
 
-set showmatch                          " highlight the matching parenthesis
-set incsearch                          " move the cursor while searching pattern
-set hlsearch                           " set highlight for searched text
+set number                         " show line numbers
+set relativenumber                 " set relative number line
+set colorcolumn=80                 " draw a column at 80 character
 
-set wrap                               " wrap long line of text
-set linebreak                          " to re-flow long line of text instantly
-set textwidth=80                       " max with of the text
-set formatoptions-=l                   " http://goo.gl/RnL9DI
+set showmatch                      " highlight the matching parenthesis
+set incsearch                      " move the cursor while searching pattern
+set hlsearch                       " set highlight for searched text
+
+set wrap                           " wrap long line of text
+set linebreak                      " to re-flow long line of text instantly
+set textwidth=80                   " max with of the text
+set formatoptions-=l               " http://goo.gl/RnL9DI
 
 " disable spell check on starup
-"set spell spelllang=en,it              " docs here https://goo.gl/17dMm
+"set spell spelllang=en,it         " docs here https://goo.gl/17dMm
 
 " ============== Backup/Swap/Undo directory
 "set backup
@@ -33,34 +35,34 @@ set undodir=~/.vim/undo//
 set writebackup
 
 " ============== Vundle
-set nocompatible                       " be improved, required
-filetype off                           " required for vundle
-set rtp+=~/.vim/bundle/Vundle.vim      " required for vundle
+set nocompatible                   " be improved, required
+filetype off                       " required for vundle
+set rtp+=~/.vim/bundle/Vundle.vim  " required for vundle
 call vundle#begin()
 
 " Plug-in for vundle-plugin-manager 
 Plugin 'gmarik/Vundle.vim'
-" My plug-in. These are all github pages, for doc check there.
-Plugin 'tpope/vim-fugitive'           " for git integration
-Plugin 'scrooloose/syntastic'         " for syntax
-Plugin 'scrooloose/nerdtree'          " for tree directory
-Plugin 'vim-airline/vim-airline'      " for bottom status bar
+" My plugin. These are all github pages, for doc check there.
+Plugin 'vim-airline/vim-airline'        " for bottom status bar
 Plugin 'vim-airline/vim-airline-themes' " set of themes for airline
 
-Plugin 'fatih/vim-go'                 " for working with go
+Plugin 'tpope/vim-fugitive'             " for git integration
+Plugin 'airblade/vim-gitgutter'         " shows a git diff in the sign column
 
-Plugin 'xolox/vim-easytags'           " dependency for tagbar
-Plugin 'xolox/vim-misc'               " dependency for tagbar
-Plugin 'majutsushi/tagbar'            " for outline of current file
-Plugin 'airblade/vim-gitgutter'       " shows a git diff in the sign column
-Plugin 'sheerun/vim-polyglot'         " syntax package
-Plugin 'neomake/neomake'              " lint for bash script https://goo.gl/qbAJFT
-Plugin 'ryanoasis/vim-devicons'       " set of dev icons
+Plugin 'scrooloose/syntastic'           " for syntax
+Plugin 'scrooloose/nerdtree'            " for tree directory
 
-" NB: this plugin is disable because break syntastic error check on save
-"Plugin 'Valloric/YouCompleteMe'       " for auto complete functions
+Plugin 'fatih/vim-go'                   " for working with go
 
-Plugin 'PotatoesMaster/i3-vim-syntax' " for i3 config file syntax highlighting
+Plugin 'xolox/vim-easytags'             " dependency for tagbar
+Plugin 'xolox/vim-misc'                 " dependency for tagbar
+Plugin 'majutsushi/tagbar'              " for outline of current file
+
+Plugin 'sheerun/vim-polyglot'           " collection of language syntax/indent 
+
+Plugin 'PotatoesMaster/i3-vim-syntax'   " i3 config file syntax highlighting
+
+Plugin 'ryanoasis/vim-devicons'
 
 call vundle#end()
 filetype plugin indent on
@@ -112,9 +114,6 @@ set laststatus=2                               " airline always displayed
 let g:airline#extensions#tabline#enabled = 1   " enable smart tab airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='simple'
-"let g:airline_left_sep = "\uE0B0"
-"let g:airline_right_sep = "\uE0B3"
-
 
 " ============= NERDTree
 map <F2> :NERDTreeToggle<CR>
