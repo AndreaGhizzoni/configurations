@@ -1,5 +1,0 @@
-# base .Xresources
-https://github.com/Hund/dotfiles/blob/master/.Xresources
-
-# customizing .XResources
-https://terminal.sexy
