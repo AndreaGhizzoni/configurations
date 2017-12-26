@@ -101,7 +101,7 @@ function installIt () {
     echo -e -n "${GREEN}=== Installing "
     echo -n "$1"
     echo -e "${NC}"
-    apt-get install "$1"
+    apt-get install "$1" -y
     dpkg --configure -a
 }
 
