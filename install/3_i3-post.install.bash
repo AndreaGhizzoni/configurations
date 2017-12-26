@@ -168,7 +168,7 @@ fi
 log "=== CONFIGURING ROFI..."
 mkdir -p $HOME/.config/rofi
 cp ../rofi/config $HOME/.config/rofi || exit
-chown -R andrea:andrea $HOME/.config/rofi
+chown -R andrea:andrea $HOME/.config
 
 log "=== INSTALLING LMSENSORS..."
 # from: https://askubuntu.com/questions/15832/how-do-i-get-the-cpu-temperature
@@ -192,7 +192,7 @@ if [ -d "$WALLPAPERS" ]; then
 else
     mkdir -p "$PICS"
     tar xf ../wallpapers.tar -C "$PICS"
-    chown -R andrea:andrea "$PICS"/*
+    chown -R andrea:andrea "$PICS"
     log "=== wallpapers extracted in $WALLPAPERS."
 fi
 
