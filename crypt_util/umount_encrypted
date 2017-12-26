@@ -17,13 +17,52 @@ function logError () {
 
 # usage and exit function.
 function usageAndExit () {
-    echo -e "Usage: $0 [mount-point]"
-    echo -e "Example: $0 /mnt/device"
+    echo -e "Usage: sudo $0 [mount-point]"
+    echo -e "Example: sudo $0 /mnt/device"
     exit 1
 }
 
-if [ "$1" = "-h" ] || [ "$1" = "--help"  ]; then
+## print some help string and call usageAndExit
+function printHelp () {
     echo "Utiliy script to umount encrypted device"
+    usageAndExit
+}
+
+getopt --test > /dev/null
+if [[ $? -ne 4 ]]; then
+    echo "I’m sorry, $(getopt --test) failed in this environment."
+    exit 1
+fi
+
+OPTIONS=h
+LONGOPTIONS=help
+PARSED=$(getopt --options=$OPTIONS \
+                --longoptions=$LONGOPTIONS \
+                --name "$0" -- "$@")
+eval set -- "$PARSED"
+
+# now enjoy the options in order and nicely split until we see --
+while true; do
+    case "$1" in
+        -h|--help)
+            printHelp
+            ;;
+        # this case is required to handle --arg
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "Programming error"
+            exit 3
+            ;;
+    esac
+done
+
+# check if correct number of arguments are passed to this script.
+# 0 == no parameters, 1 == 1 argument, 2 == 2 arguments [...]
+if [ "$#" -ne 1 ]; then
+    logError "Script arguments are missing!"
     usageAndExit
 fi
 
@@ -31,13 +70,7 @@ fi
 # comment the following statement if not required
 if [ "$EUID" -ne 0 ]; then
     logError "$0 must be run as root."
-    usageAndExit
-fi
-
-# check if correct number of arguments are passed to this script.
-# 0 == no parameters, 1 == 1 argument, 2 == 2 arguments [...]
-if [ "$#" -ne 1 ]; then
-    logError "Script arguments are missing!"
+    #logError "$0 must be executed a non-root user."
     usageAndExit
 fi
 
