@@ -124,8 +124,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         XRES_FROM=laptop
     fi
 
-    log "=== COPY $XRES_FROM/.Xresources in $HOME..."
-    cp ../urxvt/$XRES_FROM/.Xresources $HOME || exit
+    XRES=../urxvt/"$XRES_FROM"/.Xresources
+    log "=== COPY $XRES in $HOME..."
+    cp $XRES $HOME || exit
     chown andrea:andrea $HOME/.Xresources
 fi
 
