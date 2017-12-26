@@ -125,7 +125,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     fi
 
     log "=== COPY $XRES_FROM/.Xresources in $HOME..."
-    cp $XRES_FROM/.Xresources $HOME || exit
+    cp ../urxvt/$XRES_FROM/.Xresources $HOME || exit
+    chown andrea:andrea $HOME/.Xresources
 fi
 
 URXVT_HOME=$HOME/.urxvt
@@ -134,7 +135,8 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     log "=== COPY EXTENSIONS..."
     mkdir -p $URXVT_HOME
-    cp -r ext $URXVT_HOME || exit
+    cp -r ../urxvt/ext $URXVT_HOME || exit
+    chown -R andrea:andrea $URXVT_HOME
 fi
 
 log "=== FINISH! ==="
