@@ -131,5 +131,4 @@ cd .. || exit
 rm -rf nerd-fonts
 
 log "=== to list the installed font use: fc-list | grep FreeMono | grep .local"
-log "=== using uxterm/.Xresources to apply generated font to terminal emulator."
 log "=== FINISH! ==="
