@@ -46,9 +46,13 @@ fi
 
 OPTIONS=hdl
 LONGOPTIONS=help,desktop,laptop
-PARSED=$(getopt --options=$OPTIONS \
-                --longoptions=$LONGOPTIONS \
-                --name "$0" -- "$@")
+getopt --options=$OPTIONS \
+       --longoptions=$LONGOPTIONS \
+       --name "$0" -- "$@" > /dev/null
+if [[ $? -eq 1 ]]; then # if getopt exit with 1 then some argument are wrong
+    exit 2
+fi
+
 # now enjoy the options in order and nicely split until we see --
 XRES_FROM=ERROR
 while true; do
@@ -64,14 +68,14 @@ while true; do
             XRES_FROM=laptop
             shift
             ;;
-        # this case is required to handle --arg
+        # last characters produced by getopt
         --)
             shift
             break
             ;;
-        # error for unrecognized argument 
+        # no more arguments
         *)
-            exit 3
+            break
             ;;
     esac
 done
