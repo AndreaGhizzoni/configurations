@@ -72,8 +72,8 @@ new_window pixel 1
 # start a terminal
 # i3-sensible-terminal is a script that runs the installed terminal
 #bindsym $mod+Return exec i3-sensible-terminal -name term
-#bindsym $mod+Return exec xterm -fa 'Monospace' -fs 11
-bindsym $mod+Return exec uxterm
+#bindsym $mod+Return exec uxterm
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -86,7 +86,8 @@ bindsym $mod+d exec dmenu_run
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # cli calculator
-bindsym $mod+c exec uxterm qalc
+#bindsym $mod+c exec uxterm qalc
+bindsym $mod+c exec urxvt -e qalc
 
 # change focus
 bindsym $mod+j focus down 
