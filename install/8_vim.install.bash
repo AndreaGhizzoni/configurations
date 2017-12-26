@@ -99,10 +99,10 @@ fi
 
 # script logic start here
 log "=== INSTALLING VIM PLUGIN DEPENDENCIES..."
-apt-get install exuberant-ctags build-essential cmake python-dev
+apt-get install exuberant-ctags build-essential cmake python-dev -y
 
 log "=== INSTALLING VIM..."
-apt-get install vim
+apt-get install vim -y
 
 if [ -d "$HOME/.vim" ]; then
     logError "$HOME/.vim folder already exists. Skipping configurations."
