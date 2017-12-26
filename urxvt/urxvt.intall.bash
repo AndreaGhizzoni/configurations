@@ -19,8 +19,9 @@ function logError () {
 
 ## print usage and exit.
 function usageAndExit () {
-    echo -e "Usage: $0"
-    echo -e "Example: $0"
+    echo -e "Usage: sudo $0 [--desktop|--laptop]"
+    echo -e "Example: sudo $0 --desktop"
+    echo -e "Example: sudo $0 --laptop"
     exit 1
 }
 
@@ -30,14 +31,21 @@ function printHelp () {
     usageAndExit
 }
 
+# check if correct number of arguments are passed to this script.
+# 0 == no parameters, 1 == 1 argument, 2 == 2 arguments [...]
+if [ "$#" -eq 0 ]; then
+    logError "Script arguments are missing!"
+    usageAndExit
+fi
+
 getopt --test > /dev/null
 if [[ $? -ne 4 ]]; then
     echo "I’m sorry, $(getopt --test) failed in this environment."
     exit 1
 fi
 
-OPTIONS=h
-LONGOPTIONS=help
+OPTIONS=hdl
+LONGOPTIONS=help,desktop,laptop
 PARSED=$(getopt --options=$OPTIONS \
                 --longoptions=$LONGOPTIONS \
                 --name "$0" -- "$@")
@@ -48,6 +56,14 @@ while true; do
     case "$1" in
         -h|--help)
             printHelp
+            ;;
+        -d|--desktop)
+            desktop=1
+            shift
+            ;;
+        -l|--laptop)
+            laptop=1
+            shift
             ;;
         # this case is required to handle --arg
         --)
@@ -61,12 +77,10 @@ while true; do
     esac
 done
 
-# check if correct number of arguments are passed to this script.
-# 0 == no parameters, 1 == 1 argument, 2 == 2 arguments [...]
-#if [ "$#" -ne 0 ]; then
-#    logError "Script arguments are missing!"
-#    usageAndExit
-#fi
+if [[ "$desktop" -eq 1 ]] && [[ "$laptop" -eq 1 ]] ; then
+    logError "Script arguments error!"
+    usageAndExit
+fi
 
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
@@ -103,8 +117,15 @@ apt-get install rxvt-unicode-256color -y
 read -p "Do you want to copy .Xresources in $HOME ? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    log "=== COPY .Xresources..."
-    log "TODO"
+    if [[ "$desktop" -eq 1 ]]; then
+        XRES_FROM=desktop
+    fi
+    if [[ "$laptop" -eq 1 ]]; then
+        XRES_FROM=laptop
+    fi
+
+    log "=== COPY $XRES_FROM/.Xresources in $HOME..."
+    cp $XRES_FROM/.Xresources $HOME || exit
 fi
 
 URXVT_HOME=$HOME/.urxvt
@@ -113,7 +134,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     log "=== COPY EXTENSIONS..."
     mkdir -p $URXVT_HOME
-    cp -r ext $URXVT_HOME
+    cp -r ext $URXVT_HOME || exit
 fi
 
 log "=== FINISH! ==="
