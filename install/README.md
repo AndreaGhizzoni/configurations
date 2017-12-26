@@ -4,9 +4,8 @@
 - `2_git.install.bash`
 - `3_i3-post.install.bash`
 - `4_fonts.install.bash`
-- `5_urxvt.install.bash`
-- `6_zsh.install.bash`
+- `5_zsh.install.bash`
 - log in into i3, genrate new i3config in .config/i3/config
 - copy `i3/[desktop|laptop]/*` `i3/common/*` in `~/.config/i3/`
-- `7_utilities.install.bash`
-- `8_vim.install.bash`
+- `6_utilities.install.bash`
+- `7_vim.install.bash`

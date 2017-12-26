@@ -19,8 +19,9 @@ function logError () {
 
 ## print usage and exit.
 function usageAndExit () {
-    echo -e "Usage: sudo $0"
-    #echo -e "Example: $0"
+    echo -e "Usage: sudo $0 [--desktop|--laptop]"
+    echo -e "Example: sudo $0 --desktop"
+    echo -e "Example: sudo $0 --laptop"
     exit 1
 }
 
@@ -30,13 +31,12 @@ function printHelp () {
     usageAndExit
 }
 
-
 # check if correct number of arguments are passed to this script.
 # 0 == no parameters, 1 == 1 argument, 2 == 2 arguments [...]
-#if [ "$#" -ne 0 ]; then
-#    logError "Script arguments are missing!"
-#    usageAndExit
-#fi
+if [[ "$#" -eq 0 ]] || [[ "$#" -eq 2 ]] ; then
+    logError "Script arguments error!"
+    usageAndExit
+fi
 
 getopt --test > /dev/null
 if [[ $? -ne 4 ]]; then
@@ -44,26 +44,33 @@ if [[ $? -ne 4 ]]; then
     exit 1
 fi
 
-OPTIONS=h
-LONGOPTIONS=help
+OPTIONS=hdl
+LONGOPTIONS=help,desktop,laptop
 PARSED=$(getopt --options=$OPTIONS \
                 --longoptions=$LONGOPTIONS \
                 --name "$0" -- "$@")
-eval set -- "$PARSED"
-
 # now enjoy the options in order and nicely split until we see --
+XRES_FROM=ERROR
 while true; do
     case "$1" in
         -h|--help)
             printHelp
+            ;;
+        -d|--desktop)
+            XRES_FROM=desktop
+            shift
+            ;;
+        -l|--laptop)
+            XRES_FROM=laptop
+            shift
             ;;
         # this case is required to handle --arg
         --)
             shift
             break
             ;;
+        # error for unrecognized argument 
         *)
-            echo "Programming error"
             exit 3
             ;;
     esac
@@ -101,7 +108,7 @@ fi
 # script logic start here
 log "=== INSTALLING i3 POST INSTALL PROGRAMS..."
 apt-get install alsa-utils pavucontrol lxappearance wicd wicd-gtk feh scrot \
-    fonts-font-awesome arandr qalc libnotify-bin
+    fonts-font-awesome arandr qalc libnotify-bin rofi rxvt-unicode-256color
 
 fc-cache -fr --really-force
 
@@ -132,6 +139,32 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     rm master.zip
     rm -rf i3lock-color-master
 fi
+
+log "=== COPY .Xresources for $XRES_FROM..."
+read -p "Do you want to copy .Xresources for $XRES_FROM in $HOME ? [Y/n] " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    log "=== coping $XRES in $HOME..."
+    XRES=../Xresources/"$XRES_FROM"/.Xresources
+    cp $XRES $HOME || exit
+    chown andrea:andrea $HOME/.Xresources
+fi
+
+log "=== CONFIGURING URXVT..."
+read -p "Do you want to copy extensions in $URXVT_HOME ? [Y/n] " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    log "=== coping extensions.."
+    URXVT_HOME=$HOME/.urxvt
+    mkdir -p $URXVT_HOME
+    cp -r ../urxvt/ext $URXVT_HOME || exit
+    chown -R andrea:andrea $URXVT_HOME
+fi
+
+log "=== CONFIGURING ROFI..."
+mkdir -p $HOME/.config/rofi
+cp ../rofi/config $HOME/.config/rofi || exit
+chown -R andrea:andrea $HOME/.config/rofi
 
 log "=== INSTALLING LMSENSORS..."
 # from: https://askubuntu.com/questions/15832/how-do-i-get-the-cpu-temperature
