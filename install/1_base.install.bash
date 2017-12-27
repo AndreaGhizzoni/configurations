@@ -46,10 +46,12 @@ fi
 
 OPTIONS=h
 LONGOPTIONS=help
-PARSED=$(getopt --options=$OPTIONS \
-                --longoptions=$LONGOPTIONS \
-                --name "$0" -- "$@")
-eval set -- "$PARSED"
+getopt --options=$OPTIONS \
+       --longoptions=$LONGOPTIONS \
+       --name "$0" -- "$@" > /dev/null
+if [[ $? -eq 1 ]]; then # if getopt exit with 1 then some argument are wrong
+    exit 2
+fi
 
 # now enjoy the options in order and nicely split until we see --
 while true; do
@@ -57,14 +59,14 @@ while true; do
         -h|--help)
             printHelp
             ;;
-        # this case is required to handle --arg
+        # last characters produced by getopt
         --)
             shift
             break
             ;;
+        # no more arguments
         *)
-            echo "Programming error"
-            exit 3
+            break
             ;;
     esac
 done

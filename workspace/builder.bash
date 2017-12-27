@@ -33,14 +33,6 @@ function printHelp () {
     usageAndExit
 }
 
-# check if this script is running with EUID==0 (root)
-# comment the following statement if not required
-if [ "$EUID" -eq 0 ]; then
-    #logError "$0 must be run as root."
-    logError "$0 must be executed a non-root user."
-    usageAndExit
-fi
-
 # check if correct number of arguments are passed to this script.
 # 0 == no parameters, 1 == 1 argument, 2 == 2 arguments [...]
 if [ "$#" -eq 0 ]; then
@@ -55,10 +47,12 @@ fi
 
 OPTIONS=hcipa
 LONGOPTIONS=help,create-workspace,install,get-projects,all
-PARSED=$(getopt --options=$OPTIONS \
-                --longoptions=$LONGOPTIONS \
-                --name "$0" -- "$@")
-eval set -- "$PARSED"
+getopt --options=$OPTIONS \
+       --longoptions=$LONGOPTIONS \
+       --name "$0" -- "$@" > /dev/null
+if [[ $? -eq 1 ]]; then # if getopt exit with 1 then some argument are wrong
+    exit 2
+fi
 
 # now enjoy the options in order and nicely split until we see --
 while true; do
@@ -84,18 +78,25 @@ while true; do
             projects=1
             shift
             ;;
-        # this case is required to handle --arg
+        # last characters produced by getopt
         --)
             shift
             break
             ;;
+        # no more arguments
         *)
-            echo "Programming error"
-            exit 3
+            break
             ;;
     esac
 done
 
+# check if this script is running with EUID==0 (root)
+# comment the following statement if not required
+if [ "$EUID" -eq 0 ]; then
+    #logError "$0 must be run as root."
+    logError "$0 must be executed a non-root user."
+    usageAndExit
+fi
 
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
