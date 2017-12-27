@@ -155,11 +155,11 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 log "=== CONFIGURING URXVT..."
+URXVT_HOME=$HOME/.urxvt
 read -p "Do you want to copy extensions in $URXVT_HOME ? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     log "=== coping extensions.."
-    URXVT_HOME=$HOME/.urxvt
     mkdir -p $URXVT_HOME
     cp -r ../urxvt/ext $URXVT_HOME || exit
     chown -R andrea:andrea $URXVT_HOME
