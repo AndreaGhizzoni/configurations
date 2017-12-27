@@ -49,7 +49,7 @@ Plugin 'vim-airline/vim-airline-themes' " set of themes for airline
 Plugin 'tpope/vim-fugitive'             " for git integration
 Plugin 'airblade/vim-gitgutter'         " shows a git diff in the sign column
 
-Plugin 'scrooloose/syntastic'           " for syntax
+Plugin 'vim-syntastic/syntastic'        " for syntax
 Plugin 'scrooloose/nerdtree'            " for tree directory
 
 Plugin 'fatih/vim-go'                   " for working with go
@@ -62,7 +62,8 @@ Plugin 'sheerun/vim-polyglot'           " collection of language syntax/indent
 
 Plugin 'PotatoesMaster/i3-vim-syntax'   " i3 config file syntax highlighting
 
-Plugin 'ryanoasis/vim-devicons'
+Plugin 'ryanoasis/vim-devicons'         " for nice glyphs
+
 
 call vundle#end()
 filetype plugin indent on
@@ -119,8 +120,9 @@ let g:airline_theme='simple'
 map <F2> :NERDTreeToggle<CR>
 
 " ============= Syntastic 
-let g:syntastic_cpp_compiler = 'g++'                  " enable c++11
-let g:syntastic_cpp_compiler_options = ' -std=c++11'  " for syntasitc
+let g:syntastic_sh_checkers = ['shellcheck']         " enable shell syntax check
+let g:syntastic_cpp_compiler = 'g++'                 " enable c++11
+let g:syntastic_cpp_compiler_options = ' -std=c++11' " for syntasitc
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*

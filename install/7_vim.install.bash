@@ -101,7 +101,7 @@ fi
 
 # script logic start here
 log "=== INSTALLING VIM PLUGIN DEPENDENCIES..."
-apt-get install exuberant-ctags build-essential cmake python-dev -y
+apt-get install exuberant-ctags build-essential cmake python-dev shellcheck -y
 
 log "=== INSTALLING VIM..."
 apt-get install vim -y
