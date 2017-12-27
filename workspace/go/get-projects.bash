@@ -125,7 +125,7 @@ function pull () {
 # $1 : github repository path like github.com/<USER>/<REPO>
 function goget () {
     log "$spacing     [getting] $1"
-    ./usr/local/go/bin/go get "$1"
+    /usr/local/go/bin/go get "$1"
 }
 
 repos_name_github=( 
