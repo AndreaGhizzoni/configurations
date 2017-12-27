@@ -6,7 +6,6 @@ UXTerm*faceSize: 11
 
 !*customization: -color
 
-
 !
 ! URxvt
 !
@@ -111,3 +110,18 @@ URxvt.matcher.button: 1
 ! white
 *.color7:       #ebebeb
 *.color15:      #f8f8f8
+
+!
+! Rofi
+! run: rofi-theme-selector to change the theme.
+rofi.font:              FreeMono Nerd Font Mono 12
+rofi.location:          0
+rofi.fullscreen:        false
+rofi.hide-scrollbar:    true
+rofi.line-margin:       1
+rofi.yoffset:           -300
+rofi.xoffset:           0
+rofi.lines:             15
+rofi.terminal:          urxvt
+rofi.dpi:               96
+rofi.disable-history:   true
