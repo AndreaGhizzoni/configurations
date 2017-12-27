@@ -150,8 +150,8 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     log "=== coping $XRES in $HOME..."
     XRES=../Xresources/"$XRES_FROM"/.Xresources
-    cp $XRES $HOME || exit
-    chown andrea:andrea $HOME/.Xresources
+    cp "$XRES" "$HOME" || exit
+    chown andrea:andrea "$HOME"/.Xresources
 fi
 
 log "=== CONFIGURING URXVT..."
@@ -160,15 +160,15 @@ read -p "Do you want to copy extensions in $URXVT_HOME ? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     log "=== coping extensions.."
-    mkdir -p $URXVT_HOME
-    cp -r ../urxvt/ext $URXVT_HOME || exit
-    chown -R andrea:andrea $URXVT_HOME
+    mkdir -p "$URXVT_HOME"
+    cp -r ../urxvt/ext "$URXVT_HOME" || exit
+    chown -R andrea:andrea "$URXVT_HOME"
 fi
 
 log "=== CONFIGURING ROFI..."
-mkdir -p $HOME/.config/rofi
-cp ../rofi/config $HOME/.config/rofi || exit
-chown -R andrea:andrea $HOME/.config
+mkdir -p "$HOME"/.config/rofi
+cp ../rofi/config "$HOME"/.config/rofi || exit
+chown -R andrea:andrea "$HOME"/.config
 
 log "=== INSTALLING LMSENSORS..."
 # from: https://askubuntu.com/questions/15832/how-do-i-get-the-cpu-temperature
