@@ -135,6 +135,7 @@ repos_name_github=(
     JXSwingPlus
     mtg
     subsetK
+    sudoku
 )
 
 log "$spacing getting/pulling repositories..."
