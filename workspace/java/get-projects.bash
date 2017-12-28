@@ -134,6 +134,7 @@ repos_name_github=(
     IOUtil
     JXSwingPlus
     mtg
+    subsetK
 )
 
 log "$spacing getting/pulling repositories..."

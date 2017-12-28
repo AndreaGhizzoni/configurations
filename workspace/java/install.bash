@@ -111,7 +111,5 @@ echo -n -e "${GREEN}    $spacing updating sources..."
 sudo apt-get update &>/dev/null
 echo -e "done${NC}"
 
-echo -n -e "${GREEN}    $spacing installing from repo..."
+echo -n -e "${GREEN}    $spacing installing from repo...${NC}"
 sudo apt-get install oracle-java8-installer --yes
-echo -e "done${NC}"
-
