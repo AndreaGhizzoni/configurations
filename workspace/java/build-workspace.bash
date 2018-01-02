@@ -113,5 +113,5 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
+echo -e -n "$spacing"; log "building workspace..."
 mkdir -p "$destination"/java
-echo -e -n "$spacing"; log "building workspace...done"
