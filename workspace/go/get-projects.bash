@@ -166,7 +166,7 @@ do
         pull "$REPO_DST"
     else
         #clone git@github.com:AndreaGhizzoni/"$repo_name".git "$REPO_DST"
-        goget github.com/AndreaGhizzoni/"$repo_name"
+        goget "$REPO_DST"
     fi
 done
 cd "$origin" || exit
