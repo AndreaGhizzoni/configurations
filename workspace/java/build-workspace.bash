@@ -78,6 +78,12 @@ while true; do
     esac
 done
 
+# check if -d "destination" flag is set
+if [ -z "$destination" ]; then
+    echo -e -n "$spacing"; logError "-d flag missing."
+    exit 1
+fi
+
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
 if [ "$EUID" -eq 0 ]; then
