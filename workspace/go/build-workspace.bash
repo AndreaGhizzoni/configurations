@@ -9,13 +9,13 @@ NC='\033[0m' # No color
 ## print $1 in green.                                                           
 # $1: something to print in GREEN on stdout
 function log () {
-    echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
+    echo -e -n "$2"; echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
 }
 
 ## print $1 in green.                                                           
 # $1: something to print in RED on stdout
 function logError () {
-    echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
+    echo -e -n "$2"; echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
 }
 
 ## print usage and exit.
@@ -80,7 +80,8 @@ done
 
 # check if -d "destination" flag is set
 if [ -z "$destination" ]; then
-    echo -e -n "$spacing"; logError "-d flag missing."
+    #echo -e -n "$spacing"; logError "-d flag missing."
+    logError "-d flag missing." "$spacing"
     exit 1
 fi
 
@@ -113,12 +114,9 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-#echo -n -e "${GREEN}$spacing building workspace..."
-echo -e -n "$spacing" ; log "building workspace..."
+#echo -e -n "$spacing" ; log "building workspace..."
+log "building workspace..." "$spacing"
 mkdir -p "$destination"/go
 mkdir -p "$destination"/go/bin
 mkdir -p "$destination"/go/pkg
 mkdir -p "$destination"/go/src/github.com/AndreaGhizzoni
-#echo -e "done${NC}"
-
-

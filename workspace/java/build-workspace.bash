@@ -9,13 +9,13 @@ NC='\033[0m' # No color
 ## print $1 in green.                                                           
 # $1: something to print in GREEN on stdout
 function log () {
-    echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
+    echo -e -n "$2"; echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
 }
 
 ## print $1 in green.                                                           
 # $1: something to print in RED on stdout
 function logError () {
-    echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
+    echo -e -n "$2"; echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
 }
 
 ## print usage and exit.
@@ -113,5 +113,6 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-echo -e -n "$spacing"; log "building workspace..."
+#echo -e -n "$spacing"; log "building workspace..."
+log "building workspace..." "$spacing"
 mkdir -p "$destination"/java

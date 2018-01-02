@@ -9,13 +9,13 @@ NC='\033[0m' # No color
 ## print $1 in green.                                                           
 # $1: something to print in GREEN on stdout
 function log () {
-    echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
+    echo -e -n "$2"; echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
 }
 
 ## print $1 in green.                                                           
 # $1: something to print in RED on stdout
 function logError () {
-    echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
+    echo -e -n "$2"; echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
 }
 
 ## print usage and exit.
@@ -110,22 +110,27 @@ OS=linux
 # amd64, i386
 ARCH=amd64
 
-echo -e -n "$spacing"; log "installing go compiler..."
+#echo -e -n "$spacing"; log "installing go compiler..."
+log "installing go compiler..." "$spacing"
 
 # default location
 DST="/usr/local"
 if [ -d "$DST"/go ]; then
-    echo -e -n "$spacing$spacing"; log "$DST/go already exists. Nothing todo."
+    #echo -e -n "$spacing$spacing"; log "$DST/go already exists. Nothing todo."
+    log "$DST/go already exists. Nothing todo." "$spacing$spacing"
 else
     GOTAR="go${VERSION}.${OS}-${ARCH}.tar.gz"
-    echo -e -n "$spacing$spacing"; log "downloading $GOTAR"
+    #echo -e -n "$spacing$spacing"; log "downloading $GOTAR"
+    log "downloading $GOTAR" "$spacing$spacing"
     # use --quiet to suppress wget output
     wget https://storage.googleapis.com/golang/${GOTAR} || exit
 
-    echo -e -n "$spacing$spacing"; log "coping into $DST (sudo pass required)..."
+    #echo -e -n "$spacing$spacing"; log "coping into $DST (sudo pass required)..."
+    log "coping into $DST (sudo pass required)..." "$spacing$spacing"
     sudo tar -C "$DST" -xf "$GOTAR"
 
-    echo -e -n "$spacing$spacing"; log "cleaning up archive..."
+    #echo -e -n "$spacing$spacing"; log "cleaning up archive..."
+    log "cleaning up archive..." "$spacing$spacing"
     rm -rf "$GOTAR" || exit
 fi
 

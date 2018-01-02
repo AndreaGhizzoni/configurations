@@ -9,13 +9,13 @@ NC='\033[0m' # No color
 ## print $1 in green.                                                           
 # $1: something to print in GREEN on stdout
 function log () {
-    echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
+    echo -e -n "$2"; echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
 }
 
 ## print $1 in green.                                                           
 # $1: something to print in RED on stdout
 function logError () {
-    echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
+    echo -e -n "$2"; echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
 }
 
 ## print usage and exit.
@@ -80,7 +80,8 @@ done
 
 # check if -d "destination" flag is set
 if [ -z "$destination" ]; then
-    echo -e -n "$spacing"; logError "-d flag missing."
+    #echo -e -n "$spacing"; logError "-d flag missing."
+    logError "-d flag missing." "$spacing"
     exit 1
 fi
 
@@ -117,16 +118,16 @@ fi
 # $1 : git repo, git@github.com:USER/REPO-NAME.git
 # $2 : repo destination path
 function clone () {
-    #log "$spacing     [cloning] $1"
-    echo -e -n "$spacing$spacing"; log "[cloning] $1"
+    #echo -e -n "$spacing$spacing"; log "[cloning] $1"
+    log "[cloning] $1" "$spacing$spacing"
     git clone -q "$1" "$2"
 }
 
 ## pulling repo from github
 # $1 : path on which call git pull
 function pull () {
-    #log "$spacing     [pulling] $1"
-    echo -e -n "$spacing$spacing"; log "[pulling] $1"
+    #echo -e -n "$spacing$spacing"; log "[pulling] $1"
+    log "[pulling] $1" "$spacing$spacing"
     git -C "$1" pull origin master
 }
 
@@ -147,8 +148,10 @@ repos_name_github=(
     sudoku
 )
 
-echo -e -n "$spacing"; log "getting/pulling repositories..."
-echo -e -n "$spacing$spacing"; log "unlocking keys..."
+#echo -e -n "$spacing"; log "getting/pulling repositories..."
+#echo -e -n "$spacing$spacing"; log "unlocking keys..."
+log "getting/pulling repositories..." "$spacing"
+log "unlocking keys..." "$spacing$spacing"
 ssh-add -t 90 2>/dev/null || exit
 
 for repo_name in "${repos_name_github[@]}"
