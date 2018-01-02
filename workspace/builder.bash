@@ -134,7 +134,7 @@ else
     # - ./build-workspace.bash "" $ROOT_WORKSPACE
     # - ./install.bash
     # - ./get-projects.bash $ROOT_WORKSPACE
-    LOG_SPACING="    -"
+    LOG_SPACING="     "
     for w in "${WORKSPACES[@]}"
     do
         log "Building $w environment..."

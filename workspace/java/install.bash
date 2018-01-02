@@ -103,17 +103,17 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-log "${spacing}installing sdk..."
-log "${spacing}${spacing}adding repository..."
+echo -e -n "$spacing"; log "installing sdk..."
+echo -e -n "$spacing$spacing"; log "adding repository..."
 #echo -n -e "${GREEN}    $spacing adding repository..."
 sudo add-apt-repository ppa:webupd8team/java --yes &>/dev/null
 #echo -e "done${NC}"
 
-log "${spacing}${spacing}updating sources..."
+echo -e -n "$spacing$spacing"; log "updating sources..."
 #echo -n -e "${GREEN}    $spacing updating sources..."
 sudo apt-get update &>/dev/null
 #echo -e "done${NC}"
 
-log "${spacing}${spacing}installing from repo..."
+echo -e -n "$spacing$spacing"; log "installing from repo..."
 #echo -n -e "${GREEN}    $spacing installing from repo...${NC}"
 sudo apt-get install oracle-java8-installer --yes -q
