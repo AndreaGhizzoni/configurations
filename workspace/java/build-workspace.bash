@@ -108,4 +108,4 @@ if [ ${i} -ne 0 ]; then
 fi
 
 mkdir -p "$destination"/java
-log "${spacing}building workspace...done"
+echo -e -n "$spacing"; log "building workspace...done"

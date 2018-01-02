@@ -1,26 +1,27 @@
 #!/usr/bin/env bash
 
 # color declaration.
-GREEN='\033[0;32m'
+L_CYAN='\033[1;36m'
+#GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No color
 
 ## print $1 in green.                                                           
 # $1: something to print in GREEN on stdout
 function log () {
-    echo -e -n "${GREEN}"; echo -n "$1"; echo -e "${NC}"
+    echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
 }
 
 ## print $1 in green.                                                           
 # $1: something to print in RED on stdout
 function logError () {
-    echo -e -n "${RED}"; echo -n "$1"; echo -e "${NC}"
+    echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
 }
 
 ## print usage and exit.
 function usageAndExit () {
     echo -e "Usage: $0 [-s|--spacing] [-d|--destination]"
-    echo -e "Example: $0 -s \"  ->\" -d /home/pippo/work/java"
+    echo -e "Example: $0 -s \"  \" -d /home/pippo/work/java"
     exit 1
 }
 
@@ -110,14 +111,16 @@ fi
 # $1 : git repo, git@github.com:USER/REPO-NAME.git
 # $2 : repo destination path
 function clone () {
-    log "$spacing     [cloning] $1"
+    #log "$spacing     [cloning] $1"
+    echo -e -n "$spacing$spacing"; log "[cloning] $1"
     git clone "$1" "$2"
 }
 
 ## pulling repo from github
 # $1 : path on which call git pull
 function pull () {
-    log "$spacing     [pulling] $1"
+    #log "$spacing     [pulling] $1"
+    echo -e -n "$spacing$spacing"; log "[pulling] $1"
     git -C "$1" pull origin master
 }
 
@@ -138,8 +141,8 @@ repos_name_github=(
     sudoku
 )
 
-log "$spacing getting/pulling repositories..."
-log "    $spacing unlocking keys..."
+echo -e -n "$spacing"; log "getting/pulling repositories..."
+echo -e -n "$spacing$spacing"; log "unlocking keys..."
 ssh-add -t 90 2>/dev/null || exit
 
 for repo_name in "${repos_name_github[@]}"

@@ -21,7 +21,7 @@ function logError () {
 ## print usage and exit.
 function usageAndExit () {
     echo -e "Usage: $0 [-s|--spacing]"
-    echo -e "Example: $0 -s \"   -->\""
+    echo -e "Example: $0 -s \"   \""
     exit 1
 }
 
