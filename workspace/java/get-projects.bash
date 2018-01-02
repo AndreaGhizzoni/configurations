@@ -119,7 +119,7 @@ fi
 function clone () {
     #log "$spacing     [cloning] $1"
     echo -e -n "$spacing$spacing"; log "[cloning] $1"
-    git clone "$1" "$2"
+    git clone -q "$1" "$2"
 }
 
 ## pulling repo from github
