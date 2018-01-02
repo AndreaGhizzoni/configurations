@@ -1,20 +1,21 @@
 #!/usr/bin/env bash
 
 # color declaration.
-GREEN='\033[0;32m'
+L_CYAN='\033[1;36m'
+#GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No color
 
 ## print $1 in green.                                                           
 # $1: something to print in GREEN on stdout
 function log () {
-    echo -e -n "${GREEN}"; echo -n "$1"; echo -e "${NC}"
+    echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
 }
 
 ## print $1 in green.                                                           
 # $1: something to print in RED on stdout
 function logError () {
-    echo -e -n "${RED}"; echo -n "$1"; echo -e "${NC}"
+    echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
 }
 
 ## print usage and exit.
@@ -77,6 +78,12 @@ while true; do
     esac
 done
 
+# check if -d "destination" flag is set
+if [ -z "$destination" ]; then
+    echo -e -n "$spacing"; logError "-d flag missing."
+    exit 1
+fi
+
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
 if [ "$EUID" -eq 0 ]; then
@@ -106,11 +113,12 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-echo -n -e "${GREEN}$spacing building workspace..."
+#echo -n -e "${GREEN}$spacing building workspace..."
+echo -e -n "$spacing" ; log "building workspace..."
 mkdir -p "$destination"/go
 mkdir -p "$destination"/go/bin
 mkdir -p "$destination"/go/pkg
 mkdir -p "$destination"/go/src/github.com/AndreaGhizzoni
-echo -e "done${NC}"
+#echo -e "done${NC}"
 
 
