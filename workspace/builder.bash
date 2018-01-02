@@ -1,26 +1,28 @@
 #!/usr/bin/env bash
 
 # color declaration.
-GREEN='\033[0;32m'
+L_CYAN='\033[1;36m'
+#GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No color
 
 ## print $1 in green.                                                           
 # $1: something to print in GREEN on stdout
 function log () {
-    echo -e -n "${GREEN}"; echo -n "$1"; echo -e "${NC}"
+    echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
 }
 
 ## print $1 in red.                                                             
 # $1: something to print in RED on stdout
 function logError () {
-    echo -e -n "${RED}"; echo -n "$1"; echo -e "${NC}"
+    echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
 }
 
 ## print usage and exit.
 function usageAndExit () {
     echo -e "Usage: $0 [-a|--all] [-c|--create-workspace] [-i|--install] \
 [-p|--getprojects]"
+    echo "" # for spacing
     echo -e "The following two example are equivalent:"
     echo -e "Example: $0 --all"
     echo -e "Example: $0 --create-workspace --install --get-projects"
@@ -121,10 +123,9 @@ fi
 
 ROOT_WORKSPACE_CONTAINER="$HOME"/Documents
 ROOT_WORKSPACE="$ROOT_WORKSPACE_CONTAINER"/workspace2 # TODO change it
-
 WORKSPACES=( java go ) # TODO add workspaces
 
-log "create \`workspace\` folder under: $ROOT_WORKSPACE_CONTAINER"
+log "Creating \`workspace\` container in: $ROOT_WORKSPACE_CONTAINER"
 if [ -d "$ROOT_WORKSPACE" ]; then
     logError "$ROOT_WORKSPACE already exists. Nothing to do."
 else
@@ -136,7 +137,7 @@ else
     LOG_SPACING="    -"
     for w in "${WORKSPACES[@]}"
     do
-        log "-> $w"
+        log "Building $w environment..."
         cd "$w" || exit
         if [ ! -z "$create" ]; then
             ./build-workspace.bash -s "$LOG_SPACING" -d "$ROOT_WORKSPACE" || exit

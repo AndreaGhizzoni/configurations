@@ -1,20 +1,21 @@
 #!/usr/bin/env bash
 
 # color declaration.
-GREEN='\033[0;32m'
+L_CYAN='\033[1;36m'
+#GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No color
 
 ## print $1 in green.                                                           
 # $1: something to print in GREEN on stdout
 function log () {
-    echo -e -n "${GREEN}"; echo -n "$1"; echo -e "${NC}"
+    echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
 }
 
 ## print $1 in green.                                                           
 # $1: something to print in RED on stdout
 function logError () {
-    echo -e -n "${RED}"; echo -n "$1"; echo -e "${NC}"
+    echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
 }
 
 ## print usage and exit.
@@ -106,8 +107,5 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-echo -n -e "${GREEN}$spacing building workspace..."
 mkdir -p "$destination"/java
-echo -e "done${NC}"
-
-
+log "${spacing}building workspace...done"

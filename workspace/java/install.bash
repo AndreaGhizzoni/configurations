@@ -1,20 +1,21 @@
 #!/usr/bin/env bash
 
 # color declaration.
-GREEN='\033[0;32m'
+L_CYAN='\033[1;36m'
+#GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No color
 
 ## print $1 in green.                                                           
 # $1: something to print in GREEN on stdout
 function log () {
-    echo -e -n "${GREEN}"; echo -n "$1"; echo -e "${NC}"
+    echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
 }
 
 ## print $1 in green.                                                           
 # $1: something to print in RED on stdout
 function logError () {
-    echo -e -n "${RED}"; echo -n "$1"; echo -e "${NC}"
+    echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
 }
 
 ## print usage and exit.
@@ -102,14 +103,17 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-log "$spacing installing sdk.."
-echo -n -e "${GREEN}    $spacing adding repository..."
+log "${spacing}installing sdk..."
+log "${spacing}${spacing}adding repository..."
+#echo -n -e "${GREEN}    $spacing adding repository..."
 sudo add-apt-repository ppa:webupd8team/java --yes &>/dev/null
-echo -e "done${NC}"
+#echo -e "done${NC}"
 
-echo -n -e "${GREEN}    $spacing updating sources..."
+log "${spacing}${spacing}updating sources..."
+#echo -n -e "${GREEN}    $spacing updating sources..."
 sudo apt-get update &>/dev/null
-echo -e "done${NC}"
+#echo -e "done${NC}"
 
-echo -n -e "${GREEN}    $spacing installing from repo...${NC}"
-sudo apt-get install oracle-java8-installer --yes
+log "${spacing}${spacing}installing from repo..."
+#echo -n -e "${GREEN}    $spacing installing from repo...${NC}"
+sudo apt-get install oracle-java8-installer --yes -q
