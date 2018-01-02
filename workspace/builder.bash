@@ -121,11 +121,10 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-ROOT_WORKSPACE_CONTAINER="$HOME"/Documents
-ROOT_WORKSPACE="$ROOT_WORKSPACE_CONTAINER"/workspace2 # TODO change it
+ROOT_WORKSPACE="$HOME"/Documents/workspace2 # TODO change it
 WORKSPACES=( java go ) # TODO add workspaces
 
-log "Creating \`workspace\` container in: $ROOT_WORKSPACE_CONTAINER"
+log "Creating workspace in: $ROOT_WORKSPACE"
 if [ -d "$ROOT_WORKSPACE" ]; then
     logError "$ROOT_WORKSPACE already exists. Nothing to do."
 else
@@ -134,19 +133,19 @@ else
     # - ./build-workspace.bash "" $ROOT_WORKSPACE
     # - ./install.bash
     # - ./get-projects.bash $ROOT_WORKSPACE
-    LOG_SPACING="     "
+    SPACING="     "
     for w in "${WORKSPACES[@]}"
     do
         log "Building $w environment..."
         cd "$w" || exit
         if [ ! -z "$create" ]; then
-            ./build-workspace.bash -s "$LOG_SPACING" -d "$ROOT_WORKSPACE" || exit
+            ./build-workspace.bash -s "$SPACING" -d "$ROOT_WORKSPACE" || exit
         fi
         if [ ! -z "$install" ]; then
-            ./install.bash -s "$LOG_SPACING" || exit
+            ./install.bash -s "$SPACING" || exit
         fi
         if [ ! -z "$projects" ]; then
-            ./get-projects.bash -s "$LOG_SPACING" -d "$ROOT_WORKSPACE" || exit
+            ./get-projects.bash -s "$SPACING" -d "$ROOT_WORKSPACE" || exit
         fi
         cd ..
     done
