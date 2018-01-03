@@ -41,13 +41,13 @@ close(MPSTAT);
 $cpu_usage eq -1 and die 'Can\'t find CPU information';
 
 # Print short_text, full_text
-printf "%4d %%\n", $cpu_usage;
-printf "%4d %%\n", $cpu_usage;
+printf "%4d%%\n", $cpu_usage;
+printf "%4d%%\n", $cpu_usage;
 
 # Print color, if needed
 if ($cpu_usage >= $t_crit) {
     print "#FF0000\n";
-    exit 33;
+    #exit 33; # this exit code will show the cpu block in urgent mode on i3bar
 } elsif ($cpu_usage >= $t_warn) {
     print "#FFFC00\n";
 }
