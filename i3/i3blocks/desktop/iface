@@ -59,3 +59,4 @@ esac
 
 echo "$IPADDR" # full text
 echo "$IPADDR" # short text
+echo \#00FF00 # color
