@@ -146,6 +146,7 @@ repos_name_github=(
     mtg
     subsetK
     sudoku
+    tree
 )
 
 #echo -e -n "$spacing"; log "getting/pulling repositories..."
