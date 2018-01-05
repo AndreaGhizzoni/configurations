@@ -115,4 +115,4 @@ sudo apt-get update &>/dev/null
 
 #echo -e -n "$spacing$spacing"; log "installing from repo..."
 log "installing from repo..." "$spacing$spacing"
-sudo apt-get install oracle-java8-installer --yes -qq
+sudo apt-get install oracle-java8-installer graphviz --yes -qq
