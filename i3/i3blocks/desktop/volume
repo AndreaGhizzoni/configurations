@@ -22,9 +22,16 @@
 # For Jack/Jack2 users, use "jackplug"
 # For ALSA users, you may use "default" for your primary card
 # or you may use hw:# where # is the number of the card desired
-MIXER="default"
-[ -n "$(lsmod | grep pulse)" ] && MIXER="pulse"
-[ -n "$(lsmod | grep jack)" ] && MIXER="jackplug"
+#MIXER="default"
+MIXER="pulse"
+#[ -n "$(lsmod | grep pulse)" ] && MIXER="pulse"
+#[ -n "$(lsmod | grep jack)" ] && MIXER="jackplug"
+if lsmod | grep -q pulse; then
+    MIXER="pulse"
+fi
+if lsmod | grep -q jack; then
+    MIXER="jackplug"
+fi
 MIXER="${2:-$MIXER}"
 
 # The instance option sets the control to report and configure
@@ -47,14 +54,14 @@ capability() { # Return "Capture" if the device is a capture device
 }
 
 volume() {
-  amixer -D "$MIXER" get "$SCONTROL" $(capability)
+  amixer -D "$MIXER" get "$SCONTROL" "$(capability)"
 }
 
 format() {
   perl_filter='if (/.*\[(\d+%)\] (\[(-?\d+.\d+dB)\] )?\[(on|off)\]/)'
   perl_filter+='{CORE::say $4 eq "off" ? "   0 %" : "'
   # If dB was selected, print that instead
-  perl_filter+=$([[ $STEP = *dB ]] && echo '\ \ \ $3' || echo '\ \ \ $1')
+  perl_filter+=$([[ $STEP = *dB ]] && echo "\ \ \ \$3" || echo "\ \ \ \$1")
   perl_filter+='"; exit}'
   perl -ne "$perl_filter"
 }
@@ -62,9 +69,12 @@ format() {
 #------------------------------------------------------------------------
 
 case $BLOCK_BUTTON in
-  3) amixer -q -D $MIXER sset $SCONTROL $(capability) toggle ;;  # right click, mute/unmute
-  4) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}+ unmute ;; # scroll up, increase
-  5) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}- unmute ;; # scroll down, decrease
+  # right click, mute/unmute
+  3) amixer -q -D "$MIXER" sset "$SCONTROL" "$(capability)" toggle ;;
+  # scroll up, increase
+  4) amixer -q -D "$MIXER" sset "$SCONTROL" "$(capability)" "${STEP}"+ unmute ;;
+  # scroll down, decrease
+  5) amixer -q -D "$MIXER" sset "$SCONTROL" "$(capability)" "${STEP}"- unmute ;; 
 esac
 
 volume | format
