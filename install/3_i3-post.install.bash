@@ -112,7 +112,8 @@ fi
 # script logic start here
 log "=== INSTALLING i3 POST INSTALL PROGRAMS..."
 apt-get install alsa-utils pavucontrol lxappearance wicd wicd-gtk feh scrot \
-    fonts-font-awesome arandr qalc libnotify-bin rofi rxvt-unicode-256color
+    fonts-font-awesome arandr qalc libnotify-bin rofi rxvt-unicode-256color \
+    i3blocks
 
 fc-cache -fr --really-force
 
@@ -172,7 +173,7 @@ chown -R andrea:andrea "$HOME"/.config
 
 log "=== INSTALLING LMSENSORS..."
 # from: https://askubuntu.com/questions/15832/how-do-i-get-the-cpu-temperature
-read -p "Install and configure lm-sensors ? (required for i3 on laptop) [y/n] " -n 1 -r
+read -p "Install and configure lm-sensors ? [y/n] " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     log "=== installing lm-sensors..."
