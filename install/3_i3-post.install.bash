@@ -149,10 +149,20 @@ log "=== COPY .Xresources for $XRES_FROM..."
 read -p "Do you want to copy .Xresources for $XRES_FROM in $HOME ? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    log "=== coping $XRES in $HOME..."
     XRES=../Xresources/"$XRES_FROM"/.Xresources
+    log "=== coping $XRES in $HOME..."
     cp "$XRES" "$HOME" || exit
     chown andrea:andrea "$HOME"/.Xresources
+fi
+
+log "=== COPY .Xmodmap for $XRES_FROM..."
+read -p "Do you want to copy .Xmodmap for $XRES_FROM in $HOME ? [Y/n] " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    XMOD=../Xresources/"$XRES_FROM"/.Xmodmap
+    log "=== coping $MOD in $HOME..."
+    cp "$XMOD" "$HOME" || exit
+    chown andrea:andrea "$HOME"/.Xmodmap
 fi
 
 log "=== CONFIGURING URXVT..."
