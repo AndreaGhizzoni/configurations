@@ -29,13 +29,15 @@ elif [[ "${BATTERY_STATE}" = "Discharging" ]]; then
         echo " ${BATTERY_POWER}%"
         echo "#FFAE00"
     fi
+
+    if [[ "${BATTERY_POWER}" -le "${URGENT_VALUE}" ]]; then
+        notify-send -u critical "Battery Low"
+        exit 33
+    fi
 else
-    echo "unknow state"
-    echo "unknow state"
+    echo "No Battery"
+    echo "No Battery"
     echo ""
 fi
 
-if [[ "${BATTERY_POWER}" -le "${URGENT_VALUE}" ]]; then
-    notify-send -u critical "Battery Low"
-    exit 33
-fi
+
