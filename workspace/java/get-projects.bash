@@ -144,6 +144,7 @@ repos_name_github=(
     subsetK
     sudoku
     tree
+    graph
 )
 
 log "getting/pulling repositories..." "$spacing"
