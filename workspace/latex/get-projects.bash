@@ -145,7 +145,7 @@ do
     if [ -d "$REPO_DST" ]; then
         pull "$REPO_DST"
     else
-        clone git@bitbucket:andreaghizzoni/"$repo_name".git "$REPO_DST"
+        clone git@bitbucket.org:andreaghizzoni/"$repo_name".git "$REPO_DST"
     fi
 done
 

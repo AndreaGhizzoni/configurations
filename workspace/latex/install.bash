@@ -104,7 +104,7 @@ if [ ${i} -ne 0 ]; then
 fi
 
 log "installing latex full..." "$spacing"
-sudo apt-get install texlive-full texmaker --yes -qq
+sudo apt-get install texlive-full texmaker --yes -q
 
 TEX=$HOME/texmf
 if [ -d "$TEX" ]; then
