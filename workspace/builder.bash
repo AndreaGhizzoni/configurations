@@ -121,8 +121,8 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-ROOT_WORKSPACE="$HOME"/Documents/workspace # TODO change it
-WORKSPACES=( java go ) # TODO add workspaces
+ROOT_WORKSPACE="$HOME"/Documents/workspace
+WORKSPACES=( java go latex ) # TODO add workspaces
 
 log "Creating workspace in: $ROOT_WORKSPACE"
 if [ -d "$ROOT_WORKSPACE" ]; then
