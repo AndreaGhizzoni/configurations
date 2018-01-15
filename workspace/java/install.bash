@@ -103,16 +103,12 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-#echo -e -n "$spacing"; log "installing sdk..."
-#echo -e -n "$spacing$spacing"; log "adding repository..."
 log "installing sdk..." "$spacing"
 log "adding repository..." "$spacing$spacing"
 sudo add-apt-repository ppa:webupd8team/java --yes &>/dev/null
 
-#echo -e -n "$spacing$spacing"; log "updating sources..."
 log "updating sources..." "$spacing$spacing"
 sudo apt-get update &>/dev/null
 
-#echo -e -n "$spacing$spacing"; log "installing from repo..."
 log "installing from repo..." "$spacing$spacing"
 sudo apt-get install oracle-java8-installer graphviz --yes -qq

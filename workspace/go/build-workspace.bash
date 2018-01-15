@@ -80,7 +80,6 @@ done
 
 # check if -d "destination" flag is set
 if [ -z "$destination" ]; then
-    #echo -e -n "$spacing"; logError "-d flag missing."
     logError "-d flag missing." "$spacing"
     exit 1
 fi
@@ -114,7 +113,6 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-#echo -e -n "$spacing" ; log "building workspace..."
 log "building workspace..." "$spacing"
 mkdir -p "$destination"/go
 mkdir -p "$destination"/go/bin

@@ -80,7 +80,6 @@ done
 
 # check if -d "destination" flag is set
 if [ -z "$destination" ]; then
-    #echo -e -n "$spacing"; logError "-d flag missing."
     logError "-d flag missing." "$spacing"
     exit 1
 fi
@@ -118,7 +117,6 @@ fi
 # $1 : git repo, git@github.com:USER/REPO-NAME.git
 # $2 : repo destination path
 function clone () {
-    #echo -e -n "$spacing$spacing"; log "[cloning] $1"
     log "[cloning] $1" "$spacing$spacing"
     git clone -q "$1" "$2"
 }
@@ -126,7 +124,6 @@ function clone () {
 ## pulling repo from github
 # $1 : path on which call git pull
 function pull () {
-    #echo -e -n "$spacing$spacing"; log "[pulling] $1"
     log "[pulling] $1" "$spacing$spacing"
     git -C "$1" pull origin master
 }
@@ -149,8 +146,6 @@ repos_name_github=(
     tree
 )
 
-#echo -e -n "$spacing"; log "getting/pulling repositories..."
-#echo -e -n "$spacing$spacing"; log "unlocking keys..."
 log "getting/pulling repositories..." "$spacing"
 log "unlocking keys..." "$spacing$spacing"
 ssh-add -t 90 2>/dev/null || exit

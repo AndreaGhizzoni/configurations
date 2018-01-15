@@ -118,7 +118,6 @@ fi
 # $1 : git repo, git@github.com:USER/REPO-NAME.git
 # $2 : repo destination path
 function clone () {
-    #echo -e -n "$spacing$spacing"; log "[cloning] $1"
     log "[cloning] $1" "$spacing$spacing"
     git clone "$1" "$2"
 }
@@ -126,7 +125,6 @@ function clone () {
 ## pulling repo from github
 # $1 : path on which call git pull
 function pull () {
-    #echo -e -n "$spacing$spacing"; log "[pulling] $1"
     log "[pulling] $1" "$spacing$spacing"
     git -C "$1" pull origin master
 }
@@ -134,7 +132,6 @@ function pull () {
 ## get go project in the right way
 # $1 : github repository path like github.com/<USER>/<REPO>
 function goget () {
-    #echo -e -n "$spacing$spacing"; log "[getting] $1"
     log "[getting] $1" "$spacing$spacing"
     /usr/local/go/bin/go get "$1"
 }
@@ -152,8 +149,6 @@ repos_name_github=(
     go-introduction
 )
 
-#echo -e -n "$spacing"; log "getting/pulling repositories..."
-#echo -e -n "$spacing$spacing"; log "unlocking keys..."
 log "getting/pulling repositories..." "$spacing"
 log "unlocking keys..." "$spacing$spacing"
 ssh-add -t 90 2>/dev/null || exit
@@ -166,7 +161,6 @@ do
     if [ -d "$REPO_DST" ]; then
         pull "$REPO_DST"
     else
-        #clone git@github.com:AndreaGhizzoni/"$repo_name".git "$REPO_DST"
         goget "$REPO_DST"
     fi
 done
