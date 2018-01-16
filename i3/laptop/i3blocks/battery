@@ -12,19 +12,19 @@ if [[ "${BATTERY_STATE}" = "Charging" ]]; then
     echo " ${BATTERY_POWER}%"
     echo ""
 elif [[ "${BATTERY_STATE}" = "Discharging" ]]; then
-    if [[ $BATTERY_POWER -ge 76 ]]; then
+    if [[ $BATTERY_POWER -ge 90 ]]; then
         echo " ${BATTERY_POWER}%"
         echo " ${BATTERY_POWER}%"
         echo ""
-    elif [[ $BATTERY_POWER -lt 75 ]]; then
+    elif [[ $BATTERY_POWER -ge 75 ]]; then
         echo " ${BATTERY_POWER}%"
         echo " ${BATTERY_POWER}%"
         echo ""
-    elif [[ $BATTERY_POWER -lt 50 ]]; then
+    elif [[ $BATTERY_POWER -ge 50 ]]; then
         echo " ${BATTERY_POWER}%"
         echo " ${BATTERY_POWER}%"
         echo ""
-    elif [[ $BATTERY_POWER -lt 25 ]]; then
+    elif [[ $BATTERY_POWER -ge 20 ]]; then
         echo " ${BATTERY_POWER}%"
         echo " ${BATTERY_POWER}%"
         echo "#FFAE00"
