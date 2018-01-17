@@ -1,7 +1,0 @@
-UXTerm*locale: true
-UXTerm*renderFont: true
-!UXTerm*faceName: DejaVuSansMono Nerd Font Mono
-UXTerm*faceName: FreeMono Nerd Font Mono
-UXTerm*faceSize: 11
-
-*customization: -color
