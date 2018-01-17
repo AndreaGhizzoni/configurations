@@ -9,29 +9,25 @@ NC='\033[0m' # No color
 ## print $1 in green.                                                           
 # $1: something to print in GREEN on stdout
 function log () {
-    echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
+    echo -e -n "$2"; echo -e -n "${L_CYAN}==> ${NC}"; echo "$1"
 }
 
-## print $1 in red.                                                             
+## print $1 in green.                                                           
 # $1: something to print in RED on stdout
 function logError () {
-    echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
+    echo -e -n "$2"; echo -e -n "${RED}!!! Error: ${NC}"; echo "$1"
 }
 
 ## print usage and exit.
 function usageAndExit () {
-    echo -e "Usage: $0 [-a|--all] [-c|--create-workspace] [-i|--install] \
-[-p|--getprojects]"
-    echo "" # for spacing
-    echo -e "The following two example are equivalent:"
-    echo -e "Example: $0 --all"
-    echo -e "Example: $0 --create-workspace --install --get-projects"
+    echo -e "Usage: $0 [-s|--spacing] [-d|--destination]"
+    echo -e "Example: $0 --destinantion /home/pippo/work"
     exit 1
 }
 
 ## print some help string and call usageAndExit
 function printHelp () {
-    echo "Builder script for my workspace"
+    echo "Script used to build java workspace."
     usageAndExit
 }
 
@@ -47,8 +43,8 @@ if [[ $? -ne 4 ]]; then
     exit 1
 fi
 
-OPTIONS=hcipa
-LONGOPTIONS=help,create-workspace,install,get-projects,all
+OPTIONS=hd:s:
+LONGOPTIONS=help,destination:,spacing:
 getopt --options=$OPTIONS \
        --longoptions=$LONGOPTIONS \
        --name "$0" -- "$@" > /dev/null
@@ -62,23 +58,13 @@ while true; do
         -h|--help)
             printHelp
             ;;
-        -c|--create-workspace)
-            create=1
-            shift
+        -d|--destination)
+            destination="$2"
+            shift 2
             ;;
-        -i|--install)
-            install=1
-            shift
-            ;;
-        -p|--get-projects)
-            projects=1
-            shift
-            ;;
-        -a|--all)
-            create=1
-            install=1
-            projects=1
-            shift
+        -s|--spacing)
+            spacing="$2"
+            shift 2
             ;;
         # last characters produced by getopt
         --)
@@ -91,6 +77,12 @@ while true; do
             ;;
     esac
 done
+
+# check if -d "destination" flag is set
+if [ -z "$destination" ]; then
+    echo -e -n "$spacing"; logError "-d flag missing."
+    exit 1
+fi
 
 # check if this script is running with EUID==0 (root)
 # comment the following statement if not required
@@ -121,32 +113,4 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-ROOT_WORKSPACE="$HOME"/Documents/workspace
-WORKSPACES=( java go latex uni ) # TODO add workspaces
-
-log "Creating workspace in: $ROOT_WORKSPACE"
-if [ -d "$ROOT_WORKSPACE" ]; then
-    logError "$ROOT_WORKSPACE already exists. Nothing to do."
-else
-    # for each workspace in $WORKSPACES:
-    # - cd into that folder
-    # - ./build-workspace.bash "" $ROOT_WORKSPACE
-    # - ./install.bash
-    # - ./get-projects.bash $ROOT_WORKSPACE
-    SPACING="     "
-    for w in "${WORKSPACES[@]}"
-    do
-        log "Building $w environment..."
-        cd "$w" || exit
-        if [ ! -z "$create" ]; then
-            ./build-workspace.bash -s "$SPACING" -d "$ROOT_WORKSPACE" || exit
-        fi
-        if [ ! -z "$install" ]; then
-            ./install.bash -s "$SPACING" || exit
-        fi
-        if [ ! -z "$projects" ]; then
-            ./get-projects.bash -s "$SPACING" -d "$ROOT_WORKSPACE" || exit
-        fi
-        cd ..
-    done
-fi
+log "building workspace..." "$spacing"
