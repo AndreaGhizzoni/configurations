@@ -24,7 +24,7 @@ elif [[ "${BATTERY_STATE}" = "Discharging" ]]; then
         echo " ${BATTERY_POWER}%"
         echo " ${BATTERY_POWER}%"
         echo ""
-    elif [[ $BATTERY_POWER -le 20 ]]; then
+    elif [[ $BATTERY_POWER -le 50 ]]; then
         echo " ${BATTERY_POWER}%"
         echo " ${BATTERY_POWER}%"
         echo "#FFAE00"
