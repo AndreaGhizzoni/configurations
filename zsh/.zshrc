@@ -39,6 +39,7 @@ alias ssdtop='sudo iotop --only'
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias prettyjson='python -m json.tool'
 alias checkpass='chracklib-check'
+alias weather='curl wttr.in'
 
 #========== Android
 #export NDK=/home/andrea/Android/android-ndk-r10d/
