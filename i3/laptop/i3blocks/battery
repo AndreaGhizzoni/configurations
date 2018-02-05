@@ -31,9 +31,13 @@ elif [[ "${BATTERY_STATE}" = "Discharging" ]]; then
     fi
 
     if [[ "${BATTERY_POWER}" -le "${URGENT_VALUE}" ]]; then
-        notify-send -u critical "Battery Low"
+        notify-send -t 2000 -u critical "Battery Low"
         exit 33
     fi
+elif [[ "${BATTERY_STATE}" = "Full" ]]; then
+    echo "FULL"
+    echo "FULL"
+    echo "#00FF00"
 else
     echo "No Battery"
     echo "No Battery"
