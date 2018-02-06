@@ -13,6 +13,8 @@ exec_always --no-startup-id ./home/andrea/.config/i3/swap-caps-esc.bash
 exec_always --no-startup-id synclient tapbutton1=1
 # enable right click on two fingers tap -> depends on xserver-xorg-input-synaptics
 exec_always --no-startup-id synclient tapbutton2=3
+# start scratch-terminal
+exec_always --no-startup-id uxterm -name scratch 
 
 
 # =============================================================================
@@ -78,6 +80,9 @@ new_window pixel 1
 #bindsym $mod+Return exec uxterm
 bindsym $mod+Return exec urxvt
 
+# show a scratch terminal
+bindsym $mod+u [instance="scratch"] scratchpad show; [instance="scratch"] move position center
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -92,7 +97,7 @@ bindsym $mod+d exec rofi -show run
 
 # cli calculator
 #bindsym $mod+c exec uxterm qalc
-bindsym $mod+c exec urxvt -e qalc
+bindsym $mod+c exec urxvt -name qalc -fn "xft:FreeMono Nerd Font Mono:size=15" -e qalc
 
 # change focus
 bindsym $mod+j focus down 
@@ -392,6 +397,16 @@ for_window [window_role="EventDialog"] border normal
 for_window [window_role="EventDialog"] resize shrink width 15 px or 15 ppt
 for_window [window_role="EventDialog"] resize shrink height 25 px or 25 ppt
 
+# qalc
+for_window [instance="qalc"] floating enable
+for_window [instance="qalc"] move position center
+for_window [instance="qalc"] border pixel 5
+
+# scratch terminal
+for_window [instance="scratch"] floating enable
+for_window [instance="scratch"] move scratchpad
+for_window [instance="scratch"] move position center
+for_window [instance="scratch"] border pixel 5
 
 # =============================================================================
 # = Auto start Applications
