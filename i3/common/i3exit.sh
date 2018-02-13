@@ -22,7 +22,7 @@ function lock {
        --ringcolor=$GREEN \
        --separatorcolor=$GREEN \
        \
-       --textcolor=$WHITE \
+       --verifcolor=$WHITE \
        --timecolor=$WHITE \
        --datecolor=$WHITE \
        --layoutcolor=$WHITE \
