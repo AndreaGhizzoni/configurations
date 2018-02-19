@@ -411,7 +411,7 @@ for_window [instance="scratch"] border pixel 5
 # =============================================================================
 # = Auto start Applications
 # =============================================================================
-exec --no-startup-id feh --bg-fill /home/andrea/Pictures/wallpapers/i3wm_2.png
+exec --no-startup-id feh --bg-fill /home/andrea/Pictures/wallpapers/FH_3.jpg
 exec --no-startup-id dropbox start
 exec --no-startup-id wicd-client -t
 #exec xautolock -time 9 -locker '~/.i3/i3exit.sh lock' &
