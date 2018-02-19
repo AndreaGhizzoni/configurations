@@ -1,0 +1,11 @@
+#!/bin/bash
+
+GPU_ON=$( awk '{print $2}' < /proc/acpi/bbswitch )
+echo "$GPU_ON" # full text
+echo "$GPU_ON" # short text
+
+if [[ "${GPU_ON}" = ON ]]; then
+    echo "#FF0000"
+else
+    echo "#00FF00"
+fi
