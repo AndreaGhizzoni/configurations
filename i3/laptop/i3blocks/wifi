@@ -36,8 +36,8 @@ QUALITY=$(grep "$INTERFACE" /proc/net/wireless | awk '{ print int($3 * 100 / 70)
 
 #------------------------------------------------------------------------
 
-echo " $IPADDR @ $SSID $QUALITY"% # full text
-echo " $IPADDR @ $SSID $QUALITY"% # short text
+echo " $IPADDR @ $SSID  $QUALITY"% # full text
+echo " $IPADDR @ $SSID  $QUALITY"% # short text
 
 # color
 if [[ $QUALITY -ge 80 ]]; then

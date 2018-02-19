@@ -22,7 +22,7 @@ if [[ "${status}" == "on" ]]; then
 else
   #echo "  off"
   #echo "  off"
-  echo " MUTE "
-  echo " MUTE "
+  echo "  MUTE"
+  echo "  MUTE"
   echo "#FFAE00"
 fi
