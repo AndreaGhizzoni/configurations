@@ -81,7 +81,7 @@ fi
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( python-pip stress )
+dep_req=( git python-pip stress )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -113,6 +113,20 @@ fi
 
 log "=== INSTALLING s-tui - goo.gl/YJsBJ8"
 pip install s-tui
+
+log "=== INSTALLING tty-clock"
+log "installing dependencies..."
+apt-get install libncurses-dev -y -qq
+down="$HOME"/Documents || exit
+git clone git@github.com:AndreaGhizzoni/tty-clock.git "$down"/tty-clock
+
+origin=$(pwd)
+cd "$down"/tty-clock || exit
+log "compiling..."
+make
+cd "$origin" || exit
+
+chown -R andrea:andrea "$down"/tty-clock
 
 log "=== FINISH! ==="
 
