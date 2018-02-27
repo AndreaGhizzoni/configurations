@@ -63,21 +63,21 @@ alias weather='curl wttr.in'
 #export PATH=$PATH:$GRAILS_HOME/bin
 
 #========== Gradle
-export GRADLE_HOME=/opt/gradle
-export PATH=$PATH:$GRADLE_HOME/bin
+#export GRADLE_HOME=/opt/gradle
+#export PATH=$PATH:$GRADLE_HOME/bin
 
 #========== Go
-export GOOS=linux
-export GOARCH=amd64
-export GOROOT=/usr/local/go
-export PATH=$PATH:$GOROOT/bin
+#export GOOS=linux
+#export GOARCH=amd64
+#export GOROOT=/usr/local/go
+#export PATH=$PATH:$GOROOT/bin
 
 #========== Workspaces
-#export CPPPATH=~/Documents/workspace/cpp/
-export JAVAPATH=~/Documents/workspace/java/
-export GOPATH=$HOME/Documents/workspace/go
-export PATH=$PATH:$GOPATH/bin
-#export CPATH=~/Documents/workspace/c/
+#export CPPPATH=$HOME/Documents/workspace/cpp/
+#export JAVAPATH=$HOME/Documents/workspace/java/
+#export GOPATH=$HOME/Documents/workspace/go
+#export PATH=$PATH:$GOPATH/bin
+#export CPATH=$HOME/Documents/workspace/c/
 
 #=========== workaround stuff
 #alias grep="/usr/bin/grep $GREP_OPTIONS"
