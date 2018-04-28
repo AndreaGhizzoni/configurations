@@ -113,7 +113,10 @@ fi
 log "=== INSTALLING i3 POST INSTALL PROGRAMS..."
 apt-get install alsa-utils pavucontrol lxappearance wicd wicd-gtk feh scrot \
     fonts-font-awesome arandr qalc libnotify-bin rofi rxvt-unicode-256color \
-    i3blocks -y
+    -y
+
+apt-get install --no-install-recommends i3blocks -y
+apt-get install acpi gawk alsa-utils sysstat -y
 
 fc-cache -fr --really-force
 
