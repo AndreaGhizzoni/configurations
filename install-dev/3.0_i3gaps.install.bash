@@ -99,8 +99,6 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-log "=== INSTALLING i3gaps"
-
 log "=== Installing dependencies..."
 apt-get install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
     libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
