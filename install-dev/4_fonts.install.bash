@@ -81,7 +81,7 @@ fi
 # check if required packages are installed.
 # if no dependencies required for this script, just skip it without modify.
 # insert the required packages, space separated.
-dep_req=( git )
+dep_req=( git pip )
 dep_not_found=( ) # DO NOT EDIT THIS ARRAY
 i=0
 for dep in "${dep_req[@]}"
@@ -106,6 +106,7 @@ log "=== INSTALLING BASE FONTS (sudo password required)..."
 sudo apt-get install fonts-font-awesome \
                      fonts-freefont-otf \
                      fonts-freefont-ttf
+pip install configparser
 
 log "=== GETTING NERD FONTS..."
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git nerd-fonts
