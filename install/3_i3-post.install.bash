@@ -113,7 +113,7 @@ fi
 log "=== INSTALLING i3 POST INSTALL PROGRAMS..."
 apt-get install alsa-utils pavucontrol lxappearance wicd wicd-gtk feh scrot \
     fonts-font-awesome arandr qalc libnotify-bin rofi rxvt-unicode-256color \
-    i3blocks
+    i3blocks python-pip -y
 
 fc-cache -fr --really-force
 
@@ -160,7 +160,7 @@ read -p "Do you want to copy .Xmodmap for $XRES_FROM in $HOME ? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     XMOD=../Xresources/"$XRES_FROM"/.Xmodmap
-    log "=== coping $MOD in $HOME..."
+    log "=== coping $XMOD in $HOME..."
     cp "$XMOD" "$HOME" || exit
     chown andrea:andrea "$HOME"/.Xmodmap
 fi

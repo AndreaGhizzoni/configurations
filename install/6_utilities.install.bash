@@ -106,8 +106,7 @@ apt-get install build-essential \
     keepassx gparted vlc thunderbird firefox \
     gimp gpicview evince \
     youtube-dl \
-    clementine \
-    deluge
+    clementine -y
 
 read -p "Do you want to copy htoprc in $HOME/.config/htop ? [Y/n] " \
     -n 1 -r

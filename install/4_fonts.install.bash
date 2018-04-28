@@ -105,7 +105,8 @@ sudo apt-get install python-fontforge -y
 log "=== INSTALLING BASE FONTS (sudo password required)..."
 sudo apt-get install fonts-font-awesome \
                      fonts-freefont-otf \
-                     fonts-freefont-ttf
+                     fonts-freefont-ttf -y
+pip install configparser
 
 log "=== GETTING NERD FONTS..."
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git nerd-fonts
