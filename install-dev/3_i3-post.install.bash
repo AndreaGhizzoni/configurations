@@ -117,6 +117,14 @@ apt-get install alsa-utils pavucontrol lxappearance wicd wicd-gtk feh scrot \
 
 fc-cache -fr --really-force
 
+log "=== CONFIGURING I3..."
+mkdir "$HOME"/.config/i3
+cp -r ../i3/common/* "$HOME"/.config/i3/
+cp -r ../i3/"$XRES_FROM"/* "$HOME"/.config/i3/
+cp -r ../i3/"$XRES_FROM"/i3blocks/* /usr/share/i3blocks/
+chown -R andrea:andrea "$HOME"/.config/i3
+
+
 log "=== INSTALLING NEW i3lock..."
 read -p "Replace i3lock with PandorasFox/i3lock-color? (required for i3exit.sh) [y/n] " -n 1 -r
 echo    # (optional) move to a new line
