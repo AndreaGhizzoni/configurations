@@ -103,7 +103,7 @@ fi
 USER=andrea
 
 log "=== INSTALL ZSH..."
-apt-get install zsh
+apt-get install zsh -y
 
 log "=== Changing shell for user $USER..."
 chsh -s /bin/zsh $USER

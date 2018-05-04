@@ -102,21 +102,21 @@ fi
 
 # script logic start here
 log "=== Installing basic applications..."
-apt-get install curl python-pip stress ssh
+apt-get install curl python-pip stress ssh -y
 
 log "=== login manager..."
-apt-get install lightdm lightdm-gtk-greeter
+apt-get install lightdm lightdm-gtk-greeter -y
 
 log "=== file manager..."
 apt-get install dkms gvfs gvfs-backends policykit-1 udisks2 synaptic \
     qupzilla flashplugin-installer libcurl3 libnotify4 \
-    libtag1v5-vanilla spacefm
+    libtag1v5-vanilla spacefm -y
 
 log "=== network manager..."
-apt-get install wicd wicd-gtk
+apt-get install wicd wicd-gtk -y
 
 log "=== windows manager..."
-apt-get install i3
+apt-get install i3 -y
 
 dpkg --configure -a
 log "=== Finish! REBOOT REQUIRED!"

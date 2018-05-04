@@ -104,7 +104,7 @@ NAME=$1
 EMAIL=$2
 
 log "=== INSTALLING GIT..."
-sudo apt-get install git
+sudo apt-get install git -y
 log "=== Set git user.name as $NAME"
 git config --global user.name "$NAME"
 log "=== Set git user.email as $EMAIL"

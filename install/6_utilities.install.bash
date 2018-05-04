@@ -107,7 +107,7 @@ apt-get install build-essential \
     gimp gpicview evince \
     youtube-dl \
     clementine \
-    deluge
+    pwgen -y
 
 read -p "Do you want to copy htoprc in $HOME/.config/htop ? [Y/n] " \
     -n 1 -r
