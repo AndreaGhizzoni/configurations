@@ -16,6 +16,8 @@ exec_always --no-startup-id xset -dpms s off s noblank s 0 0 s noexpose
 exec_always --no-startup-id xset m 1 1
 # swap CAPS-LOCK and ESC buttons via script
 exec_always --no-startup-id ./home/andrea/.config/i3/swap-caps-esc.bash 
+# start scratch-terminal
+exec_always --no-startup-id urxvt -name scratch
 
 # =============================================================================
 # = Colors 
@@ -82,6 +84,8 @@ new_window pixel 2
 #bindsym $mod+Return exec uxterm
 bindsym $mod+Return exec urxvt
 
+bindsym $mod+u [instance="scratch"] scratchpad show; [instance="scratch"] move position center
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -96,7 +100,7 @@ bindsym $mod+d exec rofi -show run
 
 # cli calculator
 #bindsym $mod+c exec uxterm qalc
-bindsym $mod+c exec urxvt -e qalc
+bindsym $mod+c exec urxvt -name qalc -fn "xft:FreeMono Nerd Font Mono:size=15" -e qalc
 
 # change focus
 bindsym $mod+j focus down 
@@ -180,7 +184,7 @@ set $work_5_gp_icon          "5.   "
 set $work_6_gp_icon          "6.   "
 set $work_7_gp_icon          "7.   "
 set $work_8_gp_icon          "8.   "
-set $work_9_gp_icon          "9.   "
+set $work_9_gimp_icon        "9.   " 
 set $work_10_music_icon      "10.   "
 
 # Define workspaces with names
@@ -192,7 +196,7 @@ set $work_5_gp          "5. "
 set $work_6_gp          "6. "
 set $work_7_gp          "7. "
 set $work_8_gp          "8. "
-set $work_9_gp          "9. "
+set $work_9_gimp        "9. Gimp"
 set $work_10_music      "10. Clementine "
 
 # switch to workspace
@@ -204,7 +208,7 @@ bindsym $mod+5 workspace $work_5_gp_icon
 bindsym $mod+6 workspace $work_6_gp_icon
 bindsym $mod+7 workspace $work_7_gp_icon
 bindsym $mod+8 workspace $work_8_gp_icon
-bindsym $mod+9 workspace $work_9_gp_icon
+bindsym $mod+9 workspace $work_9_gimp_icon
 bindsym $mod+0 workspace $work_10_music_icon
 
 # move focused container to workspace
@@ -216,13 +220,14 @@ bindsym $mod+Shift+5 move container to workspace $work_5_gp_icon
 bindsym $mod+Shift+6 move container to workspace $work_6_gp_icon
 bindsym $mod+Shift+7 move container to workspace $work_7_gp_icon
 bindsym $mod+Shift+8 move container to workspace $work_8_gp_icon
-bindsym $mod+Shift+9 move container to workspace $work_9_gp_icon
+bindsym $mod+Shift+9 move container to workspace $work_9_gimp_icon
 bindsym $mod+Shift+0 move container to workspace $work_10_music_icon
 
 # workspace assignments
 assign [class="Firefox"] $work_1_firefox_icon
 assign [class="Thunderbird"] $work_2_thunderbird_icon
 assign [class="Franz"] $work_3_franz_icon
+assign [class="Gimp"] $work_9_gimp_icon
 assign [class="Clementine"] $work_10_music_icon
 
 #==============================================================================
@@ -294,8 +299,8 @@ mode "$mode_system" {
 bar {
     colors {
         #neon blue
-        #statusline  #00A5FF
-        statusline  #FFFFFF
+        statusline  #00A5FF
+        #statusline  #FFFFFF
         background  $black
 
         # Colors            border      backgr.    text
@@ -326,8 +331,8 @@ bar {
 bar {
     colors {
         #neon blue
-        #statusline  #00A5FF
-        statusline  #FFFFFF
+        statusline  #00A5FF
+        #statusline  #FFFFFF
         background  $black
 
         # Colors            border      backgr.    text
@@ -377,10 +382,21 @@ for_window [class="Pavucontrol"] floating enable, border normal
 for_window [window_role="Msgcompose"] floating enable, border normal, resize shrink width 15 px or 15 ppt, resize shrink height 25 px or 25 ppt
 for_window [window_role="EventDialog"] floating enable, border normal, resize shrink width 15 px or 15 ppt, resize shrink height 25 px or 25 ppt
 
+# qalc
+for_window [instance="qalc"] floating enable
+for_window [instance="qalc"] move position center
+for_window [instance="qalc"] border pixel 5
+
+# scratch terminal
+for_window [instance="scratch"] floating enable
+for_window [instance="scratch"] move scratchpad
+for_window [instance="scratch"] move position center
+for_window [instance="scratch"] border pixel 5
+
 # =============================================================================
 # = Auto start Applications
 # =============================================================================
-exec --no-startup-id feh --bg-fill /home/andrea/Pictures/wallpapers/i3wm_2.png
+exec --no-startup-id feh --bg-fill /home/andrea/Pictures/wallpapers/i3wm.png
 exec --no-startup-id dropbox start
 exec --no-startup-id xflux -l 46.0154 -g 11.6413 -k 2700
 
