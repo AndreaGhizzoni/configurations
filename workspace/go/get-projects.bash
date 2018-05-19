@@ -147,6 +147,7 @@ repos_name_github=(
     go-docker
     gos
     go-introduction
+    sentinel
 )
 
 log "getting/pulling repositories..." "$spacing"

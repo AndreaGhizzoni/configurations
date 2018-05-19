@@ -104,7 +104,7 @@ if [ ${i} -ne 0 ]; then
 fi
 
 # 1.8, 1.7...
-VERSION=1.9.2
+VERSION=1.10.2
 # linux, windows ..
 OS=linux
 # amd64, i386

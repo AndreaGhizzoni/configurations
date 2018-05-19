@@ -128,10 +128,14 @@ function pull () {
     git -C "$1" pull origin master
 }
 
+# unlisted:
+# it.unitn.disi.firstplugin
+# it.unitn.disi.gef
+# it.disi.unitn.emf.model 
+# it.disi.unitn.rcptest
+# TestEncryptSerializer
 repos_name_github=( 
     JDrive
-    it.unitn.disi.firstplugin
-    it.unitn.disi.gef
     ASDPlayGround
     Application-Util
     AUTO
