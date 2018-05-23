@@ -110,7 +110,8 @@ apt-get install lightdm lightdm-gtk-greeter -y
 log "=== file manager..."
 apt-get install dkms gvfs gvfs-backends policykit-1 udisks2 synaptic \
     qupzilla flashplugin-installer libcurl3 libnotify4 \
-    libtag1v5-vanilla spacefm -y
+    libtag1v5-vanilla \
+    spacefm thunar thunar-volman -y
 
 log "=== network manager..."
 apt-get install wicd wicd-gtk -y
