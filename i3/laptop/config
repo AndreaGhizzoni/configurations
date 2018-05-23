@@ -21,7 +21,8 @@ exec_always --no-startup-id uxterm -name scratch
 # = Colors 
 # =============================================================================
 # variable set
-set $black    #002B36
+#set $black    #002B36
+set $black    #002028
 set $white    #839496
 set $gray     #CCCCCC
 set $darkgray #666666
