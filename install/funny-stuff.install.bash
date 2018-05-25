@@ -101,7 +101,7 @@ fi
 
 # script logic start here
 log "=== INSTALLING FUNNY STUFF..."
-apt-get install figlet cowsay sl neofetch fortune bastet lolcat
+apt-get install figlet cowsay sl neofetch fortune bastet lolcat -y
 
 read -p "Copy neofetch config file? [y/n] " -n 1 -r
 echo    # (optional) move to a new line
@@ -118,7 +118,13 @@ log "=== INSTALLING tty-clock"
 log "installing dependencies..."
 apt-get install libncurses-dev -y -qq
 down="$HOME"/Documents || exit
-git clone git@github.com:AndreaGhizzoni/tty-clock.git "$down"/tty-clock
+mkdir -p "$down"/tty-clock || exit
+# git clone git@github.com:AndreaGhizzoni/tty-clock.git "$down"/tty-clock
+wget http://github.com/AndreaGhizzoni/tty-clock/archive/master.zip
+unzip master.zip
+mv tty-clock-master/* "$down"/tty-clock
+rm master.zip
+rm -rf tty-clock-master
 
 origin=$(pwd)
 cd "$down"/tty-clock || exit
