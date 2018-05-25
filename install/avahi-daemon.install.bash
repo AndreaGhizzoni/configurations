@@ -101,7 +101,7 @@ fi
 
 # script logic start here
 log "=== INSTALLING AVAHI-DAEMON AND TOOLS..."
-apt-get install avahi-daemon avahi-discover avahi-utils libnss-mdns mdns-scan
+apt-get install avahi-daemon avahi-discover avahi-utils libnss-mdns mdns-scan -y
 log "=== See /etc/avahi-daemon/avahi-daemon.conf"
 log "=== FINISH! ==="
 

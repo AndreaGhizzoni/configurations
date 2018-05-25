@@ -110,7 +110,7 @@ apt-get install hplip libcups2 libdbus-1-dev libtool libtool-bin \
 libcups2-dev cups-bsd cups-client libcupsimage2-dev python3-dev python3-pyqt4 \
 gtk2-engines-pixbuf libsnmp-dev snmp-mibs-downloader libusb-1.0.0-dev \
 libsane-dev openssl libjpeg-dev gtk2-engines-pixbuf xsane python3-notify2 \
-python3-dbus.mainloop.qt libssl-dev
+python3-dbus.mainloop.qt libssl-dev -y
 log "=== Now plug the printer usb and run the following commands:"
 log "sudo hp-check$"
 log "sudo hp-setup -i"

@@ -101,6 +101,6 @@ fi
 
 # script logic start here
 log "=== INSTALLING ARCHIVE MANAGERS TOOLS..."
-apt-get install zip unzip tar rar p7zip-full file-roller
+apt-get install zip unzip tar rar p7zip-full file-roller -y
 log "=== FINISH! ==="
 

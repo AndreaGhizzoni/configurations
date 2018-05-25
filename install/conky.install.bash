@@ -101,7 +101,7 @@ fi
 
 # script logic start here
 log "=== Installing conky..."
-apt-get install conky-all
+apt-get install conky-all -y
 
 read -p "Do you want to copy .conkyrc in $HOME ? [Y/n] " -n 1 -r
 echo    # (optional) move to a new line

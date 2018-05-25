@@ -101,5 +101,5 @@ fi
 
 # script logic start here
 log "=== INSTALLING REDSHIFT ==="
-apt-get install redshift redshift-gtk 
+apt-get install redshift redshift-gtk  -y
 log "=== FINISH!"
