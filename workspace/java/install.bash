@@ -104,11 +104,10 @@ if [ ${i} -ne 0 ]; then
 fi
 
 log "installing sdk..." "$spacing"
-log "adding repository..." "$spacing$spacing"
-sudo add-apt-repository ppa:webupd8team/java --yes &>/dev/null
-
-log "updating sources..." "$spacing$spacing"
-sudo apt-get update &>/dev/null
-
-log "installing from repo..." "$spacing$spacing"
-sudo apt-get install oracle-java8-installer graphviz --yes -qq
+sudo apt-get install openjdk-8-jdk openjdk-11-jdk
+#log "adding repository..." "$spacing$spacing"
+#sudo add-apt-repository ppa:webupd8team/java --yes &>/dev/null
+#log "updating sources..." "$spacing$spacing"
+#sudo apt-get update &>/dev/null
+#log "installing from repo..." "$spacing$spacing"
+#sudo apt-get install oracle-java8-installer graphviz --yes -qq
