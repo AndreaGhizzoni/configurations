@@ -39,7 +39,26 @@ alias ssdtop='sudo iotop --only'
 alias update='sudo apt-get update && sudo apt-get upgrade'
 alias prettyjson='python -m json.tool'
 alias checkpass='chracklib-check'
-alias weather='curl wttr.in'
+
+#========== Functions
+setjvm(){
+    if [[ ! -d "/usr/lib/jvm" ]]; then
+        echo "No jvm installed"
+    else
+        jvm=$1
+        case $jvm in
+            8)
+                sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
+                ;;
+            10)
+                sudo update-java-alternatives -s java-1.11.0-openjdk-amd64
+                ;;
+            *)
+                echo "no jvm support"
+                ;;
+        esac
+    fi
+}
 
 #========== Android
 #export NDK=/home/andrea/Android/android-ndk-r10d/
@@ -73,11 +92,11 @@ alias weather='curl wttr.in'
 #export PATH=$PATH:$GOROOT/bin
 
 #========== Workspaces
-#export CPPPATH=$HOME/Documents/workspace/cpp/
-#export JAVAPATH=$HOME/Documents/workspace/java/
+#export CPPPATH=~/Documents/workspace/cpp/
+#export JAVAPATH=~/Documents/workspace/java/
 #export GOPATH=$HOME/Documents/workspace/go
 #export PATH=$PATH:$GOPATH/bin
-#export CPATH=$HOME/Documents/workspace/c/
+#export CPATH=~/Documents/workspace/c/
 
 #=========== workaround stuff
 #alias grep="/usr/bin/grep $GREP_OPTIONS"
