@@ -102,7 +102,8 @@ fi
 
 # script logic start here
 log "=== Installing basic applications..."
-apt-get install curl python-pip stress ssh apt-transport-https  -y
+apt-get install curl python-pip stress ssh apt-transport-https \
+                ssh-askpass-gnome  -y
 
 log "=== login manager..."
 apt-get install lightdm lightdm-gtk-greeter -y
