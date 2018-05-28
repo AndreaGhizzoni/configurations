@@ -1,5 +1,5 @@
 " ============= Basic settings
-color molokayo
+color molokai
 set t_Co=256 
 set encoding=utf8
 
@@ -42,27 +42,32 @@ call vundle#begin()
 
 " Plug-in for vundle-plugin-manager 
 Plugin 'gmarik/Vundle.vim'
+
 " My plugin. These are all github pages, for doc check there.
+" COSMETICS
 Plugin 'vim-airline/vim-airline'        " for bottom status bar
 Plugin 'vim-airline/vim-airline-themes' " set of themes for airline
+Plugin 'scrooloose/nerdtree'            " for tree directory
+Plugin 'ryanoasis/vim-devicons'         " for nice glyphs
 
+" AUTOCOMPLETE
+Plugin 'Shougo/neocomplete'             " for autoompletation
+Plugin 'Shougo/vimshell'                " autocompletetion for shell 
+                                        " neocomplete required
+
+" GIT
 Plugin 'tpope/vim-fugitive'             " for git integration
 Plugin 'airblade/vim-gitgutter'         " shows a git diff in the sign column
 
+" SYNTAX
 Plugin 'vim-syntastic/syntastic'        " for syntax
-Plugin 'scrooloose/nerdtree'            " for tree directory
-
-Plugin 'fatih/vim-go'                   " for working with go
-
-Plugin 'xolox/vim-easytags'             " dependency for tagbar
-Plugin 'xolox/vim-misc'                 " dependency for tagbar
-Plugin 'majutsushi/tagbar'              " for outline of current file
-
 Plugin 'sheerun/vim-polyglot'           " collection of language syntax/indent 
 
-Plugin 'PotatoesMaster/i3-vim-syntax'   " i3 config file syntax highlighting
+" GO
+Plugin 'fatih/vim-go'                   " for working with go
 
-Plugin 'ryanoasis/vim-devicons'         " for nice glyphs
+" I3 CONFIG
+Plugin 'PotatoesMaster/i3-vim-syntax'   " i3 config file syntax highlighting
 
 
 call vundle#end()
@@ -89,18 +94,78 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 
 " ============= Tag Bar
 " Press F8 to open the Tag Window
-nmap <F8> :TagbarToggle<CR>
+"nmap <F8> :TagbarToggle<CR>
 " Enable Tag Windows to display a go file
-let g:tagbar_type_go = {
-    \ 'ctagstype': 'go',
-    \ 'kinds' : [
-        \'p:package',
-        \'f:function',
-        \'v:variables',
-        \'t:type',
-        \'c:const'
-    \]
-\}
+"let g:tagbar_type_go = {
+"    \ 'ctagstype': 'go',
+"    \ 'kinds' : [
+"        \'p:package',
+"        \'f:function',
+"        \'v:variables',
+"        \'t:type',
+"        \'c:const'
+"    \]
+"\}
+
+"===============================
+"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist'
+\ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Enable omni completion.
+"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
 
 " ============= Search Highlight
 " Press F4 to toggle highlighting on/off, and show current value.
