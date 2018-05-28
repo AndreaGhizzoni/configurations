@@ -104,7 +104,7 @@ log "=== INSTALLING VIM PLUGIN DEPENDENCIES..."
 apt-get install exuberant-ctags build-essential cmake python-dev shellcheck -y
 
 log "=== INSTALLING VIM..."
-apt-get install vim -y
+apt-get install vim vim-nox -y
 
 if [ -d "$HOME/.vim" ]; then
     logError "$HOME/.vim folder already exists. Skipping configurations."
