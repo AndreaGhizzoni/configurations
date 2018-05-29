@@ -50,11 +50,6 @@ Plugin 'vim-airline/vim-airline-themes' " set of themes for airline
 Plugin 'scrooloose/nerdtree'            " for tree directory
 Plugin 'ryanoasis/vim-devicons'         " for nice glyphs
 
-" AUTOCOMPLETE
-Plugin 'Shougo/neocomplete'             " for autoompletation
-Plugin 'Shougo/vimshell'                " autocompletetion for shell 
-                                        " neocomplete required
-
 " GIT
 Plugin 'tpope/vim-fugitive'             " for git integration
 Plugin 'airblade/vim-gitgutter'         " shows a git diff in the sign column
@@ -69,10 +64,10 @@ Plugin 'fatih/vim-go'                   " for working with go
 " I3 CONFIG
 Plugin 'PotatoesMaster/i3-vim-syntax'   " i3 config file syntax highlighting
 
-
 call vundle#end()
 filetype plugin indent on
 syntax on
+
 
 " ============= Vim-Go
 au BufRead,BufNewFile *.go set filetype=go
@@ -92,88 +87,16 @@ au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 
-" ============= Tag Bar
-" Press F8 to open the Tag Window
-"nmap <F8> :TagbarToggle<CR>
-" Enable Tag Windows to display a go file
-"let g:tagbar_type_go = {
-"    \ 'ctagstype': 'go',
-"    \ 'kinds' : [
-"        \'p:package',
-"        \'f:function',
-"        \'v:variables',
-"        \'t:type',
-"        \'c:const'
-"    \]
-"\}
-
-"===============================
-"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist'
-\ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Enable omni completion.
-"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
 
 " ============= Search Highlight
 " Press F4 to toggle highlighting on/off, and show current value.
 :noremap <F4> :set hlsearch! hlsearch?<CR>
 
+
 " ============= Spell Highlight
 " Press F5 to toggle highlighting on/off, and show current value.
 :noremap <F5> :set spell! spelllang?<CR>
+
 
 " ============= Airline
 set laststatus=2                               " airline always displayed 
@@ -181,8 +104,10 @@ let g:airline#extensions#tabline#enabled = 1   " enable smart tab airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='simple'
 
+
 " ============= NERDTree
 map <F2> :NERDTreeToggle<CR>
+
 
 " ============= Syntastic 
 let g:syntastic_sh_checkers = ['shellcheck']         " enable shell syntax check
@@ -195,6 +120,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
 
 " ============= Template
 autocmd BufNewFile makefile,Makefile 0r ~/.vim/skeletons/makefile
