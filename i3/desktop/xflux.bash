@@ -99,5 +99,5 @@ if [ ${i} -ne 0 ]; then
     exit 1
 fi
 
-./home/andrea/Documents/xflux -l 46.0154 -g 11.6413 -k 2700
+/home/andrea/Documents/xflux -l 46.0154 -g 11.6413 -k 2700
 

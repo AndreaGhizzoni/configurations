@@ -398,7 +398,8 @@ for_window [instance="scratch"] border pixel 5
 # =============================================================================
 exec --no-startup-id feh --bg-fill /home/andrea/Pictures/wallpapers/i3wm.png
 exec --no-startup-id dropbox start
-exec --no-startup-id xflux -l 46.0154 -g 11.6413 -k 2700
+#exec --no-startup-id xflux -l 46.0154 -g 11.6413 -k 2700
+exec --no-startup-id ./home/andrea/.config/i3/xflux.bash
 
 exec --no-startup-id firefox
 exec --no-startup-id thunderbird
