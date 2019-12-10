@@ -136,6 +136,7 @@ apt-get install \
     pwgen \
     curl python-pip stress ssh apt-transport-https \
     graphviz imagemagick \
+    zenmap \
     -y
 
 read -p "Do you want to copy htoprc in $HOME/.config/htop ? [Y/n] " \
